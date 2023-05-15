@@ -5,6 +5,7 @@ import at.fhtw.models.Tour;
 import at.fhtw.models.TourLog;
 
 public class TourPlannerClient {
+    // test
     private static final BusinessLogic businessLogic = new BusinessLogic();
     public static void main(String[] args) {
         Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
