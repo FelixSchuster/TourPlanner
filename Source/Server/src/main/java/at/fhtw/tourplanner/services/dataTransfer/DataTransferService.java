@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 public class DataTransferService {
-
     private final DataTransferController dataTransferController;
     public DataTransferService(DataTransferController dataTransferController) {
         this.dataTransferController = dataTransferController;

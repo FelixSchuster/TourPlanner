@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,8 +36,28 @@ public class Tour {
     @JsonIgnore
     @Column(name = "tour_information")
     private String tourInformation;
+    @JsonIgnore
+    @Column(name = "popularity")
+    private Integer popularity;
+    @JsonIgnore
+    @Column(name = "child_friendliness")
+    private Integer childFriendliness;
     @OneToMany(mappedBy = "tour", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<TourLog> tourLogs;
+    public Tour(Integer tourId, String name, String tourDescription, String start, String destination, String transportType, Double tourDistance, Integer estimatedTime, String tourInformation, Integer popularity, Integer childFriendliness) {
+        this.tourId = tourId;
+        this.name = name;
+        this.tourDescription = tourDescription;
+        this.start = start;
+        this.destination = destination;
+        this.transportType = transportType;
+        this.tourDistance = tourDistance;
+        this.estimatedTime = estimatedTime;
+        this.tourInformation = tourInformation;
+        this.popularity = popularity;
+        this.childFriendliness = childFriendliness;
+        this.tourLogs = new ArrayList<>();
+    }
     public Tour(Integer tourId, String name, String tourDescription, String start, String destination, String transportType, Double tourDistance, Integer estimatedTime, String tourInformation) {
         this.tourId = tourId;
         this.name = name;
@@ -47,8 +68,15 @@ public class Tour {
         this.tourDistance = tourDistance;
         this.estimatedTime = estimatedTime;
         this.tourInformation = tourInformation;
+        this.popularity = 1;
+        this.childFriendliness = 3;
+        this.tourLogs = new ArrayList<>();
     }
-    public Tour() { }
+    public Tour() {
+        this.popularity = 1;
+        this.childFriendliness = 3;
+        this.tourLogs = new ArrayList<>();
+    }
     @JsonProperty
     public Integer getTourId() {
         return tourId;
@@ -57,7 +85,6 @@ public class Tour {
     public void setTourId(Integer tourId) {
         this.tourId = tourId;
     }
-
     public String getName() {
         return name;
     }
@@ -112,13 +139,28 @@ public class Tour {
     public void setTourInformation(String tourInformation) {
         this.tourInformation = tourInformation;
     }
+    @JsonProperty
+    public Integer getPopularity() {
+        return popularity;
+    }
+    @JsonIgnore
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
+    }
+    @JsonProperty
+    public Integer getChildFriendliness() {
+        return childFriendliness;
+    }
+    @JsonIgnore
+    public void setChildFriendliness(Integer childFriendliness) {
+        this.childFriendliness = childFriendliness;
+    }
     public List<TourLog> getTourLogs() {
         return tourLogs;
     }
     public void setTourLogs(List<TourLog> tourLogs) {
         this.tourLogs = tourLogs;
     }
-
     @Override
     public String toString() {
         return "Tour{" +
@@ -130,21 +172,21 @@ public class Tour {
                 ", transportType='" + transportType + '\'' +
                 ", tourDistance=" + tourDistance +
                 ", estimatedTime=" + estimatedTime +
+                ", popularity" + popularity +
+                ", childFriendliness" + childFriendliness +
                 ", tourInformation='" + "<tourInformation>" + '\'' +
                 ", tourLogs=" + tourLogs +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
-        return Objects.equals(tourId, tour.tourId) && Objects.equals(name, tour.name) && Objects.equals(tourDescription, tour.tourDescription) && Objects.equals(start, tour.start) && Objects.equals(destination, tour.destination) && Objects.equals(transportType, tour.transportType) && Objects.equals(tourDistance, tour.tourDistance) && Objects.equals(estimatedTime, tour.estimatedTime) && Objects.equals(tourInformation, tour.tourInformation) && Objects.equals(tourLogs, tour.tourLogs);
+        return Objects.equals(tourId, tour.tourId) && Objects.equals(name, tour.name) && Objects.equals(tourDescription, tour.tourDescription) && Objects.equals(start, tour.start) && Objects.equals(destination, tour.destination) && Objects.equals(transportType, tour.transportType) && Objects.equals(tourDistance, tour.tourDistance) && Objects.equals(estimatedTime, tour.estimatedTime) && Objects.equals(tourInformation, tour.tourInformation) && Objects.equals(popularity, tour.popularity) && Objects.equals(childFriendliness, tour.childFriendliness);
     }
-
     @Override
     public int hashCode() {
-        return Objects.hash(tourId, name, tourDescription, start, destination, transportType, tourDistance, estimatedTime, tourInformation, tourLogs);
+        return Objects.hash(tourId, name, tourDescription, start, destination, transportType, tourDistance, estimatedTime, tourInformation, popularity, childFriendliness);
     }
 }

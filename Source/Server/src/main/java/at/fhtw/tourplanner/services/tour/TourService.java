@@ -94,4 +94,18 @@ public class TourService {
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<List<TourListEntry>> searchTour(@PathVariable("keyword") String keyword) {
+        try {
+            List<TourListEntry> tours = tourController.searchTour(keyword);
+            return new ResponseEntity<>(tours, HttpStatus.OK);
+        }
+        catch(NoContentException e) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

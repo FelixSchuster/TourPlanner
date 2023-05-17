@@ -1,5 +1,7 @@
 package at.fhtw.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -13,8 +15,10 @@ public class Tour {
     private Double tourDistance;
     private Integer estimatedTime;
     private String tourInformation;
+    private Integer popularity;
+    private Integer childFriendliness;
     private List<TourLog> tourLogs;
-    public Tour(Integer tourId, String name, String tourDescription, String start, String destination, String transportType, Double tourDistance, Integer estimatedTime, String tourInformation, List<TourLog> tourLogs) {
+    public Tour(Integer tourId, String name, String tourDescription, String start, String destination, String transportType, Double tourDistance, Integer estimatedTime, String tourInformation, Integer popularity, Integer childFriendliness, List<TourLog> tourLogs) {
         this.tourId = tourId;
         this.name = name;
         this.tourDescription = tourDescription;
@@ -24,6 +28,8 @@ public class Tour {
         this.tourDistance = tourDistance;
         this.estimatedTime = estimatedTime;
         this.tourInformation = tourInformation;
+        this.popularity = popularity;
+        this.childFriendliness = childFriendliness;
         this.tourLogs = tourLogs;
     }
     public Tour(String name, String tourDescription, String start, String destination, String transportType) {
@@ -87,6 +93,18 @@ public class Tour {
     }
     public void setTourInformation(String tourInformation) {
         this.tourInformation = tourInformation;
+    }
+    public Integer getPopularity() {
+        return popularity;
+    }
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
+    }
+    public Integer getChildFriendliness() {
+        return childFriendliness;
+    }
+    public void setChildFriendliness(Integer childFriendliness) {
+        this.childFriendliness = childFriendliness;
     }
     public List<TourLog> getTourLogs() {
         return tourLogs;
