@@ -4,16 +4,21 @@ import at.fhtw.exceptions.*;
 import at.fhtw.models.Tour;
 import at.fhtw.models.TourListEntry;
 import at.fhtw.models.TourLog;
+import at.fhtw.services.DataTransferService;
+import at.fhtw.services.TourLogService;
+import at.fhtw.services.TourService;
 import at.fhtw.utils.ImageHandler;
-import at.fhtw.utils.RequestSender;
+import at.fhtw.utils.PdfFileHandler;
 
 import java.util.List;
 
 public class BusinessLogic {
-    private static final RequestSender requestSender = new RequestSender();
+    private TourService tourService = new TourService();
+    private TourLogService tourLogService = new TourLogService();
+    private DataTransferService dataTransferService = new DataTransferService();
     public void createTour(Tour tour) {
         try {
-            tour = requestSender.createTour(tour);
+            tour = tourService.createTour(tour);
             System.out.println(tour);
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
             // TODO: show created tour in ui, also show the image (filename is <tourId>.jpg)
@@ -26,7 +31,19 @@ public class BusinessLogic {
     }
     public void getTourList() {
         try {
-            List<TourListEntry> tourList = requestSender.getTourList();
+            List<TourListEntry> tourList = tourService.getTourList();
+            System.out.println(tourList);
+            // TODO: show the list in ui
+        } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
+            System.out.println("----------------------------------------------------------------------------------");
+            System.out.println(e.getMessage());
+            System.out.println("----------------------------------------------------------------------------------");
+            // TODO: handle exceptions properly
+        }
+    }
+    public void searchTour(String keyword) {
+        try {
+            List<TourListEntry> tourList = tourService.searchTour(keyword);
             System.out.println(tourList);
             // TODO: show the list in ui
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
@@ -38,7 +55,7 @@ public class BusinessLogic {
     }
     public void getTour(Integer tourId) {
         try {
-            Tour tour = requestSender.getTour(tourId);
+            Tour tour = tourService.getTour(tourId);
             System.out.println(tour);
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
             // TODO: show the tour in ui, also show the image (filename is <tourId>.jpg)
@@ -51,7 +68,7 @@ public class BusinessLogic {
     }
     public void updateTour(Integer tourId, Tour tour) {
         try {
-            tour = requestSender.updateTour(tourId, tour);
+            tour = tourService.updateTour(tourId, tour);
             System.out.println(tour);
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
             // TODO: show the updated tour in ui, also show the updated image (filename is <tourId>.jpg)
@@ -64,8 +81,7 @@ public class BusinessLogic {
     }
     public void deleteTour(Integer tourId) {
         try {
-            requestSender.deleteTour(tourId);
-            System.out.println("tour removed - tourId: " + tourId);
+            tourService.deleteTour(tourId);
             // TODO: remove the tour from ui
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
             System.out.println("----------------------------------------------------------------------------------");
@@ -76,7 +92,7 @@ public class BusinessLogic {
     }
     public void createTourLog(Integer tourId, TourLog tourLog) {
         try {
-            tourLog = requestSender.createTourLog(tourId, tourLog);
+            tourLog = tourLogService.createTourLog(tourId, tourLog);
             System.out.println(tourLog);
             // TODO: show created tourLog in ui
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
@@ -88,7 +104,7 @@ public class BusinessLogic {
     }
     public void getTourLogs(Integer tourId) {
         try {
-            List<TourLog> tourLogs= requestSender.getTourLogs(tourId);
+            List<TourLog> tourLogs= tourLogService.getTourLogs(tourId);
             System.out.println(tourLogs);
             // TODO: show tourLogs in ui
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
@@ -100,7 +116,7 @@ public class BusinessLogic {
     }
     public void getTourLog(Integer tourLogId) {
         try {
-            TourLog tourLog= requestSender.getTourLog(tourLogId);
+            TourLog tourLog= tourLogService.getTourLog(tourLogId);
             System.out.println(tourLog);
             // TODO: show tourLog in ui
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
@@ -112,7 +128,7 @@ public class BusinessLogic {
     }
     public void updateTourLog(Integer tourLogId, TourLog tourLog) {
         try {
-            tourLog = requestSender.updateTourLog(tourLogId, tourLog);
+            tourLog = tourLogService.updateTourLog(tourLogId, tourLog);
             System.out.println(tourLog);
             // TODO: show updated tourLog in ui
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
@@ -124,8 +140,7 @@ public class BusinessLogic {
     }
     public void deleteTourLog(Integer tourLogId) {
         try {
-            requestSender.deleteTourLog(tourLogId);
-            System.out.println("tourLog removed - tourLogId: " + tourLogId);
+            tourLogService.deleteTourLog(tourLogId);
             // TODO: remove the tourLog from ui
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
             System.out.println("----------------------------------------------------------------------------------");
@@ -136,7 +151,7 @@ public class BusinessLogic {
     }
     public void exportTours(String filename) {
         try {
-            List<Tour> tours = requestSender.exportTours(filename);
+            List<Tour> tours = dataTransferService.exportTours(filename);
             System.out.println(tours);
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException | FailedToParseJsonFileException e) {
             System.out.println("----------------------------------------------------------------------------------");
@@ -147,10 +162,23 @@ public class BusinessLogic {
     }
     public void importTours(String filename) {
         try {
-            List<Tour> tours = requestSender.importTours(filename);
+            List<Tour> tours = dataTransferService.importTours(filename);
             System.out.println(tours);
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException |
                  FailedToParseJsonFileException e) {
+            System.out.println("----------------------------------------------------------------------------------");
+            System.out.println(e.getMessage());
+            System.out.println("----------------------------------------------------------------------------------");
+            // TODO: handle exceptions properly
+        }
+    }
+    public void createSummarizeReport(String filename) {
+        try {
+            PdfFileHandler pdfFileHandler = new PdfFileHandler();
+            List<Tour> tours = dataTransferService.exportTours(filename);
+            System.out.println(tours);
+            pdfFileHandler.createSummarizeReport(filename, tours);
+        } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException | FailedToParseJsonFileException e) {
             System.out.println("----------------------------------------------------------------------------------");
             System.out.println(e.getMessage());
             System.out.println("----------------------------------------------------------------------------------");

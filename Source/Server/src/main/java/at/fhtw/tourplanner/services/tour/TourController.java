@@ -8,6 +8,9 @@ import at.fhtw.tourplanner.models.TourListEntry;
 import at.fhtw.tourplanner.models.TourLog;
 import at.fhtw.tourplanner.repositories.MapQuestRepository;
 import at.fhtw.tourplanner.repositories.TourRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -86,6 +89,35 @@ public class TourController {
         }
     }
     public void deleteTour(Integer tourId) {
-        tourRepository.deleteById(tourId);
+        Integer deletedRows = tourRepository.deleteByTourId(tourId);
+        if(deletedRows < 1) {
+            throw new NotFoundException("deleteTour - not found");
+        }
+    }
+    public List<TourListEntry> searchTour(String keyword) {
+        keyword = keyword.toLowerCase();
+        List<Tour> tours = tourRepository.findAll();
+        if(tours.isEmpty()) {
+            throw new NoContentException("searchTour - no content");
+        }
+        List<TourListEntry> result = new ArrayList<>();
+        for(Tour tour : tours) {
+            if (tour.getName().toLowerCase().contains(keyword)
+                    || tour.getTourDescription().toLowerCase().contains(keyword)
+                    || tour.getStart().toLowerCase().contains(keyword)
+                    || tour.getDestination().toLowerCase().contains(keyword)
+                    || tour.getTransportType().toLowerCase().contains(keyword)) {
+                result.add(new TourListEntry(tour.getTourId(), tour.getName()));
+            }
+            else {
+                for (TourLog tourLog : tour.getTourLogs()) {
+                    if(tourLog.getDate().toLowerCase().contains(keyword)
+                            || tourLog.getComment().toLowerCase().contains(keyword)) {
+                        result.add(new TourListEntry(tour.getTourId(), tour.getName()));
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

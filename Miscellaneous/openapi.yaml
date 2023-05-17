@@ -124,6 +124,34 @@ paths:
           description: Tour with given id not found
         '500':
           description: Internal server error
+  /tours/search/{keyword}:
+    get:
+      tags:
+        - Tours
+      summary: Get a list of tours containing a keyword
+      description: Get a list of tours containing a specific keyword
+      parameters:
+        - in: path
+          name: keyword
+          required: true
+          schema:
+            type: string
+          description: The keyword to search for
+      responses:
+        '200':
+          description: A minimum of one tour exists, the response contains an array of tours that contains the keyword
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TourListEntry'
+        '204':
+          description: The request was fine, but no tours were created yet
+        '404':
+          description: No tours containing the keyword exist
+        '500':
+          description: Internal server error
   /tours/{tourId}/tourlogs:
     post:
       tags:
@@ -157,7 +185,7 @@ paths:
     get:
       tags:
         - Tour Logs
-      summary: Get all tourlogs for a tour
+      summary: Get all tourlogs for a tour (DEBUG?)
       description: Get all tourlogs for a tour
       parameters:
         - in: path
@@ -185,7 +213,7 @@ paths:
     get:
       tags:
         - Tour Logs
-      summary: Get a single tourlog
+      summary: Get a single tourlog (DEBUG?)
       description: Get a single tourlog for a tour
       parameters:
         - in: path
@@ -352,6 +380,14 @@ components:
           type: integer
           example: 3480000
           description: Estimated time in milliseconds
+        popularity:
+          type: integer
+          example: 2
+          description: popularity (from 1 - 5), default value = 1
+        childFriendliness:
+          type: integer
+          example: 3
+          description: child-friendliness (from 1 - 5), default value = 3
         tourInformation:
           type: string
           example: aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==
