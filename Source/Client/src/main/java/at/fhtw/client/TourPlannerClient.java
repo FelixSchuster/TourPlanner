@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class TourPlannerClient extends Application {
+public class TourPlannerClient extends Application{
     private static final BusinessLogic businessLogic = new BusinessLogic();
 
     @Override
@@ -36,6 +36,7 @@ public class TourPlannerClient extends Application {
         //businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\report.pdf");
 
         //client gui
+        //Application.launch(TourPlannerClient.class, args);
         launch(args);
 
         /*

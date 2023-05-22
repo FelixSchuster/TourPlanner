@@ -1,4 +1,4 @@
-package at.fhtw.client;
+package at.fhtw.client.viewmodel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

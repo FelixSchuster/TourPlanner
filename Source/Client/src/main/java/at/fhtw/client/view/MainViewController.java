@@ -1,5 +1,6 @@
-package at.fhtw.client;
+package at.fhtw.client.view;
 
+import at.fhtw.client.viewmodel.MainViewModel;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -11,7 +12,7 @@ import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class MainViewController implements Initializable {
 
     // create custom viewmodel
     public MainViewModel viewModel = new MainViewModel();
@@ -20,7 +21,7 @@ public class Controller implements Initializable {
     public TextField InputTextField;
     public Label OutputLabel;
 
-    public Controller()
+    public MainViewController()
     {
         System.out.println("Controller created");
     }
@@ -48,5 +49,13 @@ public class Controller implements Initializable {
 
         // OutputLabel.textProperty().bindBidirectional(viewModel.outputProperty());
         Bindings.bindBidirectional(OutputLabel.textProperty(), viewModel.outputProperty());
+
+        System.out.println("Controller init end");
+    }
+
+    public void onFileClose(ActionEvent actionEvent) {
+    }
+
+    public void onHelpAbout(ActionEvent actionEvent) {
     }
 }
