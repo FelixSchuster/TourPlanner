@@ -37,6 +37,10 @@ public class Tour {
         this.destination = destination;
         this.transportType = transportType;
     }
+
+    public Tour(String name) {
+        this.name = name;
+    }
     public Tour() { }
     public Integer getTourId() {
         return tourId;

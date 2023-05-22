@@ -7,16 +7,16 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
-            fx:controller="at.fhtw.client.view.SearchView"
+            fx:controller="at.fhtw.client.view.AddTourView"
             prefHeight="400.0" prefWidth="600.0">
     <children>
 
-        <HBox id="HBox" alignment="CENTER" spacing="5.0" AnchorPane.leftAnchor="2.0"
+        <HBox id="HBox" alignment="BASELINE_LEFT" spacing="5.0" AnchorPane.leftAnchor="2.0"
               AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="10.0">
             <children>
                 <Label/>
-                <TextField fx:id="searchField" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
-                <Button fx:id="searchButton" text="testtext" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="addButton" defaultButton="true" text="Add" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="reloadButton" defaultButton="true" text="Add" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
                 <Label/>
             </children>
         </HBox>

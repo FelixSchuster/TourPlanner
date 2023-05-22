@@ -22,14 +22,14 @@
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" text="title">
+                <Menu mnemonicParsing="false" text="File">
                     <items>
                         <MenuItem fx:id="miPreferences" mnemonicParsing="false" text="preferences" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="miQuit" mnemonicParsing="false" onAction="#onFileClose" text="quit" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="help">
+                <Menu mnemonicParsing="false" text="About">
                     <items>
                         <MenuItem fx:id="miAbout" mnemonicParsing="false" onAction="#onHelpAbout" text="about" />
                     </items>
@@ -40,20 +40,42 @@
     <center>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
-                <Tab text="title">
+                <Tab text="Tours">
                     <content>
                         <SplitPane disable="true" dividerPositions="0.265">
                             <items>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="542.0">
+                                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" >
                                     <children>
                                         <fx:include source="Search.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     </children>
+                                    <children>
+                                        <fx:include source="AddTour.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                                    </children>
+                                    <children>
+                                        <fx:include source="ListTours.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                                        <VBox layoutX="26.0" layoutY="59.0" prefHeight="200.0" prefWidth="531.0" />
+                                    </children>
                                 </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="542.0">
+                                    <children>
+                                        <Label text="Enter your target to greet:">
+                                            <GridPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                            </GridPane.margin>
+                                        </Label>
+                                        <!--<fx:include source="NewPerson.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />-->
+                                    </children>
+                                </AnchorPane>
+
                             </items>
                         </SplitPane>
                     </content>
                 </Tab>
-                <Tab text="title">
+                <Tab text="Tour Information">
+                    <content>
+                    </content>
+                </Tab>
+                <Tab text="Tour Logs">
                     <content>
                     </content>
                 </Tab>
@@ -70,11 +92,11 @@
         </ToolBar>
     </bottom>
     <children>
-        <Label text="Enter your target to greet:">
+        <!--<Label text="Enter your target to greet:">
             <GridPane.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </GridPane.margin>
-        </Label>
+        </Label>-->
         <TextField fx:id="InputTextField" GridPane.columnIndex="1">
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
