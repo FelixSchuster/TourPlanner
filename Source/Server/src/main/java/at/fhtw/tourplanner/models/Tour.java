@@ -172,8 +172,8 @@ public class Tour {
                 ", transportType='" + transportType + '\'' +
                 ", tourDistance=" + tourDistance +
                 ", estimatedTime=" + estimatedTime +
-                ", popularity" + popularity +
-                ", childFriendliness" + childFriendliness +
+                ", popularity=" + popularity +
+                ", childFriendliness=" + childFriendliness +
                 ", tourInformation='" + "<tourInformation>" + '\'' +
                 ", tourLogs=" + tourLogs +
                 '}';

@@ -18,35 +18,36 @@ public class TourLogController {
     private void updateTourStats(Integer tourId) {
         try {
             Tour tour = tourRepository.findById(tourId).get();
-            if (tour.getTourLogs().size() > 2) {
-                tour.setPopularity(2);
-            }
-            if (tour.getTourLogs().size() > 5) {
-                tour.setPopularity(3);
-            }
-            if (tour.getTourLogs().size() > 10) {
-                tour.setPopularity(4);
-            }
+
+            // update popularity
             if (tour.getTourLogs().size() > 15) {
                 tour.setPopularity(5);
             }
-            Integer averageDifficulty = 0;
-            for(TourLog tourLog : tour.getTourLogs()) {
-                averageDifficulty = averageDifficulty + tourLog.getDifficulty();
+            else if (tour.getTourLogs().size() > 10) {
+                tour.setPopularity(4);
             }
-            averageDifficulty = averageDifficulty / tour.getTourLogs().size();
-            if(averageDifficulty == 1) {
-                tour.setChildFriendliness(5);
+            else if (tour.getTourLogs().size() > 5) {
+                tour.setPopularity(3);
             }
-            if(averageDifficulty == 2) {
-                tour.setChildFriendliness(4);
+            else if (tour.getTourLogs().size() > 2) {
+                tour.setPopularity(2);
             }
-            if(averageDifficulty == 4) {
-                tour.setChildFriendliness(2);
+            else {
+                tour.setPopularity(1);
             }
-            if(averageDifficulty == 5) {
-                tour.setChildFriendliness(1);
+
+            // update childFriendliness
+            if(tour.getTourLogs().size() == 0) {
+                tour.setChildFriendliness(3);
+            } else {
+                Integer averageDifficulty = 0;
+                for(TourLog tourLog : tour.getTourLogs()) {
+                    averageDifficulty = averageDifficulty + tourLog.getDifficulty();
+                }
+                averageDifficulty = averageDifficulty / tour.getTourLogs().size();
+                tour.setChildFriendliness(6 - averageDifficulty);
             }
+
             tourRepository.save(tour);
         }
         catch(NoSuchElementException e) {
@@ -124,10 +125,11 @@ public class TourLogController {
         }
     }
     public void deleteTourLog(Integer tourLogId) {
+        Integer tourId = tourLogRepository.findById(tourLogId).get().getTour().getTourId();
         Integer deletedRows = tourLogRepository.deleteByTourLogId(tourLogId);
         if(deletedRows < 1) {
             throw new NotFoundException("deleteTourLog - not found");
         }
-        updateTourStats(tourLogRepository.findById(tourLogId).get().getTour().getTourId());
+        updateTourStats(tourId);
     }
 }
