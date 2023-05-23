@@ -18,7 +18,8 @@ import java.io.IOException;
 public class TourPlannerClient {
     private static final BusinessLogic businessLogic = new BusinessLogic();
     public static void main(String[] args) {
-        businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\report.pdf");
+        businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\summarizeReport.pdf");
+        businessLogic.createTourReport(1, "C:\\Users\\Felix\\Desktop\\tourReport.pdf");
 
         // Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
         // businessLogic.createTour(createTour);

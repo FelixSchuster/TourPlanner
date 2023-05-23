@@ -22,6 +22,7 @@ import java.net.MalformedURLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class PdfFileHandler {
     private final String FONT = "./src/main/resources/ARIALUNI.TTF";
@@ -30,7 +31,7 @@ public class PdfFileHandler {
     private final Integer FONTSIZE_SUBSUBHEADING = 14;
     private final Integer FONTSIZE_TEXT = 12;
     private final Text NEWLINE = new Text("\n").setFontSize(3);
-    public void createSummarizeReport(String filename, java.util.List<Tour> tours) {
+    public void createSummarizeReport(java.util.List<Tour> tours, String filename) {
         try {
             PdfDocument pdfDocument = new PdfDocument(new PdfWriter(filename));
             Document document = new Document(pdfDocument);
@@ -40,10 +41,9 @@ public class PdfFileHandler {
             document.setFont(font);
 
             pdfDocument.getDocumentInfo().setTitle("Summarize-Report");
-            pdfDocument.getDocumentInfo().setSubject("<TourName>");
             pdfDocument.getDocumentInfo().setCreator("TourPlanner-Client");
 
-            addTitle(document);
+            addSummarizeReportTitle(document);
 
             addTours(document, tours);
 
@@ -53,11 +53,50 @@ public class PdfFileHandler {
             throw new FailedToCreatePdfFileException("createSummarizeReport - " + e.getMessage());
         }
     }
-    private void addTitle(Document document) {
+    public void createTourReport(Tour tour, String filename) {
+        java.util.List<Tour> tours = new ArrayList<>();
+        tours.add(tour);
+        try {
+            PdfDocument pdfDocument = new PdfDocument(new PdfWriter(filename));
+            Document document = new Document(pdfDocument);
+            pdfDocument.addEventHandler(PdfDocumentEvent.END_PAGE, new FooterEventHandler(document));
+
+            PdfFont font = PdfFontFactory.createFont(FONT, PdfEncodings.IDENTITY_H);
+            document.setFont(font);
+
+            pdfDocument.getDocumentInfo().setTitle("Tour-Report");
+            pdfDocument.getDocumentInfo().setSubject(tour.getName());
+            pdfDocument.getDocumentInfo().setCreator("TourPlanner-Client");
+
+            addTourReportTitle(document);
+
+            addTours(document, tours);
+
+            document.close();
+        } catch (Exception e) {
+            // e.printStackTrace();
+            throw new FailedToCreatePdfFileException("createTourReport - " + e.getMessage());
+        }
+    }
+    private void addSummarizeReportTitle(Document document) {
         Paragraph paragraph = new Paragraph();
         paragraph.setFontSize(FONTSIZE_TEXT);
 
         Text heading = new Text("Summarize-Report").setFontSize(FONTSIZE_HEADING).setBold();
+        Text dateOfReport = new Text("Date of report: " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(LocalDateTime.now()));
+
+        paragraph.add(heading);
+        paragraph.add(NEWLINE);
+
+        paragraph.add(dateOfReport);
+
+        document.add(paragraph);
+    }
+    private void addTourReportTitle(Document document) {
+        Paragraph paragraph = new Paragraph();
+        paragraph.setFontSize(FONTSIZE_TEXT);
+
+        Text heading = new Text("Tour-Report").setFontSize(FONTSIZE_HEADING).setBold();
         Text dateOfReport = new Text("Date of report: " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(LocalDateTime.now()));
 
         paragraph.add(heading);
@@ -138,38 +177,54 @@ public class PdfFileHandler {
             paragraph.add(table);
 
             if(!tour.getTourLogs().isEmpty()) {
-
                 subSubHeading = new Text(i + ".2) Tour Logs").setFontSize(FONTSIZE_SUBSUBHEADING).setBold();
                 paragraph.add(subSubHeading);
                 paragraph.add(NEWLINE);
                 paragraph.add(NEWLINE);
 
+                Table tourLogTable = new Table(UnitValue.createPercentArray(new float[]{1, 1})).useAllAvailableWidth();
+
                 Integer k = 1;
                 for (TourLog tourLog : tour.getTourLogs()) {
-                    Text tourLogHeading = new Text(i + ".2." + k + ") Tour Log #" + k).setBold();
-                    paragraph.add(tourLogHeading);
-                    paragraph.add(NEWLINE);
+                    Cell tourLogCell = new Cell().setBorder(Border.NO_BORDER);
 
-                    paragraph.add("Date: " + tourLog.getDate());
-                    paragraph.add(NEWLINE);
+                    Paragraph tourLogParagraph = new Paragraph();
+                    tourLogParagraph.setFontSize(FONTSIZE_TEXT);
 
-                    paragraph.add("Total Time: " + DateHandler.formatSecondsToHHMMSS(tourLog.getTotalTime()));
-                    paragraph.add(NEWLINE);
+                    Text tourLogHeading = new Text("Tour Log #" + k).setBold();
+                    tourLogParagraph.add(tourLogHeading);
+                    tourLogParagraph.add(NEWLINE);
+
+                    tourLogParagraph.add("Date: " + tourLog.getDate());
+                    tourLogParagraph.add(NEWLINE);
+
+                    tourLogParagraph.add("Total Time: " + DateHandler.formatSecondsToHHMMSS(tourLog.getTotalTime()));
+                    tourLogParagraph.add(NEWLINE);
 
                     String ratingString = getStringWithStars(tourLog.getRating(), "Rating:");
-                    paragraph.add(ratingString);
-                    paragraph.add(NEWLINE);
+                    tourLogParagraph.add(ratingString);
+                    tourLogParagraph.add(NEWLINE);
 
                     String difficultyString = getStringWithStars(tourLog.getDifficulty(), "Difficulty:");
-                    paragraph.add(difficultyString);
-                    paragraph.add(NEWLINE);
+                    tourLogParagraph.add(difficultyString);
+                    tourLogParagraph.add(NEWLINE);
 
-                    paragraph.add(tourLog.getComment());
-                    paragraph.add(NEWLINE);
-                    paragraph.add(NEWLINE);
+                    tourLogParagraph.add(tourLog.getComment());
+                    tourLogParagraph.add(NEWLINE);
+                    tourLogParagraph.add(NEWLINE);
+
+                    tourLogCell.add(tourLogParagraph);
+                    tourLogTable.addCell(tourLogCell);
+
+                    if(k % 2 == 0) {
+                        paragraph.add(tourLogTable);
+                        tourLogTable = new Table(UnitValue.createPercentArray(new float[]{1, 1})).useAllAvailableWidth();
+                    }
 
                     k = k + 1;
                 }
+
+                paragraph.add(tourLogTable);
             }
 
             i = i + 1;

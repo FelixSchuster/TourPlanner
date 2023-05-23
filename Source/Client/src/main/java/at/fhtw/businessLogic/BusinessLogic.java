@@ -180,7 +180,21 @@ public class BusinessLogic {
                 ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
             }
             System.out.println(tours);
-            pdfFileHandler.createSummarizeReport(filename, tours);
+            pdfFileHandler.createSummarizeReport(tours, filename);
+        } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException | FailedToParseJsonFileException | FailedToCreatePdfFileException e) {
+            System.out.println("----------------------------------------------------------------------------------");
+            System.out.println(e.getMessage());
+            System.out.println("----------------------------------------------------------------------------------");
+            // TODO: handle exceptions properly
+        }
+    }
+    public void createTourReport(Integer tourId, String filename) {
+        try {
+            PdfFileHandler pdfFileHandler = new PdfFileHandler();
+            Tour tour = tourService.getTour(tourId);
+            ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tourId.toString());
+            System.out.println(tour);
+            pdfFileHandler.createTourReport(tour, filename);
         } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException | FailedToParseJsonFileException | FailedToCreatePdfFileException e) {
             System.out.println("----------------------------------------------------------------------------------");
             System.out.println(e.getMessage());
