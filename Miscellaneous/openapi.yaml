@@ -378,8 +378,8 @@ components:
           description: Tour distance in kilometers
         estimatedTime:
           type: integer
-          example: 3480000
-          description: Estimated time in milliseconds
+          example: 3480
+          description: Estimated time in seconds
         popularity:
           type: integer
           example: 2
@@ -415,8 +415,8 @@ components:
           description: Difficulty (from 1 to 5)
         totalTime:
           type: integer
-          example: 3480000
-          description: Actual time spent in milliseconds
+          example: 3480
+          description: Actual time spent in seconds
         rating:
           type: integer
           example: 5
