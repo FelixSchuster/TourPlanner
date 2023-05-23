@@ -38,7 +38,9 @@ public class DataTransferService {
                 throw new NotFoundException("exportTours - not found");
             }
 
-            JsonFileHandler.saveJsonStringToFile(filename, httpResponse.body());
+            if(filename != null) {
+                JsonFileHandler.saveJsonStringToFile(filename, httpResponse.body());
+            }
 
             List<Tour> tours = List.of(objectMapper.readValue(httpResponse.body(), Tour[].class));
             return tours;

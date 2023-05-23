@@ -8,7 +8,7 @@ import at.fhtw.services.DataTransferService;
 import at.fhtw.services.TourLogService;
 import at.fhtw.services.TourService;
 import at.fhtw.utils.ImageHandler;
-import at.fhtw.utils.PdfFileHandler;
+import at.fhtw.utils.pdfFileHandler.PdfFileHandler;
 
 import java.util.List;
 
@@ -175,10 +175,27 @@ public class BusinessLogic {
     public void createSummarizeReport(String filename) {
         try {
             PdfFileHandler pdfFileHandler = new PdfFileHandler();
-            List<Tour> tours = dataTransferService.exportTours(filename);
+            List<Tour> tours = dataTransferService.exportTours(null);
+            for(Tour tour : tours) {
+                ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
+            }
             System.out.println(tours);
-            pdfFileHandler.createSummarizeReport(filename, tours);
-        } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException | FailedToParseJsonFileException e) {
+            pdfFileHandler.createSummarizeReport(tours, filename);
+        } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException | FailedToParseJsonFileException | FailedToCreatePdfFileException e) {
+            System.out.println("----------------------------------------------------------------------------------");
+            System.out.println(e.getMessage());
+            System.out.println("----------------------------------------------------------------------------------");
+            // TODO: handle exceptions properly
+        }
+    }
+    public void createTourReport(Integer tourId, String filename) {
+        try {
+            PdfFileHandler pdfFileHandler = new PdfFileHandler();
+            Tour tour = tourService.getTour(tourId);
+            ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tourId.toString());
+            System.out.println(tour);
+            pdfFileHandler.createTourReport(tour, filename);
+        } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException | FailedToParseJsonFileException | FailedToCreatePdfFileException e) {
             System.out.println("----------------------------------------------------------------------------------");
             System.out.println(e.getMessage());
             System.out.println("----------------------------------------------------------------------------------");
