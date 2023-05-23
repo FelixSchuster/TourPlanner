@@ -103,6 +103,9 @@ public class TourService {
         catch(NoContentException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        catch(NotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         catch(Exception e) {
             e.printStackTrace();
         }

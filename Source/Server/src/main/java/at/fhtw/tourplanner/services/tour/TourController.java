@@ -102,21 +102,13 @@ public class TourController {
         }
         List<TourListEntry> result = new ArrayList<>();
         for(Tour tour : tours) {
-            if (tour.getName().toLowerCase().contains(keyword)
-                    || tour.getTourDescription().toLowerCase().contains(keyword)
-                    || tour.getStart().toLowerCase().contains(keyword)
-                    || tour.getDestination().toLowerCase().contains(keyword)
-                    || tour.getTransportType().toLowerCase().contains(keyword)) {
+            System.out.println(tour);
+            if (tour.toString().toLowerCase().contains(keyword)) {
                 result.add(new TourListEntry(tour.getTourId(), tour.getName()));
             }
-            else {
-                for (TourLog tourLog : tour.getTourLogs()) {
-                    if(tourLog.getDate().toLowerCase().contains(keyword)
-                            || tourLog.getComment().toLowerCase().contains(keyword)) {
-                        result.add(new TourListEntry(tour.getTourId(), tour.getName()));
-                    }
-                }
-            }
+        }
+        if(result.isEmpty()) {
+            throw new NotFoundException("searchTour - not found");
         }
         return result;
     }
