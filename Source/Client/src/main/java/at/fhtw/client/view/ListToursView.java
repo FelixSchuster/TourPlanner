@@ -13,9 +13,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class ListToursView {
     public ListToursViewModel listToursViewModel = new ListToursViewModel();
@@ -37,7 +39,7 @@ public class ListToursView {
         return new ArrayList<Tour>(Arrays.asList(tourtems));
     }
     @FXML
-    private void initialize() {
+    private void initialize(URL location, ResourceBundle rb) {
 
         ComboBox<Tour> tourItems = new ComboBox<Tour>(FXCollections.observableList(getItems()));
         List<Tour> tourList = getItems();

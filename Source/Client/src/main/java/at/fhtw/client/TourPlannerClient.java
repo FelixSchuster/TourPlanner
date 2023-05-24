@@ -22,9 +22,9 @@ public class TourPlannerClient extends Application{
         System.out.println("set title");
 
         // set scene into stage in defined size
-        primaryStage.setScene(new Scene(root, 600, 500));
-        primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(400);
+        primaryStage.setScene(new Scene(root, 800, 500));
+        primaryStage.setMinWidth(300);
+        primaryStage.setMinHeight(300);
         System.out.println("set scene");
 
         // let's go
