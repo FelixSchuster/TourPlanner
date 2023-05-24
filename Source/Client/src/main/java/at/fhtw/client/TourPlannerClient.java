@@ -1,6 +1,7 @@
 package at.fhtw.client;
 
 import at.fhtw.client.businessLogic.BusinessLogic;
+import at.fhtw.client.models.Tour;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,21 +34,21 @@ public class TourPlannerClient extends Application{
     }
 
     public static void main(String[] args) {
-        //businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\report.pdf");
+        //businessLogic.createSummarizeReport("C:\\Users\\Bea\\Desktop\\report.pdf");
 
         //client gui
         //Application.launch(TourPlannerClient.class, args);
         launch(args);
 
-        /*
-        Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
+
+        /*Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
         businessLogic.createTour(createTour);
 
-        businessLogic.searchTour("aaaaaaaaaa");
-        */
+        businessLogic.searchTour("aaaaaaaaaa");*/
 
-        /*
-        businessLogic.getTourList();
+
+
+        /*businessLogic.getTourList();
 
         businessLogic.getTour(1);
 

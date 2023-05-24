@@ -53,7 +53,7 @@
                                     </children>
                                     <children>
                                         <fx:include source="ListTours.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
-                                        <VBox layoutX="26.0" layoutY="59.0" prefHeight="200.0" prefWidth="531.0" />
+                                        <VBox layoutX="26.0" layoutY="59.0" prefHeight="200.0" prefWidth="200.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="542.0">

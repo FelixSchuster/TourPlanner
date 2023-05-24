@@ -17,7 +17,7 @@
                 <Label/>
                 <TextField fx:id="searchField" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
                 <Button fx:id="searchButton" text="testtext" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
-                <Label/>
+                <Label fx:id="searchLabel"/>
             </children>
         </HBox>
 
