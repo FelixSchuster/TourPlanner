@@ -40,12 +40,13 @@ public class ListToursView {
     private void initialize() {
 
         ComboBox<Tour> tourItems = new ComboBox<Tour>(FXCollections.observableList(getItems()));
-       /*oreach(Tour value  s)
+        List<Tour> tourList = getItems();
+       for (Tour value : tourList)
         {
             System.out.println("value: " + value);
-        }*/
+        }
         //searchField.textProperty().bindBidirectional(searchViewModel.searchStringProperty());
-        tableView.setItems((ObservableList) tourItems);
+        tableView.setItems((ObservableList) tourList);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn name = new TableColumn("Name");
