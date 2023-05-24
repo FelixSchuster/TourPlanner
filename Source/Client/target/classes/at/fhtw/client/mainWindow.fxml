@@ -30,7 +30,7 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="miSummarizeReport" mnemonicParsing="false" onAction="#onFileClose" text="Summarize Report" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="miQuit" mnemonicParsing="false" onAction="#onFileClose" text="quit" />
+                        <MenuItem fx:id="miQuit" mnemonicParsing="false" onAction="#onFileClose" text="Quit" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="About">
