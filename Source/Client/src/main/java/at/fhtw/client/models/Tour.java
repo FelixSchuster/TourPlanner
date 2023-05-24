@@ -1,5 +1,7 @@
 package at.fhtw.client.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -36,10 +38,6 @@ public class Tour {
         this.start = start;
         this.destination = destination;
         this.transportType = transportType;
-    }
-
-    public Tour(String name) {
-        this.name = name;
     }
     public Tour() { }
     public Integer getTourId() {

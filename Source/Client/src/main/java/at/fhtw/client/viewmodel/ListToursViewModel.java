@@ -1,30 +1,30 @@
 package at.fhtw.client.viewmodel;
 
-import at.fhtw.client.models.Person;
-import at.fhtw.client.models.Tour;
 import at.fhtw.client.models.TourListEntry;
 import at.fhtw.client.services.TourService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class ListToursViewModel {
 
     public TourService tourService = new TourService();
-    private List<Person> masterData = new ArrayList<>();
-    private ObservableList<Person> tourListItems = FXCollections.observableArrayList();
+    private List<TourListEntry> masterData = new ArrayList<>();
+    private ObservableList<TourListEntry> tourListItems = FXCollections.observableArrayList();
 
-    public List<Person> getMasterDataListItems() {
+    public List<TourListEntry> getMasterDataListItems() {
         return masterData;
     }
-    public ObservableList<Person> getTourListItems() {
+    public ObservableList<TourListEntry> getTourListItems() {
         return tourListItems;
     }
 
-    public void addItem(Person tour) {
+    public void addItem(TourListEntry tour) {
         tourListItems.add(tour);
         masterData.add(tour);
     }
@@ -32,23 +32,29 @@ public class ListToursViewModel {
 
     public void initList(){
 
-        /*tourService.getTourList().forEach(p -> {
-            addItem(p);
-        });*/
-        getItems().forEach(p -> {
+        tourService.getTourList().forEach(p -> {
             addItem(p);
         });
     }
-    public List<Person> getItems() {
 
-        Person[] tourItems =
-                {
-                        new Person("Item1"),
-                        new Person("Item2"),
-                        new Person("Another"),
-                        new Person("SWE1"),
-                        new Person("FHTW"),
-                };
-        return new ArrayList<Person>(Arrays.asList(tourItems));
+    public void filterList(String searchText){
+        Task<List<TourListEntry>> task = new Task<>() {
+            @Override
+            protected List<TourListEntry> call() throws Exception {
+                updateMessage("Loading data");
+                return masterData
+                        .stream()
+                        .filter(value -> value.getName().toLowerCase().contains(searchText.toLowerCase()))
+                        .collect(Collectors.toList());
+            }
+        };
+
+        task.setOnSucceeded(event -> {
+            tourListItems.setAll(task.getValue());
+        });
+
+        Thread th = new Thread(task);
+        th.setDaemon(true);
+        th.start();
     }
 }

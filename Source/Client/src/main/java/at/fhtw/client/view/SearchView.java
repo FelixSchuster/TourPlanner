@@ -14,7 +14,7 @@ public class SearchView {
 
     public static final int PAGE_ITEMS_COUNT = 10;
 
-    public SearchViewModel searchViewModel = new SearchViewModel();
+    private SearchViewModel searchViewModel = new SearchViewModel();
 
     @FXML
     private TextField searchField;
@@ -23,7 +23,7 @@ public class SearchView {
     @FXML
     private Label searchLabel;
 
-    @FXML
+    /*@FXML
     private void initialize() {
 
         //searchField.textProperty().bindBidirectional(searchViewModel.searchStringProperty());
@@ -42,10 +42,40 @@ public class SearchView {
         /*searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchLabel.setText(newValue);
         });*/
-    }
+    //}
+
+    /*private void loadData() {
+        searchViewModel.search();
+    }*/
+
+    @FXML
+    private void initialize() {
+
+            searchField.textProperty().bindBidirectional(searchViewModel.searchStringProperty());
+
+            // search panel
+            searchButton.setText("Search");
+            searchButton.setOnAction(event -> loadData());
+            searchButton.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
+            searchField.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                System.out.println("1");
+                searchButton.setText("yes");
+                System.out.println("2");
+                loadData();
+                System.out.println("3");
+
+            }
+            });
+            searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchLabel.setText(newValue);
+            });
+        }
 
     private void loadData() {
-        searchViewModel.search();
+        System.out.println("lodaddata1");
+            searchViewModel.search();
+        System.out.println("lodaddata2");
     }
 
 }

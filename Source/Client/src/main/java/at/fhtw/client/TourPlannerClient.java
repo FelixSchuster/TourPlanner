@@ -20,7 +20,6 @@ public class TourPlannerClient extends Application{
 
         // bootstrap "window" named stage
         primaryStage.setTitle("Tour Planner");
-        System.out.println("set title");
 
         // set scene into stage in defined size
         primaryStage.setScene(new Scene(root, 800, 500));
@@ -40,17 +39,19 @@ public class TourPlannerClient extends Application{
         //Application.launch(TourPlannerClient.class, args);
         launch(args);
 
-
-        /*Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
+        /*
+        System.out.println("create tour");
+        Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
         businessLogic.createTour(createTour);
 
-        businessLogic.searchTour("aaaaaaaaaa");*/
+        businessLogic.searchTour("aaaaaaaaaa");
 
 
 
-        /*businessLogic.getTourList();
+        businessLogic.getTourList();
 
         businessLogic.getTour(1);
+
 
         Tour updateTour = new Tour(); updateTour.setTourDescription("New description"); updateTour.setDestination("Wien Mitte");
         businessLogic.updateTour(1, updateTour);

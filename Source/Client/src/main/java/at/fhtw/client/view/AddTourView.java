@@ -5,10 +5,13 @@ import at.fhtw.client.viewmodel.MainViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+@Component
 public class AddTourView {
 
-    public AddTourViewModel addTourViewModel = new AddTourViewModel();
+    @Autowired
+    private AddTourViewModel addTourViewModel;
     @FXML
     private Button addButton;
     @FXML

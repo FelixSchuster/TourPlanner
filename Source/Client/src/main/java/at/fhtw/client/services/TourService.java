@@ -44,7 +44,7 @@ public class TourService {
             Tour newtour = objectMapper.readValue(httpResponse.body(), Tour.class);
             return newtour;
         } catch (URISyntaxException | IOException | InterruptedException e) {
-            // e.printStackTrace();
+            e.printStackTrace();
             throw new FailedToSendRequestException("createTour - failed to send request");
         }
     }
