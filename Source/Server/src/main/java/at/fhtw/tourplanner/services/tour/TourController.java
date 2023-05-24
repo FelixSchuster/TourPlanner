@@ -31,13 +31,14 @@ public class TourController {
         tour.setEstimatedTime(mapQuestData.getEstimatedTime());
         tour.setTourInformation(tourInformation);
 
+        tour.updateTourStats();
         tour = tourRepository.save(tour);
         return tour;
     }
     public List<TourListEntry> getTourList() {
         List<Tour> tours = tourRepository.findAll();
         if(tours.isEmpty()) {
-            throw new NoContentException("No tours were created yet");
+            throw new NoContentException("TourController.getTourList() - no content");
         }
         List<TourListEntry> tourListEntries = new ArrayList<>();
         for(Tour tour : tours) {
@@ -48,10 +49,11 @@ public class TourController {
     public Tour getTour(Integer tourId) {
         try {
             Tour tour = tourRepository.findById(tourId).get();
+            tour.updateTourStats();
             return tour;
         }
         catch(NoSuchElementException e) {
-            throw new NotFoundException("Tour with given id not found");
+            throw new NotFoundException("TourController.getTour() - tourId not found: " + tourId);
         }
     }
     public Tour updateTour(Integer tourId, Tour tour) {
@@ -80,25 +82,26 @@ public class TourController {
             updatedTour.setEstimatedTime(mapQuestData.getEstimatedTime());
             updatedTour.setTourInformation(tourInformation);
 
+            updatedTour.updateTourStats();
             updatedTour = tourRepository.save(updatedTour);
 
             return updatedTour;
         }
         catch(NoSuchElementException e) {
-            throw new NotFoundException("Tour with given id not found");
+            throw new NotFoundException("TourController.updateTour() - tourId not found: " + tourId);
         }
     }
     public void deleteTour(Integer tourId) {
         Integer deletedRows = tourRepository.deleteByTourId(tourId);
         if(deletedRows < 1) {
-            throw new NotFoundException("deleteTour - not found");
+            throw new NotFoundException("TourController.deleteTour() - tourId not found: " + tourId);
         }
     }
     public List<TourListEntry> searchTour(String keyword) {
         keyword = keyword.toLowerCase();
         List<Tour> tours = tourRepository.findAll();
         if(tours.isEmpty()) {
-            throw new NoContentException("searchTour - no content");
+            throw new NoContentException("TourController.searchTour() - no content");
         }
         List<TourListEntry> result = new ArrayList<>();
         for(Tour tour : tours) {
@@ -108,7 +111,7 @@ public class TourController {
             }
         }
         if(result.isEmpty()) {
-            throw new NotFoundException("searchTour - not found");
+            throw new NotFoundException("TourController.searchTour() - keyword not found: " + keyword);
         }
         return result;
     }

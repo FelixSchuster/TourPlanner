@@ -6,6 +6,7 @@ import at.fhtw.tourplanner.models.Tour;
 import at.fhtw.tourplanner.models.TourLog;
 import at.fhtw.tourplanner.repositories.TourLogRepository;
 import at.fhtw.tourplanner.repositories.TourRepository;
+import at.fhtw.tourplanner.services.tour.TourController;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,45 +16,6 @@ import java.util.NoSuchElementException;
 public class TourLogController {
     private final TourLogRepository tourLogRepository;
     private final TourRepository tourRepository;
-    private void updateTourStats(Integer tourId) {
-        try {
-            Tour tour = tourRepository.findById(tourId).get();
-
-            // update popularity
-            if (tour.getTourLogs().size() > 15) {
-                tour.setPopularity(5);
-            }
-            else if (tour.getTourLogs().size() > 10) {
-                tour.setPopularity(4);
-            }
-            else if (tour.getTourLogs().size() > 5) {
-                tour.setPopularity(3);
-            }
-            else if (tour.getTourLogs().size() > 2) {
-                tour.setPopularity(2);
-            }
-            else {
-                tour.setPopularity(1);
-            }
-
-            // update childFriendliness
-            if(tour.getTourLogs().size() == 0) {
-                tour.setChildFriendliness(3);
-            } else {
-                Integer averageDifficulty = 0;
-                for(TourLog tourLog : tour.getTourLogs()) {
-                    averageDifficulty = averageDifficulty + tourLog.getDifficulty();
-                }
-                averageDifficulty = averageDifficulty / tour.getTourLogs().size();
-                tour.setChildFriendliness(6 - averageDifficulty);
-            }
-
-            tourRepository.save(tour);
-        }
-        catch(NoSuchElementException e) {
-            throw new NotFoundException("Tour with given id not found");
-        }
-    }
     public TourLogController(TourLogRepository tourLogRepository, TourRepository tourRepository) {
         this.tourLogRepository = tourLogRepository;
         this.tourRepository = tourRepository;
@@ -63,11 +25,10 @@ public class TourLogController {
             Tour tour = tourRepository.findById(tourId).get();
             tourLog.setTour(tour);
             tourLog = tourLogRepository.save(tourLog);
-            updateTourStats(tourId);
             return tourLog;
         }
         catch(NoSuchElementException e) {
-            throw new NotFoundException("Tour with given id not found");
+            throw new NotFoundException("TourLogController.createTourLog() - tourId not found: " + tourId);
         }
     }
     public List<TourLog> getTourLogs(Integer tourId) {
@@ -77,13 +38,13 @@ public class TourLogController {
             return tourLogs;
         }
         catch(NoSuchElementException e) {
-            throw new NotFoundException("Tour with given id not found");
+            throw new NotFoundException("TourLogController.getTourLogs() - tourId not found: " + tourId);
         }
     }
     public List<TourLog> getTourLogs() {
         List<TourLog> tourLogs = tourLogRepository.findAll();
         if(tourLogs.isEmpty()) {
-            throw new NoContentException("No tourLogs were created yet");
+            throw new NoContentException("TourLogController.getTourLogs() - no content");
         }
         return tourLogs;
     }
@@ -93,7 +54,7 @@ public class TourLogController {
             return tourLog;
         }
         catch(NoSuchElementException e) {
-            throw new NotFoundException("TourLog with given id not found");
+            throw new NotFoundException("TourLogController.getTourLog() - tourLogId not found: " + tourLogId);
         }
     }
     public TourLog updateTourLog(Integer tourLogId, TourLog tourLog) {
@@ -115,21 +76,18 @@ public class TourLogController {
             if(tourLog.getRating() != null) {
                 updatedTourLog.setRating(tourLog.getRating());
             }
-            updateTourStats(tourLogRepository.findById(tourLogId).get().getTour().getTourId());
             updatedTourLog = tourLogRepository.save(updatedTourLog);
 
             return updatedTourLog;
         }
         catch(NoSuchElementException e) {
-            throw new NotFoundException("TourLog with given id not found");
+            throw new NotFoundException("TourLogController.updateTourLog() - tourLogId not found: " + tourLogId);
         }
     }
     public void deleteTourLog(Integer tourLogId) {
-        Integer tourId = tourLogRepository.findById(tourLogId).get().getTour().getTourId();
         Integer deletedRows = tourLogRepository.deleteByTourLogId(tourLogId);
         if(deletedRows < 1) {
-            throw new NotFoundException("deleteTourLog - not found");
+            throw new NotFoundException("TourLogController.deleteTourLog() - tourLogId not found: " + tourLogId);
         }
-        updateTourStats(tourId);
     }
 }

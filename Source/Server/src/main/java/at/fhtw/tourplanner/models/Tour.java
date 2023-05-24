@@ -1,11 +1,13 @@
 package at.fhtw.tourplanner.models;
 
+import at.fhtw.tourplanner.exceptions.NotFoundException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @Entity
@@ -188,5 +190,35 @@ public class Tour {
     @Override
     public int hashCode() {
         return Objects.hash(tourId, name, tourDescription, start, destination, transportType, tourDistance, estimatedTime, tourInformation, popularity, childFriendliness);
+    }
+    public void updateTourStats() {
+        // update popularity
+        if (this.tourLogs.size() > 15) {
+            this.popularity = 5;
+        }
+        else if (this.tourLogs.size() > 10) {
+            this.popularity = 4;
+        }
+        else if (this.tourLogs.size() > 5) {
+            this.popularity = 3;
+        }
+        else if (this.tourLogs.size() > 2) {
+            this.popularity = 2;
+        }
+        else {
+            this.popularity = 1;
+        }
+
+        // update childFriendliness
+        if(this.tourLogs.size() == 0) {
+            this.childFriendliness = 3;
+        } else {
+            Integer averageDifficulty = 0;
+            for(TourLog tourLog : this.tourLogs) {
+                averageDifficulty = averageDifficulty + tourLog.getDifficulty();
+            }
+            averageDifficulty = averageDifficulty / this.tourLogs.size();
+            this.childFriendliness = 6 - averageDifficulty;
+        }
     }
 }

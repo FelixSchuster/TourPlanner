@@ -2,34 +2,24 @@ package at.fhtw;
 
 import at.fhtw.businessLogic.BusinessLogic;
 import at.fhtw.models.Tour;
-import com.itextpdf.io.font.PdfEncodings;
-import com.itextpdf.io.font.constants.StandardFonts;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.List;
-import com.itextpdf.layout.element.ListItem;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import at.fhtw.models.TourLog;
 
 public class TourPlannerClient {
     private static final BusinessLogic businessLogic = new BusinessLogic();
     public static void main(String[] args) {
         businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\summarizeReport.pdf");
         businessLogic.createTourReport(1, "C:\\Users\\Felix\\Desktop\\tourReport.pdf");
+        businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\summarizeReport1.pdf");
+        businessLogic.importTours("C:\\Users\\Felix\\Desktop\\export.json");
+        businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\summarizeReport2.pdf");
 
-        // Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
-        // businessLogic.createTour(createTour);
+        Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
+        businessLogic.createTour(createTour);
 
-        // businessLogic.searchTour("aaaaaaaaaa");
+        businessLogic.searchTour("aaaaaaaaaa");
 
-        // businessLogic.getTour(1);
+        businessLogic.getTour(1);
 
-
-        /*
         businessLogic.getTourList();
 
         businessLogic.getTour(1);
@@ -73,6 +63,5 @@ public class TourPlannerClient {
         businessLogic.exportTours("C:\\Users\\Felix\\Desktop\\export.json");
 
         businessLogic.importTours("C:\\Users\\Felix\\Desktop\\import.json");
-        */
     }
 }
