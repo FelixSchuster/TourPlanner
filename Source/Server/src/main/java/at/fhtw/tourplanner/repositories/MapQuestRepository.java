@@ -41,8 +41,8 @@ public class MapQuestRepository {
             return mapQuestData;
         }
         catch(Exception e) {
-            e.printStackTrace();
-            throw new BadRequestException("Bad Request - findMapQuestData");
+            // e.printStackTrace();
+            throw new BadRequestException("MapQuestRepository.findMapQuestData() - bad request");
         }
     }
     public String findMapQuestMap(String start, String destination) {
@@ -64,8 +64,8 @@ public class MapQuestRepository {
             return encodedImage;
         }
         catch (Exception e) {
-            e.printStackTrace();
-            throw new BadRequestException("Bad Request - findMapQuestMap");
+            // e.printStackTrace();
+            throw new BadRequestException("MapQuestRepository.findMapQuestMap() - bad request");
         }
     }
 }

@@ -26,8 +26,11 @@ public class DataTransferController {
     }
     public List<Tour> exportTours() {
         List<Tour> tours = tourRepository.findAll();
+        for(Tour tour : tours) {
+            tour.updateTourStats();
+        }
         if(tours.isEmpty()) {
-            throw new NoContentException("No tours were created yet");
+            throw new NoContentException("DataTransferController.exportTours() - no content");
         }
         return tours;
     }
