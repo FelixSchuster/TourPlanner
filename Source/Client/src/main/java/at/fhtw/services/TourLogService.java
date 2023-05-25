@@ -1,9 +1,6 @@
 package at.fhtw.services;
 
-import at.fhtw.exceptions.BadRequestException;
-import at.fhtw.exceptions.FailedToSendRequestException;
-import at.fhtw.exceptions.NoContentException;
-import at.fhtw.exceptions.NotFoundException;
+import at.fhtw.exceptions.*;
 import at.fhtw.models.TourLog;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,21 +27,18 @@ public class TourLogService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("createTourLog - no content");
-            }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("createTourLog - bad request");
-            }
             if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("createTourLog - not found");
+                throw new NotFoundException("TourLogService.createTourLog() - not found");
+            }
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourLogService.createTour() - internal server error");
             }
 
             TourLog newTourLog = objectMapper.readValue(httpResponse.body(), TourLog.class);
             return newTourLog;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("createTourLog - failed to send request");
+            throw new FailedToSendRequestException("TourLogService.createTourLog() - failed to send request");
         }
     }
     public List<TourLog> getTourLogs(Integer tourId) {
@@ -56,21 +50,18 @@ public class TourLogService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("getTourLogs - no content");
-            }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("getTourLogs - bad request");
-            }
             if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("getTourLogs - not found");
+                throw new NotFoundException("TourLogService.getTourLogs() - not found");
+            }
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourLogService.getTourLogs() - internal server error");
             }
 
             List <TourLog> tourLogs = List.of(objectMapper.readValue(httpResponse.body(), TourLog[].class));
             return tourLogs;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("getTourLogs - failed to send request");
+            throw new FailedToSendRequestException("TourLogService.getTourLogs() - failed to send request");
         }
     }
     public TourLog getTourLog(Integer tourLogId) {
@@ -82,21 +73,18 @@ public class TourLogService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("getTourLog - no content");
-            }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("getTourLog - bad request");
-            }
             if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("getTourLog - not found");
+                throw new NotFoundException("TourLogService.getTourLog() - not found");
+            }
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourLogService.getTourLog() - internal server error");
             }
 
             TourLog tourLog = objectMapper.readValue(httpResponse.body(), TourLog.class);
             return tourLog;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("getTourLog - failed to send request");
+            throw new FailedToSendRequestException("TourLogService.getTourLog() - failed to send request");
         }
     }
     public TourLog updateTourLog(Integer tourLogId, TourLog tourlog) {
@@ -111,21 +99,18 @@ public class TourLogService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("updateTourLog - no content");
-            }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("updateTourLog - bad request");
-            }
             if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("updateTourLog - not found");
+                throw new NotFoundException("TourLogService.updateTourLog() - not found");
+            }
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourLogService.updateTourLog() - internal server error");
             }
 
             TourLog newTourLog = objectMapper.readValue(httpResponse.body(), TourLog.class);
             return newTourLog;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("updateTourLog - failed to send request");
+            throw new FailedToSendRequestException("TourLogService.updateTourLog() - failed to send request");
         }
     }
     public void deleteTourLog(Integer tourLogId) {
@@ -137,18 +122,15 @@ public class TourLogService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("deleteTourLog - no content");
-            }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("deleteTourLog - bad request");
-            }
             if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("deleteTourLog - not found");
+                throw new NotFoundException("TourLogService.deleteTourLog() - not found");
+            }
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourLogService.deleteTourLog() - internal server error");
             }
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("deleteTourLog - failed to send request");
+            throw new FailedToSendRequestException("TourLogService.deleteTourLog() - failed to send request");
         }
     }
 }
