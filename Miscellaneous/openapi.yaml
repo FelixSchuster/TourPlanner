@@ -32,6 +32,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tour'
+        '400':
+          description: Bad request (most likely due to invalid lokation)
         '500':
           description: Internal server error
     get:
@@ -101,6 +103,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tour'
+        '400':
+          description: Bad request (most likely due to invalid lokation)
         '404':
           description: Tour with given id not found
         '500':
@@ -294,8 +298,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tour'
-        '204':
-          description: The request was fine, but no tours were created yet
+        '400':
+          description: Bad request (most likely due to invalid lokation)
         '500':
           description: Internal server error
   /export:
