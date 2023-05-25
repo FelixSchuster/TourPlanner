@@ -1,5 +1,6 @@
 package at.fhtw.utils.pdfFileHandler;
 
+import at.fhtw.TourPlannerClient;
 import at.fhtw.exceptions.FailedToCreatePdfFileException;
 import at.fhtw.models.Tour;
 import at.fhtw.models.TourLog;
@@ -17,6 +18,8 @@ import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.AreaBreakType;
 import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.UnitValue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.MalformedURLException;
 import java.time.LocalDateTime;
@@ -25,13 +28,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PdfFileHandler {
+    private static final Logger logger = LogManager.getLogger(PdfFileHandler.class);
     private final String FONT = "./src/main/resources/ARIALUNI.TTF";
+    private final String IMAGE_PATH = "data/images/";
     private final Integer FONTSIZE_HEADING = 20;
     private final Integer FONTSIZE_SUBHEADING = 16;
     private final Integer FONTSIZE_SUBSUBHEADING = 14;
     private final Integer FONTSIZE_TEXT = 12;
     private final Text NEWLINE = new Text("\n").setFontSize(3);
     public void createSummarizeReport(java.util.List<Tour> tours, String filename) {
+        if(!filename.endsWith(".pdf")) {
+            filename += ".pdf";
+        }
+
         try {
             PdfDocument pdfDocument = new PdfDocument(new PdfWriter(filename));
             Document document = new Document(pdfDocument);
@@ -48,6 +57,8 @@ public class PdfFileHandler {
             addTours(document, tours);
 
             document.close();
+
+            logger.info("PdfFileHandler.createSummarizeReport() - summarize report created successfully: " + filename);
         } catch (Exception e) {
             // e.printStackTrace();
             throw new FailedToCreatePdfFileException("createSummarizeReport - " + e.getMessage());
@@ -73,6 +84,7 @@ public class PdfFileHandler {
             addTours(document, tours);
 
             document.close();
+            logger.info("PdfFileHandler.createTourReport() - tour report created successfully: " + filename);
         } catch (Exception e) {
             // e.printStackTrace();
             throw new FailedToCreatePdfFileException("createTourReport - " + e.getMessage());
@@ -164,7 +176,7 @@ public class PdfFileHandler {
             list.add(childfriendlinessString);
             list.add("Tour Description: " + tour.getTourDescription());
 
-            Image image = new Image(ImageDataFactory.create(tour.getTourId() + ".jpg"));
+            Image image = new Image(ImageDataFactory.create(IMAGE_PATH + tour.getTourId() + ".jpg"));
             image.setWidth(220);
             image.setHorizontalAlignment(HorizontalAlignment.RIGHT);
 

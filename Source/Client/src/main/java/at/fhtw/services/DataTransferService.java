@@ -1,9 +1,6 @@
 package at.fhtw.services;
 
-import at.fhtw.exceptions.BadRequestException;
-import at.fhtw.exceptions.FailedToSendRequestException;
-import at.fhtw.exceptions.NoContentException;
-import at.fhtw.exceptions.NotFoundException;
+import at.fhtw.exceptions.*;
 import at.fhtw.models.Tour;
 import at.fhtw.utils.JsonFileHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,13 +26,10 @@ public class DataTransferService {
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
             if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("exportTours - no content");
+                throw new NoContentException("DataTransferService.exportTours() - no content");
             }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("exportTours - bad request");
-            }
-            if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("exportTours - not found");
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("DataTransferService.exportTours() - internal server error");
             }
 
             if(filename != null) {
@@ -46,7 +40,7 @@ public class DataTransferService {
             return tours;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("exportTours - failed to send request");
+            throw new FailedToSendRequestException("DataTransferService.exportTours() - failed to send request");
         }
     }
     public List<Tour> importTours(String filename) {
@@ -61,21 +55,18 @@ public class DataTransferService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("importTours - no content");
-            }
             if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("importTours - bad request");
+                throw new InternalServerErrorException("DataTransferService.importTours() - bad request");
             }
-            if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("importTours - not found");
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("DataTransferService.importTours() - internal server error");
             }
 
             List<Tour> importTours = List.of(objectMapper.readValue(httpResponse.body(), Tour[].class));
             return importTours;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("importTours - failed to send request");
+            throw new FailedToSendRequestException("DataTransferService.importTours() - failed to send request");
         }
     }
 }

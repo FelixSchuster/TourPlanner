@@ -1,5 +1,6 @@
 package at.fhtw.tourplanner.services.dataTransfer;
 
+import at.fhtw.tourplanner.exceptions.BadRequestException;
 import at.fhtw.tourplanner.exceptions.NoContentException;
 import at.fhtw.tourplanner.models.Tour;
 import org.apache.logging.log4j.LogManager;
@@ -43,9 +44,9 @@ public class DataTransferService {
             logger.info("DataTransferService.importTours() - tours imported successfully: " + tours);
             return new ResponseEntity<>(importedTours, HttpStatus.CREATED);
         }
-        catch(NoContentException e) {
-            logger.info("DataTransferService.importTours() - " + e.getMessage());
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        catch(BadRequestException e) {
+            logger.warn("DataTransferService.importTours() - " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         catch(Exception e) {
             logger.error("DataTransferService.importTours() - " + e.getMessage());

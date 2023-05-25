@@ -112,7 +112,6 @@ public class Tour {
     public void setTourLogs(List<TourLog> tourLogs) {
         this.tourLogs = tourLogs;
     }
-
     @Override
     public String toString() {
         return "Tour{" +
@@ -124,11 +123,11 @@ public class Tour {
                 ", transportType='" + transportType + '\'' +
                 ", tourDistance=" + tourDistance +
                 ", estimatedTime=" + estimatedTime +
-                ", tourInformation='" + "<tourInformation>" + '\'' +
+                ", popularity=" + popularity +
+                ", childFriendliness=" + childFriendliness +
                 ", tourLogs=" + tourLogs +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -136,7 +135,6 @@ public class Tour {
         Tour tour = (Tour) o;
         return Objects.equals(tourId, tour.tourId) && Objects.equals(name, tour.name) && Objects.equals(tourDescription, tour.tourDescription) && Objects.equals(start, tour.start) && Objects.equals(destination, tour.destination) && Objects.equals(transportType, tour.transportType) && Objects.equals(tourDistance, tour.tourDistance) && Objects.equals(estimatedTime, tour.estimatedTime) && Objects.equals(tourInformation, tour.tourInformation) && Objects.equals(tourLogs, tour.tourLogs);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(tourId, name, tourDescription, start, destination, transportType, tourDistance, estimatedTime, tourInformation, tourLogs);

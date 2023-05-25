@@ -18,7 +18,7 @@ public class JsonFileHandler {
             return jsonString;
         } catch (IOException e) {
             // e.printStackTrace();
-            throw new FailedToParseJsonFileException("readJsonStringFromFile - failed to read json file: " + filename);
+            throw new FailedToParseJsonFileException("JsonFileHandler.readJsonStringFromFile() - failed to read json file: " + filename);
         }
     }
     public static void saveJsonStringToFile(String filename, String string) {
@@ -29,7 +29,7 @@ public class JsonFileHandler {
             out.close();
         } catch (IOException e) {
             // e.printStackTrace();
-            throw new FailedToParseJsonFileException("saveJsonStringToFile - failed to save to json file: " + filename);
+            throw new FailedToParseJsonFileException("JsonFileHandler.saveJsonStringToFile() - failed to save to json file: " + filename);
         }
     }
 }

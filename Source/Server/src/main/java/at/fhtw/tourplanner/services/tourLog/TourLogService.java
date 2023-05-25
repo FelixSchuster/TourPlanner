@@ -43,6 +43,10 @@ public class TourLogService {
             logger.info("TourLogService.getTourLogs() - tourLogs retrieved successfully: " + tourLogs);
             return new ResponseEntity<>(tourLogs, HttpStatus.OK);
         }
+        catch(NoContentException e) {
+            logger.info("TourLogService.getTourLogs() - " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         catch(NotFoundException e) {
             logger.info("TourLogService.getTourLogs() - " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

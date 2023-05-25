@@ -35,6 +35,9 @@ public class TourLogController {
         try {
             Tour tour = tourRepository.findById(tourId).get();
             List<TourLog> tourLogs = tour.getTourLogs();
+            if(tourLogs.isEmpty()) {
+                throw new NoContentException("TourLogController.getTourLogs() - no content");
+            }
             return tourLogs;
         }
         catch(NoSuchElementException e) {

@@ -1,9 +1,6 @@
 package at.fhtw.services;
 
-import at.fhtw.exceptions.BadRequestException;
-import at.fhtw.exceptions.FailedToSendRequestException;
-import at.fhtw.exceptions.NoContentException;
-import at.fhtw.exceptions.NotFoundException;
+import at.fhtw.exceptions.*;
 import at.fhtw.models.Tour;
 import at.fhtw.models.TourListEntry;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,21 +28,18 @@ public class TourService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("createTour - no content");
-            }
             if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("createTour - bad request");
+                throw new BadRequestException("TourService.createTour() - bad request");
             }
-            if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("createTour - not found");
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourService.createTour() - internal server error");
             }
 
             Tour newtour = objectMapper.readValue(httpResponse.body(), Tour.class);
             return newtour;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("createTour - failed to send request");
+            throw new FailedToSendRequestException("TourService.createTour() - failed to send request");
         }
     }
     public Tour getTour(Integer tourId) {
@@ -57,21 +51,18 @@ public class TourService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("getTour - no content");
-            }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("getTour - bad request");
-            }
             if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("getTour - not found");
+                throw new NotFoundException("TourService.getTour() - tourId not found: " + tourId);
+            }
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourService.getTour() - internal server error");
             }
 
             Tour newtour = objectMapper.readValue(httpResponse.body(), Tour.class);
             return newtour;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("getTour - failed to send request");
+            throw new FailedToSendRequestException("TourService.getTour() - failed to send request");
         }
     }
     public List<TourListEntry> getTourList() {
@@ -84,20 +75,17 @@ public class TourService {
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
             if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("getTourList - no content");
+                throw new NoContentException("TourService.getTourList() - no content");
             }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("getTourList - bad request");
-            }
-            if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("getTourList - not found");
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourService.getTourList() - internal server error");
             }
 
             List<TourListEntry> tourList = List.of(objectMapper.readValue(httpResponse.body(), TourListEntry[].class));
             return tourList;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("getTourList - failed to send request");
+            throw new FailedToSendRequestException("TourService.getTourList() - failed to send request");
         }
     }
     public List<TourListEntry> searchTour(String keyword) {
@@ -110,20 +98,20 @@ public class TourService {
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
             if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("searchTour - no content");
-            }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("searchTour - bad request");
+                throw new NoContentException("TourService.searchTour() - no content");
             }
             if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("searchTour - not found");
+                throw new NotFoundException("TourService.searchTour() - keyword not found: " + keyword);
+            }
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourService.searchTour() - internal server error");
             }
 
             List<TourListEntry> tourList = List.of(objectMapper.readValue(httpResponse.body(), TourListEntry[].class));
             return tourList;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("searchTour - failed to send request");
+            throw new FailedToSendRequestException("TourService.searchTour() - failed to send request");
         }
     }
     public Tour updateTour(Integer tourId, Tour tour) {
@@ -138,21 +126,21 @@ public class TourService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("updateTour - no content");
-            }
             if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("updateTour - bad request");
+                throw new BadRequestException("TourService.updateTour() - bad request");
             }
             if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("updateTour - not found");
+                throw new NotFoundException("TourService.updateTour() - tourId not found: " + tourId);
+            }
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourService.updateTour() - internal server error");
             }
 
             Tour newtour = objectMapper.readValue(httpResponse.body(), Tour.class);
             return newtour;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("updateTour - failed to send request");
+            throw new FailedToSendRequestException("TourService.updateTour() - failed to send request");
         }
     }
     public void deleteTour(Integer tourId) {
@@ -164,18 +152,15 @@ public class TourService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(httpResponse.statusCode() == 204) {
-                throw new NoContentException("deleteTour - no content");
-            }
-            if(httpResponse.statusCode() == 400) {
-                throw new BadRequestException("deleteTour - bad request");
-            }
             if(httpResponse.statusCode() == 404) {
-                throw new NotFoundException("deleteTour - not found");
+                throw new NotFoundException("TourService.deleteTour() - tourId not found: " + tourId);
+            }
+            if(httpResponse.statusCode() == 500) {
+                throw new InternalServerErrorException("TourService.deleteTour() - internal server error");
             }
         } catch (URISyntaxException | IOException | InterruptedException e) {
             // e.printStackTrace();
-            throw new FailedToSendRequestException("deleteTour - failed to send request");
+            throw new FailedToSendRequestException("TourService.deleteTour() - failed to send request");
         }
     }
 }

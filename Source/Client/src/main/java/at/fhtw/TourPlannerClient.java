@@ -8,6 +8,7 @@ public class TourPlannerClient {
     private static final BusinessLogic businessLogic = new BusinessLogic();
     public static void main(String[] args) {
         businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\summarizeReport.pdf");
+
         businessLogic.createTourReport(1, "C:\\Users\\Felix\\Desktop\\tourReport.pdf");
         businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\summarizeReport1.pdf");
         businessLogic.importTours("C:\\Users\\Felix\\Desktop\\export.json");
@@ -15,6 +16,8 @@ public class TourPlannerClient {
 
         Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
         businessLogic.createTour(createTour);
+
+        businessLogic.getTour(2);
 
         businessLogic.searchTour("aaaaaaaaaa");
 
@@ -26,8 +29,6 @@ public class TourPlannerClient {
 
         Tour updateTour = new Tour(); updateTour.setTourDescription("New description"); updateTour.setDestination("Wien Mitte");
         businessLogic.updateTour(1, updateTour);
-
-
 
         businessLogic.deleteTour(1);
 
@@ -58,7 +59,6 @@ public class TourPlannerClient {
         businessLogic.getTourLog(1);
 
         businessLogic.getTourLogs(2);
-
 
         businessLogic.exportTours("C:\\Users\\Felix\\Desktop\\export.json");
 

@@ -1,13 +1,11 @@
 package at.fhtw.tourplanner.models;
 
-import at.fhtw.tourplanner.exceptions.NotFoundException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @Entity
@@ -193,7 +191,10 @@ public class Tour {
     }
     public void updateTourStats() {
         // update popularity
-        if (this.tourLogs.size() > 15) {
+        if(this.tourLogs == null) {
+            this.popularity = 1;
+        }
+        else if (this.tourLogs.size() > 15) {
             this.popularity = 5;
         }
         else if (this.tourLogs.size() > 10) {
@@ -210,7 +211,7 @@ public class Tour {
         }
 
         // update childFriendliness
-        if(this.tourLogs.size() == 0) {
+        if(this.tourLogs == null || this.tourLogs.size() == 0) {
             this.childFriendliness = 3;
         } else {
             Integer averageDifficulty = 0;
