@@ -2,31 +2,54 @@ package at.fhtw.client.view;
 
 import at.fhtw.client.viewmodel.AddTourViewModel;
 import at.fhtw.client.viewmodel.MainViewModel;
+import javafx.beans.property.Property;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-@Component
-public class AddTourView {
 
-    @Autowired
-    private AddTourViewModel addTourViewModel;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AddTourView implements Initializable {
+
+    private AddTourViewModel addTourViewModel = new AddTourViewModel();
     @FXML
-    private Button addButton;
+    private Text feedbackText;
     @FXML
-    private Button reloadButton;
+    private TextField startTextField;
     @FXML
-    private void initialize() {
+    private TextField destinationTextField;
+    @FXML
+    private TextField transportTypeTextField;
 
-        //searchField.textProperty().bindBidirectional(searchViewModel.searchStringProperty());
+    @Override
+    public void initialize(URL location, ResourceBundle rb) {
+        startTextField.textProperty().bindBidirectional(addTourViewModel.startProperty());
+        destinationTextField.textProperty().bindBidirectional(addTourViewModel.destinationProperty());
+        transportTypeTextField.textProperty().bindBidirectional(addTourViewModel.transportTypeProperty());
 
-        // search panel
-        addButton.setText("Add");
-        reloadButton.setText("Reload");
+    }
 
-        /*searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchLabel.setText(newValue);
-        });*/
+    public void addTourAction(ActionEvent event) {
+        if (startTextField.getText().isEmpty()) {
+            feedbackText.setText("nothing entered!");
+            return;
+        }
+        else if (destinationTextField.getText().isEmpty()) {
+            feedbackText.setText("nothing entered!");
+            return;
+        }
+        else if (transportTypeTextField.getText().isEmpty()) {
+            feedbackText.setText("nothing entered!");
+            return;
+        }
+
+        addTourViewModel.addTour();
     }
 }

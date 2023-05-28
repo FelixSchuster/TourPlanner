@@ -9,6 +9,11 @@ module tourplanner {
     requires itextpdf;
     requires spring.context;
     requires spring.beans;
+    requires lombok;
+    requires org.controlsfx.controls;
+    requires org.slf4j;
+    requires spring.boot.autoconfigure;
+    requires spring.boot;
 
     opens at.fhtw.client to javafx.graphics, javafx.fxml;
     exports at.fhtw.client;
@@ -22,6 +27,4 @@ module tourplanner {
     opens at.fhtw.client.services to javafx.graphics, javafx.fxml;
     exports at.fhtw.client.models;
     opens at.fhtw.client.models to javafx.graphics, javafx.fxml;
-
-
 }

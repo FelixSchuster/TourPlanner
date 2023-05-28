@@ -23,13 +23,6 @@ public class MainViewModel {
         return output;
     }
 
-    public void calculateOutputString() {
-        System.out.println("VM: calculate Output");
-        this.output.set("Hello ".concat(this.input.get()).concat("!"));
-        this.input.set("");
-        this.propertyChangeSupport.firePropertyChange("RequiresPropertyChange", false, true);
-    }
-
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
         propertyChangeSupport.addPropertyChangeListener(pcl);
     }

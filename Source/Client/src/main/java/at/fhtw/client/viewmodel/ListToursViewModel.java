@@ -1,10 +1,19 @@
 package at.fhtw.client.viewmodel;
 
+import at.fhtw.client.exceptions.BadRequestException;
+import at.fhtw.client.exceptions.FailedToSendRequestException;
+import at.fhtw.client.exceptions.NoContentException;
+import at.fhtw.client.exceptions.NotFoundException;
 import at.fhtw.client.models.TourListEntry;
 import at.fhtw.client.services.TourService;
+import at.fhtw.client.view.ListToursView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +21,26 @@ import java.util.stream.Collectors;
 
 
 public class ListToursViewModel {
+    private static ListToursViewModel instance;
+    private final TourService tourService;
+    private List<TourListEntry> masterData;
+    private ObservableList<TourListEntry> tourListItems;
 
-    public TourService tourService = new TourService();
-    private List<TourListEntry> masterData = new ArrayList<>();
-    private ObservableList<TourListEntry> tourListItems = FXCollections.observableArrayList();
+    public ListToursViewModel()
+    {
+        this.tourService = new TourService();
+        masterData = new ArrayList<>();
+        tourListItems = FXCollections.observableArrayList();
+    }
+
+    public static ListToursViewModel getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new ListToursViewModel();
+        }
+        return instance;
+    }
 
     public List<TourListEntry> getMasterDataListItems() {
         return masterData;
@@ -32,9 +57,16 @@ public class ListToursViewModel {
 
     public void initList(){
 
-        tourService.getTourList().forEach(p -> {
-            addItem(p);
-        });
+        try {
+            tourService.getTourList().forEach(p -> {
+                addItem(p);
+            });
+        } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
+            System.out.println("----------------------------------------------------------------------------------");
+            System.out.println(e.getMessage());
+            System.out.println("----------------------------------------------------------------------------------");
+            // TODO: handle exceptions properly
+        }
     }
 
     public void filterList(String searchText){

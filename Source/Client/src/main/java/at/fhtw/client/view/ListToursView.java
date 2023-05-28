@@ -4,8 +4,10 @@ import at.fhtw.client.models.TourListEntry;
 import at.fhtw.client.services.TourService;
 import at.fhtw.client.viewmodel.ListToursViewModel;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,12 +17,36 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ListToursView implements Initializable {
-
-    private ListToursViewModel listToursViewModel = new ListToursViewModel();
+    private static ListToursView instance;
+    private final ListToursViewModel listToursViewModel;
     @FXML
     public TableView tableView = new TableView<>();
     @FXML
     private VBox dataContainer;
+    @FXML
+    private Button reloadButton;
+
+    public ListToursView()
+    {
+        listToursViewModel = new ListToursViewModel();
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    public static ListToursView getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new ListToursView();
+        }
+        return instance;
+    }
+
+    public ListToursViewModel getListToursViewModel() {
+        return listToursViewModel;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle rb){
@@ -37,4 +63,15 @@ public class ListToursView implements Initializable {
         dataContainer.getChildren().add(tableView);
         listToursViewModel.initList();
     }
+
+    public void reload() {
+        listToursViewModel.clearItems();
+        listToursViewModel.clearItems();
+        listToursViewModel.initList();
+
+    }
+
+
+
+
 }

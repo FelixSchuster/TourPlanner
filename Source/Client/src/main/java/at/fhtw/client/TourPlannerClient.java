@@ -2,13 +2,17 @@ package at.fhtw.client;
 
 import at.fhtw.client.businessLogic.BusinessLogic;
 import at.fhtw.client.models.Tour;
+import at.fhtw.client.view.MainView;
+import at.fhtw.client.viewmodel.TourPlannerApplication;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-public class TourPlannerClient extends Application{
+@SpringBootApplication
+public class TourPlannerClient extends Application {
     private static final BusinessLogic businessLogic = new BusinessLogic();
 
     @Override
@@ -36,7 +40,7 @@ public class TourPlannerClient extends Application{
         //businessLogic.createSummarizeReport("C:\\Users\\Bea\\Desktop\\report.pdf");
 
         //client gui
-        //Application.launch(TourPlannerClient.class, args);
+        //Application.launch(TourPlannerApplication.class, args);
         launch(args);
 
         /*

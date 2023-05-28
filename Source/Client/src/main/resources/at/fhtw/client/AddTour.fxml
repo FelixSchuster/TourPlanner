@@ -5,21 +5,32 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="at.fhtw.client.view.AddTourView"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.text.Font?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200.0" prefWidth="200.0"
+      spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="at.fhtw.client.view.AddTourView">
+
     <children>
-
-        <HBox id="HBox" alignment="BASELINE_LEFT" spacing="5.0" AnchorPane.leftAnchor="2.0"
-              AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="10.0">
-            <children>
-                <Label/>
-                    <Button fx:id="addButton" defaultButton="true" text="Add" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
-                    <Button fx:id="reloadButton" defaultButton="true" text="Add" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
-                <Label/>
-            </children>
-        </HBox>
-
+        <Label text="Add Tour">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Separator prefWidth="200.0" />
+        <Text text="Start"/>
+        <TextField fx:id="startTextField"/>
+        <Text text="Destination"/>
+        <TextField fx:id="destinationTextField"/>
+        <Text text="Transport Type"/>
+        <TextField fx:id="transportTypeTextField"/>
+        <Button fx:id="submitButton" onAction="#addTourAction" text="insert"/>
+        <Separator prefWidth="200.0" />
+        <Text fx:id="feedbackText" />
     </children>
-</AnchorPane>
+    <padding>
+        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+    </padding>
+</VBox>

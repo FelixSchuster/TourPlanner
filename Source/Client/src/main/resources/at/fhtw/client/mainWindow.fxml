@@ -35,56 +35,70 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="About">
                     <items>
-                        <MenuItem fx:id="miAbout" mnemonicParsing="false" onAction="#onHelpAbout" text="about" />
+                        <MenuItem fx:id="miAbout" mnemonicParsing="false" onAction="#onHelpAbout" text="About" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
     </top>
+
     <center>
+        <SplitPane dividerPositions="0.3">
+            <items >
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
                 <Tab text="Tours">
                     <content>
-                        <SplitPane disable="true" dividerPositions="0.265">
-                            <items>
                                 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" >
                                     <children>
                                         <fx:include source="Search.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     </children>
+                                    <!--<children>
+                                        <fx:include source="ReloadTours.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
+                                    </children>-->
                                     <children>
-                                        <fx:include source="AddTour.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
-                                    </children>
-                                    <children>
-                                        <fx:include source="ListTours.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
-                                        <VBox layoutX="26.0" layoutY="59.0" prefHeight="200.0" prefWidth="200.0" />
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="542.0">
-                                    <children>
-                                        <Label text="Enter your target to greet:">
-                                            <GridPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                            </GridPane.margin>
-                                        </Label>
-                                        <!--<fx:include source="NewPerson.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />-->
+                                        <fx:include source="ListTours.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
                                     </children>
                                 </AnchorPane>
-
-                            </items>
-                        </SplitPane>
                     </content>
                 </Tab>
-                <Tab text="Tour Information">
+                <Tab text="Add Tour">
                     <content>
-                    </content>
-                </Tab>
-                <Tab text="Tour Logs">
-                    <content>
+                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" >
+                            <children>
+                                <fx:include source="AddTour.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
                     </content>
                 </Tab>
             </tabs>
+
         </TabPane>
+                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                    <tabs>
+                        <Tab text="Tour Information">
+                            <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="542.0">
+                                            <children>
+                                                <Label text="Enter your target to greet:">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <!--<fx:include source="NewPerson.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />-->
+                                            </children>
+                                        </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Tour Logs">
+                            <content>
+                            </content>
+                        </Tab>
+                    </tabs>
+
+                </TabPane>
+            </items>
+        </SplitPane>
     </center>
     <bottom>
         <ToolBar maxHeight="20.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" BorderPane.alignment="CENTER">

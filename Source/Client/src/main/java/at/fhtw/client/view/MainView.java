@@ -1,5 +1,7 @@
 package at.fhtw.client.view;
 
+import at.fhtw.client.StageAware;
+import at.fhtw.client.events.ApplicationShutdownEvent;
 import at.fhtw.client.viewmodel.MainViewModel;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -18,8 +20,7 @@ import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-@Component
-public class MainView implements Initializable {
+public class MainView implements Initializable, StageAware {
 
     ApplicationEventPublisher publisher;
 
@@ -47,9 +48,18 @@ public class MainView implements Initializable {
         tbMonitorStatus.setGraphic(monitorStatusIcon);
     }
 
-    public void onFileClose(ActionEvent actionEvent) {
+    @FXML
+    public void onFileClose(ActionEvent event) {
+        publisher.publishEvent(new ApplicationShutdownEvent(event.getSource()));
     }
 
-    public void onHelpAbout(ActionEvent actionEvent) {
+    @FXML
+    public void onHelpAbout(ActionEvent event) {
+        new AboutDialogView().show();
+    }
+
+    @Override
+    public void setStage(Stage stage) {
+        this.stage.setValue(stage);
     }
 }
