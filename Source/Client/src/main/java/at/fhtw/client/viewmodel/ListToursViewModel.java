@@ -69,6 +69,11 @@ public class ListToursViewModel {
         }
     }
 
+    public void showInformations(TourListEntry tourListEntry)
+    {
+        tourListEntry.getTourId();
+    }
+
     public void filterList(String searchText){
         Task<List<TourListEntry>> task = new Task<>() {
             @Override

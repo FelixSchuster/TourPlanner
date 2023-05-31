@@ -40,16 +40,11 @@ public class ReloadTourView implements Initializable {
     }
 
     public void reload() {
-        ListToursView toursView = ListToursView.getInstance();
-        ListToursViewModel toursViewModel = toursView.getListToursViewModel();
+        ListToursViewModel toursViewModel = ListToursView.getInstance();
 
-        System.out.println("before");
         System.out.println(toursViewModel.getTourListItems());
-        System.out.println("clear");
         toursViewModel.clearItems();
         toursViewModel.initList();
-        System.out.println("danach");
         System.out.println(toursViewModel.getTourListItems());
-        System.out.println("yes");
     }
 }

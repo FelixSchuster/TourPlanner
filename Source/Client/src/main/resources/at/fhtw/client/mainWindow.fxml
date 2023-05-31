@@ -78,16 +78,11 @@
                     <tabs>
                         <Tab text="Tour Information">
                             <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="542.0">
-                                            <children>
-                                                <Label text="Enter your target to greet:">
-                                                    <GridPane.margin>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </GridPane.margin>
-                                                </Label>
-                                                <!--<fx:include source="NewPerson.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />-->
-                                            </children>
-                                        </AnchorPane>
+                                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" >
+                                    <children>
+                                        <fx:include source="TourInformations.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    </children>
+                                </AnchorPane>
                             </content>
                         </Tab>
                         <Tab text="Tour Logs">

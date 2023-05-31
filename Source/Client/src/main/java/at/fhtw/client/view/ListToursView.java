@@ -1,24 +1,21 @@
 package at.fhtw.client.view;
 
 import at.fhtw.client.models.TourListEntry;
-import at.fhtw.client.services.TourService;
 import at.fhtw.client.viewmodel.ListToursViewModel;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ListToursView implements Initializable {
-    private static ListToursView instance;
-    private final ListToursViewModel listToursViewModel;
+    private static ListToursViewModel listToursViewModel;
     @FXML
     public TableView tableView = new TableView<>();
     @FXML
@@ -29,19 +26,15 @@ public class ListToursView implements Initializable {
     public ListToursView()
     {
         listToursViewModel = new ListToursViewModel();
-        if(instance == null)
-        {
-            instance = this;
-        }
     }
 
-    public static ListToursView getInstance()
+    public static ListToursViewModel getInstance()
     {
-        if(instance == null)
+        if(listToursViewModel == null)
         {
-            instance = new ListToursView();
+            listToursViewModel = new ListToursViewModel();
         }
-        return instance;
+        return listToursViewModel;
     }
 
     public ListToursViewModel getListToursViewModel() {
@@ -62,15 +55,34 @@ public class ListToursView implements Initializable {
 
         dataContainer.getChildren().add(tableView);
         listToursViewModel.initList();
+
+
+        //tableView.setOnAction(event -> loadData());
+        tableView.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
+        tableView.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                if(tableView.getSelectionModel().getSelectedItem() != null) {
+                    TourInformationsView.getInstance().changeTourImagePath((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+                }
+            }
+        });
+        //searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+          //  searchLabel.setText(newValue);
+        //});
     }
 
     public void reload() {
         listToursViewModel.clearItems();
         listToursViewModel.clearItems();
         listToursViewModel.initList();
-
     }
 
+    public void showInformations(TourListEntry tourListEntry)
+    {
+
+        System.out.println("item: ");
+        System.out.println(tourListEntry);
+    }
 
 
 

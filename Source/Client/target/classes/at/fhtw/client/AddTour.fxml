@@ -20,6 +20,10 @@
             </font>
         </Label>
         <Separator prefWidth="200.0" />
+        <Text text="Tour Name"/>
+        <TextField fx:id="tourNameTextField"/>
+        <Text text="Description"/>
+        <TextField fx:id="descriptionTextField"/>
         <Text text="Start"/>
         <TextField fx:id="startTextField"/>
         <Text text="Destination"/>

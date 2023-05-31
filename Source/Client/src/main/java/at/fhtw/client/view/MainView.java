@@ -1,6 +1,5 @@
 package at.fhtw.client.view;
 
-import at.fhtw.client.StageAware;
 import at.fhtw.client.events.ApplicationShutdownEvent;
 import at.fhtw.client.viewmodel.MainViewModel;
 import javafx.beans.property.SimpleObjectProperty;
@@ -8,19 +7,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Component;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainView implements Initializable, StageAware {
+public class MainView implements Initializable {
 
     ApplicationEventPublisher publisher;
 
@@ -56,10 +51,5 @@ public class MainView implements Initializable, StageAware {
     @FXML
     public void onHelpAbout(ActionEvent event) {
         new AboutDialogView().show();
-    }
-
-    @Override
-    public void setStage(Stage stage) {
-        this.stage.setValue(stage);
     }
 }

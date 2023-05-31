@@ -1,5 +1,6 @@
 package at.fhtw.client.view;
 
+import at.fhtw.client.models.TourListEntry;
 import at.fhtw.client.viewmodel.AddTourViewModel;
 import at.fhtw.client.viewmodel.MainViewModel;
 import javafx.beans.property.Property;
@@ -18,9 +19,15 @@ import java.util.ResourceBundle;
 
 public class AddTourView implements Initializable {
 
+
+
     private AddTourViewModel addTourViewModel = new AddTourViewModel();
     @FXML
     private Text feedbackText;
+    @FXML
+    public TextField tourNameTextField;
+    @FXML
+    public TextField descriptionTextField;
     @FXML
     private TextField startTextField;
     @FXML
@@ -30,10 +37,11 @@ public class AddTourView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
+        tourNameTextField.textProperty().bindBidirectional(addTourViewModel.tourNameProperty());
+        descriptionTextField.textProperty().bindBidirectional(addTourViewModel.descriptionProperty());
         startTextField.textProperty().bindBidirectional(addTourViewModel.startProperty());
         destinationTextField.textProperty().bindBidirectional(addTourViewModel.destinationProperty());
         transportTypeTextField.textProperty().bindBidirectional(addTourViewModel.transportTypeProperty());
-
     }
 
     public void addTourAction(ActionEvent event) {
@@ -51,5 +59,6 @@ public class AddTourView implements Initializable {
         }
 
         addTourViewModel.addTour();
+        //ListToursView.getInstance().addItem(new TourListEntry());
     }
 }
