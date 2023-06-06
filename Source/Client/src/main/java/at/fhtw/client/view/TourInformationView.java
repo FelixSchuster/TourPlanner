@@ -45,11 +45,11 @@ public class TourInformationView implements Initializable {
                 outputTextArea.appendText("TextField Text Changed (newValue: " + newValue + ")\n");
             }
         });*/
-        imageView.imageProperty().bindBidirectional(tourInformationViewModel.getImage());
+        //imageView.imageProperty().bindBidirectional(tourInformationViewModel.getImage());
         //imagePath.textProperty().bindBidirectional(addTourViewModel.descriptionProperty());
         //String imagePath = tourInformationViewModel.getImagePath();
 
-
+    /*
 
             Image image = new Image(tourInformationViewModel.getImagePath());
             ImageView imgView = new ImageView();
@@ -60,7 +60,7 @@ public class TourInformationView implements Initializable {
             imageContainer.getChildren().add(imgView);
 
 
-
+*/
 
 
 
