@@ -3,10 +3,41 @@ package at.fhtw;
 import at.fhtw.businessLogic.BusinessLogic;
 import at.fhtw.models.Tour;
 import at.fhtw.models.TourLog;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class TourPlannerClient {
+public class TourPlannerClient extends Application {
     private static final BusinessLogic businessLogic = new BusinessLogic();
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        // fxml created with SceneBuilder
+        System.out.println("fxml start");
+        Parent root = FXMLLoader.load(TourPlannerClient.class.getResource("/mainWindow.fxml"));
+        System.out.println("fxml loaded");
+
+        // bootstrap "window" named stage
+        primaryStage.setTitle("Tour Planner");
+
+        // set scene into stage in defined size
+        primaryStage.setScene(new Scene(root, 800, 500));
+        primaryStage.setMinWidth(300);
+        primaryStage.setMinHeight(300);
+        System.out.println("set scene");
+
+        // let's go
+        primaryStage.show();
+        System.out.println("show stage");
+    }
     public static void main(String[] args) {
+
+        launch(args);
+
+        // some proof of concept
+        /*
         businessLogic.createSummarizeReport("C:\\Users\\Felix\\Desktop\\summarizeReport.pdf");
 
         businessLogic.createTourReport(1, "C:\\Users\\Felix\\Desktop\\tourReport.pdf");
@@ -63,5 +94,6 @@ public class TourPlannerClient {
         businessLogic.exportTours("C:\\Users\\Felix\\Desktop\\export.json");
 
         businessLogic.importTours("C:\\Users\\Felix\\Desktop\\import.json");
+        */
     }
 }

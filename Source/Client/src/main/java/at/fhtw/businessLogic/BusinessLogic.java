@@ -291,6 +291,9 @@ public class BusinessLogic {
         } catch (NoContentException e) {
             logger.info("BusinessLogic.createTourReport() - " + e.getMessage());
             // TODO: handle exception properly
+        } catch (NotFoundException e) {
+            logger.info("BusinessLogic.createTourReport() - " + e.getMessage());
+            // TODO: handle exception properly
         } catch (InternalServerErrorException e) {
             logger.error("BusinessLogic.createTourReport() - " + e.getMessage());
             // TODO: handle exception properly
