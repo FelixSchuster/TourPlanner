@@ -17,16 +17,15 @@ public class AddTourViewModel {
 
 
     public AddTourViewModel() {
-
     }
 
     public AddTourViewModel(Tour tour) {
-        /*this.tour3 = tour;
+        //this.tour3 = tour;
         this.tourName = new SimpleStringProperty(tour.getName());
         this.description = new SimpleStringProperty(tour.getTourDescription());
         this.start = new SimpleStringProperty(tour.getStart());
         this.destination = new SimpleStringProperty(tour.getDestination());
-        this.transportType = new SimpleStringProperty(tour.getTransportType());*/
+        this.transportType = new SimpleStringProperty(tour.getTransportType());
     }
 
     public String getTourName() {

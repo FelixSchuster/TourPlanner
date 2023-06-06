@@ -1,5 +1,6 @@
 package at.fhtw.client.view;
 
+import at.fhtw.client.models.Tour;
 import at.fhtw.client.models.TourListEntry;
 import at.fhtw.client.viewmodel.AddTourViewModel;
 import at.fhtw.client.viewmodel.MainViewModel;
@@ -14,6 +15,7 @@ import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,7 +23,7 @@ public class AddTourView implements Initializable {
 
 
 
-    private AddTourViewModel addTourViewModel = new AddTourViewModel();
+    private AddTourViewModel addTourViewModel;
     @FXML
     private Text feedbackText;
     @FXML
@@ -37,6 +39,15 @@ public class AddTourView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
+        //Tour tour = new Tour();
+        tourNameTextField.setText("");
+        descriptionTextField.setText("");
+        startTextField.setText("");
+        destinationTextField.setText("");
+        transportTypeTextField.setText("");
+
+
+        addTourViewModel = new AddTourViewModel();
         tourNameTextField.textProperty().bindBidirectional(addTourViewModel.tourNameProperty());
         descriptionTextField.textProperty().bindBidirectional(addTourViewModel.descriptionProperty());
         startTextField.textProperty().bindBidirectional(addTourViewModel.startProperty());
@@ -45,20 +56,37 @@ public class AddTourView implements Initializable {
     }
 
     public void addTourAction(ActionEvent event) {
-        if (startTextField.getText().isEmpty()) {
-            feedbackText.setText("nothing entered!");
-            return;
+
+        try {
+            System.out.println("iam here 5");
+            if (tourNameTextField.getText().trim().equals("")) {
+                feedbackText.setText("nothing entered!");
+                System.out.println("yeahh");
+                return;
+            } else if (descriptionTextField.getText().isEmpty()) {
+                feedbackText.setText("nothing entered!");
+                return;
+            } else if (startTextField.getText().isEmpty()) {
+                feedbackText.setText("nothing entered!");
+                return;
+            } else if (destinationTextField.getText().isEmpty()) {
+                feedbackText.setText("nothing entered!");
+                return;
+            } else if (transportTypeTextField.getText().isEmpty()) {
+                feedbackText.setText("nothing entered!");
+                return;
+            }
+
+            addTourViewModel.addTour();
+            System.out.println("iam here 6");
+            feedbackText.setText("Tour successfully created!");
         }
-        else if (destinationTextField.getText().isEmpty()) {
-            feedbackText.setText("nothing entered!");
-            return;
-        }
-        else if (transportTypeTextField.getText().isEmpty()) {
-            feedbackText.setText("nothing entered!");
+        catch(NullPointerException e)
+        {
+            feedbackText.setText("nothing entered! exc");
             return;
         }
 
-        addTourViewModel.addTour();
         //ListToursView.getInstance().addItem(new TourListEntry());
     }
 }

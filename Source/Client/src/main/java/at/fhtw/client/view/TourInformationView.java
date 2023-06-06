@@ -1,43 +1,38 @@
 package at.fhtw.client.view;
 
-import at.fhtw.client.models.TourListEntry;
-import at.fhtw.client.viewmodel.ListToursViewModel;
-import at.fhtw.client.viewmodel.TourInformationsViewModel;
+import at.fhtw.client.viewmodel.TourInformationViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TourInformationsView implements Initializable {
-    private static TourInformationsViewModel tourInformationsViewModel;
+public class TourInformationView implements Initializable {
+    private static TourInformationViewModel tourInformationViewModel;
     @FXML
     private VBox imageContainer;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private Image image;
     private String imagePath;
 
-    public TourInformationsView()
+    public TourInformationView()
     {
-        this.tourInformationsViewModel = new TourInformationsViewModel();
+        this.tourInformationViewModel = new TourInformationViewModel();
     }
 
-    public static TourInformationsViewModel getInstance()
+    public static TourInformationViewModel getInstance()
     {
-        if(tourInformationsViewModel == null)
+        if(tourInformationViewModel == null)
         {
-            tourInformationsViewModel = new TourInformationsViewModel();
+            tourInformationViewModel = new TourInformationViewModel();
         }
-        return tourInformationsViewModel;
+        return tourInformationViewModel;
     }
 
     @Override
@@ -50,20 +45,20 @@ public class TourInformationsView implements Initializable {
                 outputTextArea.appendText("TextField Text Changed (newValue: " + newValue + ")\n");
             }
         });*/
+        imageView.imageProperty().bindBidirectional(tourInformationViewModel.getImage());
+        //imagePath.textProperty().bindBidirectional(addTourViewModel.descriptionProperty());
+        //String imagePath = tourInformationViewModel.getImagePath();
 
 
-        String imagePath = tourInformationsViewModel.getImagePath();
 
-        if(imagePath != null)
-        {
-            Image image = new Image(tourInformationsViewModel.getImagePath());
+            Image image = new Image(tourInformationViewModel.getImagePath());
             ImageView imgView = new ImageView();
             imgView.setImage(image);
-            Rectangle2D viewportRect = new Rectangle2D(170, 80, 120, 300);
+            //Rectangle2D viewportRect = new Rectangle2D(170, 80, 120, 300);
             //imgView.setViewport(viewportRect);
 
             imageContainer.getChildren().add(imgView);
-        }
+
 
 
 

@@ -58,11 +58,11 @@ public class ListToursView implements Initializable {
 
 
         //tableView.setOnAction(event -> loadData());
-        tableView.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
+        //tableView.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
         tableView.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
                 if(tableView.getSelectionModel().getSelectedItem() != null) {
-                    TourInformationsView.getInstance().changeTourImagePath((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+                    TourInformationView.getInstance().changeTourImagePath((TourListEntry) tableView.getSelectionModel().getSelectedItem());
                 }
             }
         });
