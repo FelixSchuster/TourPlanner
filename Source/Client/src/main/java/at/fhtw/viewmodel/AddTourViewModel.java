@@ -1,12 +1,16 @@
 package at.fhtw.viewmodel;
 
+import at.fhtw.businessLogic.BusinessLogic;
 import at.fhtw.exceptions.*;
 import at.fhtw.models.Tour;
 import at.fhtw.services.TourService;
 import at.fhtw.utils.ImageHandler;
 import javafx.beans.property.SimpleStringProperty;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AddTourViewModel {
+    private static final Logger logger = LogManager.getLogger(BusinessLogic.class);
     private SimpleStringProperty tourName = new SimpleStringProperty();
     private SimpleStringProperty description = new SimpleStringProperty();
     private SimpleStringProperty start = new SimpleStringProperty();
@@ -87,7 +91,7 @@ public class AddTourViewModel {
     }
 
     public void addTour() {
-        try {
+        /*try {
             Tour createTour = new Tour(tourName.get(), description.get(), start.get(), destination.get(), transportType.get());
             Tour tour = new TourService().createTour(createTour);
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
@@ -98,6 +102,26 @@ public class AddTourViewModel {
             System.out.println(e.getMessage());
             System.out.println("----------------------------------------------------------------------------------");
             // TODO: handle exceptions properly
+        }*/
+
+        try {
+            Tour createTour = new Tour(tourName.get(), description.get(), start.get(), destination.get(), transportType.get());
+            Tour tour = new TourService().createTour(createTour);
+            ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
+            logger.info("BusinessLogic.createTour() - tour created successfully: " + tour);
+            // TODO: show created tour in ui, also show the image (filename is data/images/<tourId>.jpg)
+        } catch (BadRequestException e) {
+            logger.warn("BusinessLogic.createTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        } catch (InternalServerErrorException e) {
+            logger.error("BusinessLogic.createTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        } catch (FailedToSendRequestException e) {
+            logger.error("BusinessLogic.createTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        } catch (FailedToParseImageFileException e) {
+            logger.error("BusinessLogic.createTour() - " + e.getMessage());
+            // TODO: handle exception properly
         }
     }
 }
