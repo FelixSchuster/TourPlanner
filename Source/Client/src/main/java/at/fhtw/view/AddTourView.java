@@ -1,9 +1,11 @@
 package at.fhtw.view;
 
+import at.fhtw.models.TourListEntry;
 import at.fhtw.viewmodel.AddTourViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -27,10 +29,16 @@ public class AddTourView implements Initializable {
     private TextField destinationTextField;
     @FXML
     private TextField transportTypeTextField;
+    @FXML
+    private ChoiceBox<String> transportTypeChoiceBox;
+    @FXML
+    private Text hiddenText;
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
         //Tour tour = new Tour();
+
+
         tourNameTextField.setText("");
         descriptionTextField.setText("");
         startTextField.setText("");
@@ -44,6 +52,19 @@ public class AddTourView implements Initializable {
         startTextField.textProperty().bindBidirectional(addTourViewModel.startProperty());
         destinationTextField.textProperty().bindBidirectional(addTourViewModel.destinationProperty());
         transportTypeTextField.textProperty().bindBidirectional(addTourViewModel.transportTypeProperty());
+        transportTypeChoiceBox.valueProperty().bindBidirectional(addTourViewModel.selectedTransportTypeOptionProperty());
+
+        transportTypeChoiceBox.setValue("car");
+        updateChoiceBoxWidth();
+        transportTypeChoiceBox.setOnAction(event -> updateChoiceBoxWidth());
+    }
+
+    @FXML
+    private void updateChoiceBoxWidth() {
+        String selectedValue = transportTypeChoiceBox.getSelectionModel().getSelectedItem();
+        double newWidth = selectedValue.length() * 10; // Adjust the factor as needed
+        System.out.println("length: " + selectedValue.length());
+        transportTypeChoiceBox.setPrefWidth(newWidth);
     }
 
     public void addTourAction(ActionEvent event) {
@@ -77,6 +98,14 @@ public class AddTourView implements Initializable {
             feedbackText.setText("nothing entered! exc");
             return;
         }
+
+        ListToursView.getInstance().addItem(new TourListEntry());
+
+        tourNameTextField.setText("");
+        descriptionTextField.setText("");
+        startTextField.setText("");
+        destinationTextField.setText("");
+        transportTypeTextField.setText("");
 
         //ListToursView.getInstance().addItem(new TourListEntry());
     }

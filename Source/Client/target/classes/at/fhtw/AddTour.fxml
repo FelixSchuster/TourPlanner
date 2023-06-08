@@ -9,6 +9,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200.0" prefWidth="200.0"
       spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="at.fhtw.view.AddTourView">
@@ -30,7 +33,19 @@
         <TextField fx:id="destinationTextField"/>
         <Text text="Transport Type"/>
         <TextField fx:id="transportTypeTextField"/>
-        <Button fx:id="submitButton" onAction="#addTourAction" text="insert"/>
+        <ChoiceBox fx:id="transportTypeChoiceBox" prefHeight="30">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="car" />
+                    <String fx:value="Option 2" />
+                    <String fx:value="Option 3" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+        <HBox alignment="BASELINE_RIGHT">
+            <Button fx:id="submitButton"  onAction="#addTourAction" text="insert"/>
+        </HBox>
+
         <Separator prefWidth="200.0" />
         <Text fx:id="feedbackText" />
     </children>

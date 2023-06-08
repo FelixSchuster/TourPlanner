@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -13,12 +14,9 @@ import java.util.ResourceBundle;
 public class TourInformationView implements Initializable {
     private static TourInformationViewModel tourInformationViewModel;
     @FXML
-    private VBox imageContainer;
+    private HBox HBoxImage;
     @FXML
-    private ImageView imageView;
-    @FXML
-    private Image image;
-    private String imagePath;
+    private ImageView imageView = new ImageView();
 
     public TourInformationView()
     {
@@ -36,17 +34,11 @@ public class TourInformationView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle rb){
-        /*textField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable,
-                                String oldValue, String newValue) {
 
-                outputTextArea.appendText("TextField Text Changed (newValue: " + newValue + ")\n");
-            }
-        });*/
-        //imageView.imageProperty().bindBidirectional(tourInformationViewModel.getImage());
-        //imagePath.textProperty().bindBidirectional(addTourViewModel.descriptionProperty());
-        //String imagePath = tourInformationViewModel.getImagePath();
+        imageView.imageProperty().bindBidirectional(tourInformationViewModel.getImageProperty());
+        //imageView.setImage(tourInformationViewModel.getImage());
+        HBoxImage.getChildren().add(imageView);
+
 
     /*
 
@@ -60,40 +52,5 @@ public class TourInformationView implements Initializable {
 
 
 */
-
-
-
-        /*imageContainer.setTitle("ImageView Beispiel");
-        imageContainer.setWidth(imgView.getViewport().getWidth());
-        imageContainer.setHeight(imgView.getViewport().getHeight());
-        imageContainer.setScene(scene);
-        imageContainer.show(); */
-
-
-        /*tableView.setItems(listToursViewModel.getTourListItems());
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        TableColumn id = new TableColumn("ID");
-        id.setCellValueFactory(new PropertyValueFactory("tourId"));
-        TableColumn name = new TableColumn("NAME");
-        name.setCellValueFactory(new PropertyValueFactory("name"));
-        tableView.getColumns().addAll(id, name);
-
-        dataContainer.getChildren().add(tableView);
-        listToursViewModel.initList();
-
-
-        //tableView.setOnAction(event -> loadData());
-        tableView.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
-        tableView.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY)) {
-                if(tableView.getSelectionModel().getSelectedItem() != null) {
-                    showInformations((TourListEntry) tableView.getSelectionModel().getSelectedItem());
-                }
-            }
-        });
-        //searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-        //  searchLabel.setText(newValue);
-        //});*/
     }
 }

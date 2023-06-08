@@ -1,12 +1,14 @@
 package at.fhtw.view;
 
 
+import at.fhtw.models.TourListEntry;
 import at.fhtw.viewmodel.SearchViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 
 
 public class SearchView {
@@ -58,13 +60,13 @@ public class SearchView {
             searchButton.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
             searchField.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)) {
-                System.out.println("1");
-                searchButton.setText("yes");
-                System.out.println("2");
                 loadData();
-                System.out.println("3");
-
             }
+            });
+            searchButton.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.PRIMARY)) {
+                    loadData();
+                }
             });
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchLabel.setText(newValue);

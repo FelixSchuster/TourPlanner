@@ -8,18 +8,28 @@ import javafx.scene.image.Image;
 public class TourInformationViewModel {
     private String imagePath;
     private ObjectProperty<Image> image = new SimpleObjectProperty<>();
-    private String imageFolderPath = "C:\\Users\\Bea\\Documents\\FH_UNI\\FH Technikum\\4.Semester\\SWEN2_Software_Engineering\\TourPlanner_v2\\TourPlanner\\Source\\Client\\";
+    private String imageFolderPath = "file:data/images/";
+
+    public TourInformationViewModel()
+    {
+        Image img = new Image("file:data/images/1.jpg");
+        String imageName = "1.jpg";
+        imagePath = imageFolderPath + imageName;
+        image = new SimpleObjectProperty(new Image(imagePath));
+    }
 
     public String getImagePath() {
         return imagePath;
     }
 
-    public ObjectProperty getImage() { return image; }
+    public ObjectProperty getImageProperty() { return image; }
+
+    public Image getImage() { return image.get(); }
+
+
 
     public void changeTourImagePath(TourListEntry tourListEntry)
     {
-
-
         String imageName = tourListEntry.getTourId() + ".jpg";
 
         imagePath = imageFolderPath + imageName;

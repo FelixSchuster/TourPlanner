@@ -5,6 +5,8 @@ import at.fhtw.exceptions.*;
 import at.fhtw.models.Tour;
 import at.fhtw.services.TourService;
 import at.fhtw.utils.ImageHandler;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +18,7 @@ public class AddTourViewModel {
     private SimpleStringProperty start = new SimpleStringProperty();
     private SimpleStringProperty destination = new SimpleStringProperty();
     private SimpleStringProperty transportType = new SimpleStringProperty();
+    ObjectProperty<String> selectedTransportTypeOption = new SimpleObjectProperty<>();
 
 
     public AddTourViewModel() {
@@ -88,6 +91,18 @@ public class AddTourViewModel {
 
     public void setTransportType(String transportType) {
         this.transportType.set(transportType);
+    }
+
+    public String getSelectedTransportTypeOption() {
+        return selectedTransportTypeOption.get();
+    }
+
+    public ObjectProperty<String> selectedTransportTypeOptionProperty() {
+        return selectedTransportTypeOption;
+    }
+
+    public void setSelectedTransportTypeOption(String selectedTransportTypeOption) {
+        this.selectedTransportTypeOption.set(selectedTransportTypeOption);
     }
 
     public void addTour() {

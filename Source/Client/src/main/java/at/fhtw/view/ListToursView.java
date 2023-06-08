@@ -4,9 +4,7 @@ import at.fhtw.models.TourListEntry;
 import at.fhtw.viewmodel.ListToursViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
@@ -43,6 +41,11 @@ public class ListToursView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle rb){
+        //ScrollPane scrollPane = new ScrollPane(tableView);
+        //scrollPane.setFitToHeight(true);
+
+
+
 
         tableView.setItems(listToursViewModel.getTourListItems());
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -53,7 +56,10 @@ public class ListToursView implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory("name"));
         tableView.getColumns().addAll(id, name);
 
-        dataContainer.getChildren().add(tableView);
+        //dataContainer.getChildren().add(tableView);
+        ScrollPane scrollPane = new ScrollPane(tableView);
+        scrollPane.setFitToWidth(true);
+        dataContainer.getChildren().add(scrollPane);
         listToursViewModel.initList();
 
 
