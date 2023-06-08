@@ -64,6 +64,32 @@ public class ListToursViewModel {
         }
     }
 
+    public void filterList(String keyword){
+
+        try {
+            tourService.searchTour(keyword).forEach(p -> {
+                addItem(p);
+            });
+            logger.info("BusinessLogic.searchTour() - tourList retrieved successfully: " + tourListItems);
+            // TODO: show the list in ui
+        } catch (NoContentException e) {
+            logger.info("BusinessLogic.searchTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        } catch (NotFoundException e) {
+            logger.info("BusinessLogic.searchTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        } catch (InternalServerErrorException e) {
+            logger.error("BusinessLogic.searchTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        } catch (FailedToSendRequestException e) {
+            logger.error("BusinessLogic.searchTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        }
+
+
+
+    }
+
     public void deleteTour(Integer tourId)
     {
         try {
@@ -80,31 +106,5 @@ public class ListToursViewModel {
             logger.error("BusinessLogic.deleteTour() - " + e.getMessage());
             // TODO: handle exception properly
         }
-    }
-
-    public void addTour()
-    {
-
-    }
-
-    public void filterList(String searchText){
-        Task<List<TourListEntry>> task = new Task<>() {
-            @Override
-            protected List<TourListEntry> call() throws Exception {
-                updateMessage("Loading data");
-                return masterData
-                        .stream()
-                        .filter(value -> value.getName().toLowerCase().contains(searchText.toLowerCase()))
-                        .collect(Collectors.toList());
-            }
-        };
-
-        task.setOnSucceeded(event -> {
-            tourListItems.setAll(task.getValue());
-        });
-
-        Thread th = new Thread(task);
-        th.setDaemon(true);
-        th.start();
     }
 }

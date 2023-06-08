@@ -32,7 +32,6 @@
         <Text text="Destination"/>
         <TextField fx:id="destinationTextField"/>
         <Text text="Transport Type"/>
-        <TextField fx:id="transportTypeTextField"/>
         <ChoiceBox fx:id="transportTypeChoiceBox" prefHeight="30">
             <items>
                 <FXCollections fx:factory="observableArrayList">

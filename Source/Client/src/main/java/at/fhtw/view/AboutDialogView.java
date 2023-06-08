@@ -1,14 +1,12 @@
 package at.fhtw.view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class AboutDialogView extends Dialog<Void> {
     String message;
@@ -25,7 +23,7 @@ public class AboutDialogView extends Dialog<Void> {
     public void initialize() {
         setTitle(title);
 
-        ButtonType ok = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
+        ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
         getDialogPane().getButtonTypes().add(ok);
 
         VBox layout = new VBox(8);

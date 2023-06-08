@@ -31,6 +31,11 @@ public class TourController {
         tour.setEstimatedTime(mapQuestData.getEstimatedTime());
         tour.setTourInformation(tourInformation);
 
+        /*tour.setTourDistance(80.5);
+        tour.setEstimatedTime(3480000);
+        tour.setTourInformation("aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==");*/
+
+
         tour.updateTourStats();
         tour = tourRepository.save(tour);
         return tour;

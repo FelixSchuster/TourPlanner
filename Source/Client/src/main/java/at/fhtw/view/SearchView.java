@@ -2,6 +2,7 @@ package at.fhtw.view;
 
 
 import at.fhtw.models.TourListEntry;
+import at.fhtw.viewmodel.ListToursViewModel;
 import at.fhtw.viewmodel.SearchViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -63,20 +64,23 @@ public class SearchView {
                 loadData();
             }
             });
-            searchButton.setOnMouseClicked(event -> {
-                if (event.getButton().equals(MouseButton.PRIMARY)) {
-                    loadData();
-                }
-            });
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchLabel.setText(newValue);
             });
         }
 
     private void loadData() {
-        System.out.println("lodaddata1");
-            searchViewModel.search();
-        System.out.println("lodaddata2");
+        ListToursViewModel toursViewModel = ListToursView.getInstance();
+
+        if(searchField.getText() == null || searchField.getText().isBlank() || searchField.getText().isEmpty())
+        {
+            toursViewModel.clearItems();
+            toursViewModel.initList();
+            return;
+        }
+
+        toursViewModel.clearItems();
+        toursViewModel.filterList(searchField.getText());
     }
 
 }

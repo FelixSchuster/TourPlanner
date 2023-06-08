@@ -16,7 +16,7 @@ public class TourInformationView implements Initializable {
     @FXML
     private HBox HBoxImage;
     @FXML
-    private ImageView imageView = new ImageView();
+    private static ImageView imageView = new ImageView();
 
     public TourInformationView()
     {
@@ -32,12 +32,18 @@ public class TourInformationView implements Initializable {
         return tourInformationViewModel;
     }
 
+    public static void updateTourinformation()
+    {
+        imageView.setImage(tourInformationViewModel.getImage());
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle rb){
 
-        imageView.imageProperty().bindBidirectional(tourInformationViewModel.getImageProperty());
         //imageView.setImage(tourInformationViewModel.getImage());
+        imageView.imageProperty().bindBidirectional(tourInformationViewModel.imageProperty());
         HBoxImage.getChildren().add(imageView);
+        //imageView.setImage(tourInformationViewModel.getImage());
 
 
     /*

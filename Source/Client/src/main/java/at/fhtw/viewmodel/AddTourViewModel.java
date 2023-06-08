@@ -17,8 +17,7 @@ public class AddTourViewModel {
     private SimpleStringProperty description = new SimpleStringProperty();
     private SimpleStringProperty start = new SimpleStringProperty();
     private SimpleStringProperty destination = new SimpleStringProperty();
-    private SimpleStringProperty transportType = new SimpleStringProperty();
-    ObjectProperty<String> selectedTransportTypeOption = new SimpleObjectProperty<>();
+    private ObjectProperty<String> selectedTransportTypeOption = new SimpleObjectProperty<>();
 
 
     public AddTourViewModel() {
@@ -26,11 +25,11 @@ public class AddTourViewModel {
 
     public AddTourViewModel(Tour tour) {
         //this.tour3 = tour;
-        this.tourName = new SimpleStringProperty(tour.getName());
+        /*this.tourName = new SimpleStringProperty(tour.getName());
         this.description = new SimpleStringProperty(tour.getTourDescription());
         this.start = new SimpleStringProperty(tour.getStart());
         this.destination = new SimpleStringProperty(tour.getDestination());
-        this.transportType = new SimpleStringProperty(tour.getTransportType());
+        this.transportType = new SimpleStringProperty(tour.getTransportType());*/
     }
 
     public String getTourName() {
@@ -81,18 +80,6 @@ public class AddTourViewModel {
         this.destination.set(destination);
     }
 
-    public String getTransportType() {
-        return transportType.get();
-    }
-
-    public SimpleStringProperty transportTypeProperty() {
-        return transportType;
-    }
-
-    public void setTransportType(String transportType) {
-        this.transportType.set(transportType);
-    }
-
     public String getSelectedTransportTypeOption() {
         return selectedTransportTypeOption.get();
     }
@@ -106,37 +93,22 @@ public class AddTourViewModel {
     }
 
     public void addTour() {
-        /*try {
-            Tour createTour = new Tour(tourName.get(), description.get(), start.get(), destination.get(), transportType.get());
-            Tour tour = new TourService().createTour(createTour);
-            ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
-            // TODO: show created tour in ui, also show the image (filename is <tourId>.jpg)
-        } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException |
-                 FailedToParseImageFileException e) {
-            System.out.println("----------------------------------------------------------------------------------");
-            System.out.println(e.getMessage());
-            System.out.println("----------------------------------------------------------------------------------");
-            // TODO: handle exceptions properly
-        }*/
-
         try {
-            Tour createTour = new Tour(tourName.get(), description.get(), start.get(), destination.get(), transportType.get());
+            System.out.print("option: ");
+            System.out.println(selectedTransportTypeOption.get());
+            Tour createTour = new Tour(tourName.get(), description.get(), start.get(), destination.get(), selectedTransportTypeOption.get());
             Tour tour = new TourService().createTour(createTour);
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
             logger.info("BusinessLogic.createTour() - tour created successfully: " + tour);
             // TODO: show created tour in ui, also show the image (filename is data/images/<tourId>.jpg)
         } catch (BadRequestException e) {
-            logger.warn("BusinessLogic.createTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new BadRequestException(e);
         } catch (InternalServerErrorException e) {
-            logger.error("BusinessLogic.createTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new InternalServerErrorException(e);
         } catch (FailedToSendRequestException e) {
-            logger.error("BusinessLogic.createTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new FailedToSendRequestException(e);
         } catch (FailedToParseImageFileException e) {
-            logger.error("BusinessLogic.createTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new FailedToParseImageFileException(e);
         }
     }
 }

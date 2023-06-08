@@ -2,6 +2,7 @@ package at.fhtw.view;
 
 import at.fhtw.models.TourListEntry;
 import at.fhtw.viewmodel.ListToursViewModel;
+import at.fhtw.viewmodel.TourInformationViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,11 +43,6 @@ public class ListToursView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle rb){
-        //ScrollPane scrollPane = new ScrollPane(tableView);
-        //scrollPane.setFitToHeight(true);
-
-
-
 
         tableView.setItems(listToursViewModel.getTourListItems());
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -69,6 +65,8 @@ public class ListToursView implements Initializable {
         tableView.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
                 if(tableView.getSelectionModel().getSelectedItem() != null) {
+                    //TourInformationViewModel tourInformationViewModel = TourInformationView.getInstance();
+                    //tourInformationViewModel.changeTourImagePath((TourListEntry) tableView.getSelectionModel().getSelectedItem());
                     TourInformationView.getInstance().changeTourImagePath((TourListEntry) tableView.getSelectionModel().getSelectedItem());
                 }
             }
@@ -80,11 +78,10 @@ public class ListToursView implements Initializable {
 
     public void reload() {
         listToursViewModel.clearItems();
-        listToursViewModel.clearItems();
         listToursViewModel.initList();
     }
 
-    public void showInformations(TourListEntry tourListEntry)
+    public void showInformation(TourListEntry tourListEntry)
     {
 
         System.out.println("item: ");

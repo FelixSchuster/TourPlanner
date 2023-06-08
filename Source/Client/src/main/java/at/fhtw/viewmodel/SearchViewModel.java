@@ -1,12 +1,19 @@
 package at.fhtw.viewmodel;
 
+import at.fhtw.exceptions.FailedToSendRequestException;
+import at.fhtw.exceptions.InternalServerErrorException;
+import at.fhtw.exceptions.NoContentException;
+import at.fhtw.exceptions.NotFoundException;
 import at.fhtw.models.TourListEntry;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 public class SearchViewModel {
-
-    private ListToursViewModel toursViewModel = new ListToursViewModel();
+    private static final Logger logger = LogManager.getLogger(SearchViewModel.class);
 
     private SimpleStringProperty searchString = new SimpleStringProperty();
 
@@ -24,24 +31,5 @@ public class SearchViewModel {
     }
 
     public void search() {
-        toursViewModel.initList();
-        System.out.println("search1");
-
-        System.out.println("search2");
-
-        toursViewModel.filterList(getSearchString());
-        System.out.println("search3");
-
-        System.out.print("search text: ");
-        System.out.println(getSearchString());
-
-        ObservableList<TourListEntry> list = toursViewModel.getTourListItems();
-        for (TourListEntry value : list)
-        {
-            System.out.print("value: ");
-            System.out.println(value);
-        }
-        System.out.println("search4");
-
     }
 }

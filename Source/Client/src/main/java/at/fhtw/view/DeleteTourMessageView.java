@@ -2,6 +2,7 @@ package at.fhtw.view;
 
 import at.fhtw.models.TourListEntry;
 import at.fhtw.viewmodel.ListToursViewModel;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ButtonBar;
@@ -30,29 +31,23 @@ public class DeleteTourMessageView extends Dialog<Void> {
 
 
     public void initialize() {
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle(title);
+        setTitle(title);
+        final Button btOk = (Button) getDialogPane().lookupButton(ButtonType.OK);
+        btOk.addEventFilter(ActionEvent.ACTION, event -> {
+            System.out.println("yess");
+        });
 
 
-        //getDialogPane.set
-        //ButtonType cancleButton = new ButtonType("Cancle", ButtonBar.ButtonData.OK_DONE);
-        //getDialogPane().getButtonTypes().add(cancleButton);
 
-        Button cancelButton = new Button("Cancel");
+        //Button agreeButton = new Button("Agree");
+        ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        //getDialogPane().getButtonTypes().add(ok);
 
-        Button agreeButton = new Button("Agree");
-
-
-        cancelButton.setAlignment(Pos.CENTER);
-        agreeButton.setAlignment(Pos.CENTER);
-
-
-       /* VBox layout = new VBox(8);
-        getDialogPane().setContent(layout);
-        layout.setAlignment(Pos.CENTER);
-
-        //getDialogPane().getChildren().add(cancleButton);
         //getDialogPane().getChildren().add(agreeButton);
+        //getDialogPane().getButtonTypes().add(agreeButton);
+
+        VBox layout = new VBox(8);
+        getDialogPane().setContent(layout);
 
         layout.setPadding(new Insets(16, 16, 16, 16));
         layout.setMaxWidth(300);
@@ -60,33 +55,22 @@ public class DeleteTourMessageView extends Dialog<Void> {
         Text content = new Text(message);
         content.setWrappingWidth(layout.getMaxWidth());
         content.maxWidth(layout.getMaxWidth());
-        layout.getChildren().add(content);*/
+        layout.getChildren().add(content);
+        //layout.getChildren().add(btOk);
 
-        HBox buttonBox = new HBox(10, agreeButton, cancelButton);
-        buttonBox.setStyle("-fx-alignment: center-right; -fx-padding: 10px;");
-        //layout.getChildren().add(cancelButton);
-        //layout.getChildren().add(agreeButton);
+        //agreeButton.setOnAction(event -> onAgreeButton());
 
 
-        Label messageLabel = new Label(message);
-        messageLabel.setStyle("-fx-font-size: 14px;");
-
-        BorderPane dialogPane = new BorderPane();
-        dialogPane.setCenter(messageLabel);
-        dialogPane.setBottom(buttonBox);
-
-        dialog.getDialogPane().setContent(dialogPane);
-
-        agreeButton.setOnAction(event -> dialog.setResult(ButtonType.OK));
-        cancelButton.setOnAction(event -> dialog.setResult(ButtonType.OK));
-
-
-
-        agreeButton.setOnMouseClicked(event -> {
+        /*agreeButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
-                ListToursViewModel listToursViewModel = ListToursView.getInstance();
-                listToursViewModel.deleteTour(tourListEntry.getTourId());
+               DialogPane dialogPane = getDialogPane();
+
             }
-        });
+        });*/
+    }
+
+    private void onAgreeButton()
+    {
+        //getDialogPane().getWi
     }
 }

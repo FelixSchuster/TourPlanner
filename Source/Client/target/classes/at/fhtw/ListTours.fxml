@@ -21,7 +21,8 @@
         <VBox fx:id="dataContainer"
               AnchorPane.leftAnchor="10.0"
               AnchorPane.rightAnchor="10.0"
-              AnchorPane.topAnchor="35.0">
+              AnchorPane.topAnchor="35.0"
+              AnchorPane.bottomAnchor="10.0">
         </VBox>
     </children>
 </AnchorPane>
