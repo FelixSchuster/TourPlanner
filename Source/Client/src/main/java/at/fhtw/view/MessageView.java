@@ -10,10 +10,10 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AboutDialogView extends Dialog<Void> {
+public class MessageView extends Dialog<Void> {
     String message;
     String title;
-    public AboutDialogView(String message, String title) {
+    public MessageView(String message, String title) {
         super();
         this.message = message;
         this.title = title;
@@ -25,8 +25,10 @@ public class AboutDialogView extends Dialog<Void> {
     public void initialize() {
         setTitle(title);
 
-        ButtonType ok = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
-        getDialogPane().getButtonTypes().add(ok);
+        ButtonType cancle = new ButtonType("Cancle", ButtonBar.ButtonData.OK_DONE);
+        getDialogPane().getButtonTypes().add(cancle);
+        ButtonType agree = new ButtonType("Agree", ButtonBar.ButtonData.OK_DONE);
+        getDialogPane().getButtonTypes().add(agree);
 
         VBox layout = new VBox(8);
         getDialogPane().setContent(layout);

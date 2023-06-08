@@ -50,6 +50,6 @@ public class MainView implements Initializable {
 
     @FXML
     public void onHelpAbout(ActionEvent event) {
-        new AboutDialogView().show();
+        //new AboutDialogView().show();
     }
 }

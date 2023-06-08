@@ -2,6 +2,7 @@ package at.fhtw.view;
 
 import at.fhtw.models.TourListEntry;
 import at.fhtw.viewmodel.ListToursViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -91,5 +92,19 @@ public class ListToursView implements Initializable {
     }
 
 
+    public void deleteTour(ActionEvent actionEvent)
+    {
+        if(tableView.getSelectionModel().getSelectedItem() != null) {
+            TourListEntry tourListEntry = (TourListEntry) tableView.getSelectionModel().getSelectedItem();
+            new DeleteTourMessageView(tourListEntry, "Delete Tour").show();
+            //listToursViewModel.deleteTour(tourListEntry.getTourId());
+        }
+        else
+        {
+            new DeleteTourMessageView(new TourListEntry(1, "tour1"), "Delete Tour").show();
+            //messageView.initialize();
 
+            System.out.println("please select an item");
+        }
+    }
 }

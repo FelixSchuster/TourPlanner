@@ -1,9 +1,6 @@
 package at.fhtw.viewmodel;
 
-import at.fhtw.exceptions.BadRequestException;
-import at.fhtw.exceptions.FailedToSendRequestException;
-import at.fhtw.exceptions.NoContentException;
-import at.fhtw.exceptions.NotFoundException;
+import at.fhtw.exceptions.*;
 import at.fhtw.models.TourListEntry;
 import at.fhtw.services.TourService;
 import javafx.collections.FXCollections;
@@ -13,9 +10,12 @@ import javafx.concurrent.Task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class ListToursViewModel {
+    private static final Logger logger = LogManager.getLogger(ListToursViewModel.class);
     private static ListToursViewModel instance;
     private final TourService tourService;
     private List<TourListEntry> masterData;
@@ -64,9 +64,27 @@ public class ListToursViewModel {
         }
     }
 
-    public void showInformations(TourListEntry tourListEntry)
+    public void deleteTour(Integer tourId)
     {
-        tourListEntry.getTourId();
+        try {
+            tourService.deleteTour(tourId);
+            logger.info("BusinessLogic.deleteTour() - tour deleted successfully: " + tourId);
+            // TODO: remove the tour from ui
+        } catch (NotFoundException e) {
+            logger.info("BusinessLogic.deleteTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        } catch (InternalServerErrorException e) {
+            logger.error("BusinessLogic.deleteTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        } catch (FailedToSendRequestException e) {
+            logger.error("BusinessLogic.deleteTour() - " + e.getMessage());
+            // TODO: handle exception properly
+        }
+    }
+
+    public void addTour()
+    {
+
     }
 
     public void filterList(String searchText){

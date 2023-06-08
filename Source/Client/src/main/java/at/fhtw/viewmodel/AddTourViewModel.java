@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class AddTourViewModel {
-    private static final Logger logger = LogManager.getLogger(BusinessLogic.class);
+    private static final Logger logger = LogManager.getLogger(AddTourViewModel.class);
     private SimpleStringProperty tourName = new SimpleStringProperty();
     private SimpleStringProperty description = new SimpleStringProperty();
     private SimpleStringProperty start = new SimpleStringProperty();
