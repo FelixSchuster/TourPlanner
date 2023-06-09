@@ -50,6 +50,9 @@ public class TourLogService {
 
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
+            if(httpResponse.statusCode() == 204) {
+                throw new NoContentException("TourLogService.getTourList() - no content");
+            }
             if(httpResponse.statusCode() == 404) {
                 throw new NotFoundException("TourLogService.getTourLogs() - not found");
             }

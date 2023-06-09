@@ -16,12 +16,13 @@
             fx:id="ImagePane">
 
     <children>
+
         <Label fx:id="informationTextField"
-                AnchorPane.topAnchor="10"
-               AnchorPane.bottomAnchor="100"
-               AnchorPane.leftAnchor="10"
-               AnchorPane.rightAnchor="10"
-                text="Please select a Tour to see Information!" alignment="CENTER"/>
+               AnchorPane.topAnchor="0.0"
+               AnchorPane.bottomAnchor="62.0"
+               AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0"
+               text="Please select a Tour to see Information!" alignment="CENTER"/>
         <VBox fx:id="informationTypeField" spacing="10"
                 AnchorPane.topAnchor="10"
                 AnchorPane.bottomAnchor="100"
@@ -40,10 +41,7 @@
                             <Label text="Popularity: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
                             <Label text="Child-Friendliness: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
                         </VBox>
-                        <VBox
-                              AnchorPane.leftAnchor="10.0"
-                              AnchorPane.rightAnchor="10.0"
-                              AnchorPane.topAnchor="10.0">
+                        <VBox>
                             <Label fx:id="tourNameLabel" />
                             <Label fx:id="startLabel" />
                             <Label fx:id="destinationLabel" />
@@ -55,20 +53,23 @@
                         </VBox>
                     </HBox>
                     <Pane HBox.hgrow="ALWAYS" />
-                    <HBox fx:id="HBoxImage" alignment="TOP_RIGHT"
-                          AnchorPane.leftAnchor="10.0"
-                          AnchorPane.rightAnchor="10.0"
-                          AnchorPane.topAnchor="10.0"
-                    ></HBox>
+                    <HBox fx:id="HBoxImage" alignment="TOP_RIGHT"></HBox>
                 </children>
             </HBox>
             <HBox spacing="10">
-                <VBox>
-                    <Label text="Tour Description: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
-                </VBox>
-                <VBox>
-                    <Label fx:id="tourDescriptionLabel"/>
-                </VBox>
+                <HBox>
+                    <VBox>
+                        <Label text="Tour Description: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
+                    </VBox>
+                    <VBox>
+                        <Label fx:id="tourDescriptionLabel"/>
+                    </VBox>
+                </HBox>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <HBox style="-fx-padding: 30 53 0 0;" spacing="8">
+                    <Button minWidth="90" fx:id="updateButton" text="Update Tour"></Button>
+                    <Button minWidth="90" fx:id="createTourReportButton" text="Create Report"></Button>
+                </HBox>
             </HBox>
         </VBox>
     </children>

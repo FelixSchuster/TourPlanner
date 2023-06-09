@@ -1,7 +1,11 @@
-package at.fhtw.view;
+package at.fhtw.view.popUps;
 
+import at.fhtw.exceptions.*;
 import at.fhtw.models.TourListEntry;
+import at.fhtw.view.ListToursView;
+import at.fhtw.view.ShowTourLogsView;
 import at.fhtw.viewmodel.ListToursViewModel;
+import at.fhtw.viewmodel.ShowTourLogsViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,8 +17,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DeleteTourMessageView extends Dialog<Void> {
+    private static final Logger logger = LogManager.getLogger(DeleteTourMessageView.class);
     TourListEntry tourListEntry;
     String message;
     String title;
@@ -40,10 +47,7 @@ public class DeleteTourMessageView extends Dialog<Void> {
 
         submitButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
-                ListToursViewModel listToursViewModel = ListToursView.getInstance();
-                listToursViewModel.deleteTour(tourListEntry.getTourId());
-                listToursViewModel.clearItems();
-                listToursViewModel.initList();
+                onDeleteTour();
                 popupWindow.close();
             }
         });
@@ -66,5 +70,30 @@ public class DeleteTourMessageView extends Dialog<Void> {
         Scene scene = new Scene(layout);
         popupWindow.setScene(scene);
         popupWindow.showAndWait();
+    }
+
+    public void onDeleteTour()
+    {
+        try
+        {
+            ListToursViewModel listToursViewModel = ListToursView.getInstance();
+            listToursViewModel.deleteTour(tourListEntry.getTourId());
+            listToursViewModel.clearItems();
+            listToursViewModel.initList();
+        } catch (NoContentException e) {
+            logger.info("ShowTourLogsView.getTourLogs() - " + e.getMessage());
+        } catch (NotFoundException e) {
+            logger.info("ShowTourInformationView.getTour() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Delete Tour Log");
+        } catch (InternalServerErrorException e) {
+            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Tour Log could not be deleted!", "Delete Tour Log");
+        } catch (FailedToParseImageFileException e) {
+            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nThe Tour Tour Log could be not shown!", "Delete Tour Log");
+        } catch (FailedToSendRequestException e) {
+            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Tour Log could not be deleted!", "Delete Tour Log");
+        }
     }
 }

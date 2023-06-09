@@ -5,6 +5,7 @@ import at.fhtw.exceptions.FailedToParseImageFileException;
 import at.fhtw.exceptions.FailedToSendRequestException;
 import at.fhtw.exceptions.InternalServerErrorException;
 import at.fhtw.models.Tour;
+import at.fhtw.view.popUps.DialogView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

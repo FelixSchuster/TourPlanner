@@ -1,18 +1,17 @@
 package at.fhtw.viewmodel;
 
-import at.fhtw.exceptions.FailedToParseImageFileException;
-import at.fhtw.exceptions.FailedToSendRequestException;
-import at.fhtw.exceptions.InternalServerErrorException;
-import at.fhtw.exceptions.NotFoundException;
+import at.fhtw.exceptions.*;
 import at.fhtw.models.Tour;
 import at.fhtw.models.TourListEntry;
 import at.fhtw.services.TourService;
 import at.fhtw.utils.ImageHandler;
+import at.fhtw.utils.pdfFileHandler.PdfFileHandler;
+import at.fhtw.view.ListToursView;
+import at.fhtw.view.popUps.DialogView;
 import javafx.beans.property.*;
 import javafx.scene.image.Image;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import javafx.util.StringConverter;
 
 public class ShowTourInformationViewModel {
     private static final Logger logger = LogManager.getLogger(ShowTourInformationViewModel.class);
@@ -40,6 +39,7 @@ public class ShowTourInformationViewModel {
 
     private SimpleBooleanProperty showInformation = new SimpleBooleanProperty();
     private SimpleBooleanProperty hideInformation = new SimpleBooleanProperty();
+    private TourListEntry tourListEntry;
 
     public ShowTourInformationViewModel()
     {
@@ -63,40 +63,28 @@ public class ShowTourInformationViewModel {
         hideInformation.set(false);
     }
 
-    public void changeTourImagePath(TourListEntry tourListEntry)
-    {
-        String imageName = (tourListEntry.getTourId()) + ".jpg";
-        imagePath = imageFolderPath + imageName;
-        image.set(new Image(imagePath));
-    }
-
     public void changeTourInformation(TourListEntry tourListEntry)
     {
         try{
+            this.tourListEntry = tourListEntry;
             String imageName = (tourListEntry.getTourId()) + ".jpg";
             imagePath = imageFolderPath + imageName;
             image.set(new Image(imagePath));
 
-
-            Tour tour = tourService.getTour(tourListEntry.getTourId());
+            Tour tour = ListToursView.getInstance().getTour(tourListEntry.getTourId());
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
             logger.info("ShowTourInformationViewModel.getTour() - tour retrieved successfully: " + tour);
-            System.out.println("name: " + tour.getName());
             setTourInformation(tour);
             showInformation();
 
         } catch (NotFoundException e) {
-            logger.info("BusinessLogic.getTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new NotFoundException(e);
         } catch (InternalServerErrorException e) {
-            logger.error("BusinessLogic.getTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new InternalServerErrorException(e);
         } catch (FailedToParseImageFileException e) {
-            logger.error("BusinessLogic.getTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new FailedToParseImageFileException(e);
         } catch (FailedToSendRequestException e) {
-            logger.error("BusinessLogic.getTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new FailedToSendRequestException(e);
         }
     }
 
@@ -113,6 +101,34 @@ public class ShowTourInformationViewModel {
         tourDescription.set(tour.getTourDescription());
     }
 
+    public void createTourReport(Integer tourId, String filename) {
+        try {
+            PdfFileHandler pdfFileHandler = new PdfFileHandler();
+            Tour tour = tourService.getTour(tourId);
+            ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tourId.toString());
+            pdfFileHandler.createTourReport(tour, filename);
+            logger.info("ShowTourInformationViewModel.createTourReport() - report created successfully: " + filename);
+            new DialogView("Tour Report successfully created", "Create Report Tour");
+        } catch (NoContentException e) {
+            logger.info("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
+            new DialogView("Tour has no content", "Create Report Tour");
+        } catch (NotFoundException e) {
+            logger.info("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Create Report Tour");
+        } catch (InternalServerErrorException e) {
+            logger.error("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Tour Report could not be created!", "Create Report Tour");
+        } catch (FailedToParseJsonFileException e) {
+            logger.error("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
+            new DialogView("Failed to parse jsonfile\nThe Tour Report could not be created!", "Create Report Tour");
+        } catch (FailedToCreatePdfFileException e) {
+            logger.error("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
+            new DialogView("Failed to parse image\nThe Tour Report could not be created!", "Create Report Tour");
+        } catch (FailedToSendRequestException e) {
+            logger.error("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Report could not be created!", "Create Report Tour");
+        }
+    }
     public String getTourName() {
         return tourName.get();
     }
@@ -199,5 +215,9 @@ public class ShowTourInformationViewModel {
 
     public SimpleBooleanProperty hideInformationProperty() {
         return hideInformation;
+    }
+
+    public TourListEntry getTourListEntry() {
+        return tourListEntry;
     }
 }

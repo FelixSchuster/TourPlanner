@@ -2,6 +2,8 @@ package at.fhtw.view;
 
 import at.fhtw.exceptions.*;
 import at.fhtw.models.TourListEntry;
+import at.fhtw.view.popUps.DeleteTourMessageView;
+import at.fhtw.view.popUps.DialogView;
 import at.fhtw.viewmodel.ListToursViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +60,8 @@ public class ListToursView implements Initializable {
             tableView.setOnMouseClicked(event -> {
                 if (event.getButton().equals(MouseButton.PRIMARY)) {
                     if (tableView.getSelectionModel().getSelectedItem() != null) {
-                        ShowTourInformationView.getInstance().changeTourInformation((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+                        loadTourInformation();
+                        loadTourLogs();
                     }
                 }
             });
@@ -74,10 +77,50 @@ public class ListToursView implements Initializable {
         }
     }
 
+    public void loadTourInformation()
+    {
+        try
+        {
+            ShowTourInformationView.getInstance().changeTourInformation((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+        } catch (NotFoundException e) {
+            logger.info("ListToursView.getTour() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Tour Information");
+        } catch (InternalServerErrorException e) {
+            logger.error("ListToursView.getTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Tour Information");
+        } catch (FailedToParseImageFileException e) {
+            logger.error("ListToursView.getTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nThe Tour Information could not be shown!", "Tour Information");
+        } catch (FailedToSendRequestException e) {
+            logger.error("ListToursView.getTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Tour Information");
+        }
+    }
+
+    public void loadTourLogs()
+    {
+        try
+        {   ShowTourLogsView.getInstance().setTourListEntry((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+            ShowTourLogsView.getInstance().showTourLogs(((TourListEntry) tableView.getSelectionModel().getSelectedItem()).getTourId());
+        } catch (NoContentException e) {
+            logger.info("ListToursView.getTourLogs() - " + e.getMessage());
+        } catch (NotFoundException e) {
+            logger.info("ListToursView.getTourLogs() - " + e.getMessage());
+            new DialogView("Tour Log could not be found", "Tour Log");
+        } catch (InternalServerErrorException e) {
+            logger.error("ListToursView.getTourLogs() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Log could not be shown!", "Tour Log");
+        } catch (FailedToSendRequestException e) {
+            logger.error("ListToursView.getTourLogs() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Log could not be shown!", "Tour Log");
+        }
+    }
+
     public void reload(ActionEvent actionEvent) {
         listToursViewModel.clearItems();
         listToursViewModel.initList();
         ShowTourInformationView.getInstance().hideInformation();
+        ShowTourLogsView.getInstance().hideTourLogs();
     }
 
     public void deleteTour(ActionEvent actionEvent)

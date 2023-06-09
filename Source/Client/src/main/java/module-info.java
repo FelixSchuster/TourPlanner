@@ -24,4 +24,6 @@ module tourplanner {
     opens at.fhtw.services to javafx.graphics, javafx.fxml;
     exports at.fhtw.models;
     opens at.fhtw.models to javafx.graphics, javafx.fxml;
+    opens at.fhtw.view.popUps to javafx.fxml, javafx.graphics;
+    exports at.fhtw.view.popUps;
 }

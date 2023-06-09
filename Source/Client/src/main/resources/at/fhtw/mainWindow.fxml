@@ -24,11 +24,11 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem fx:id="miExport" mnemonicParsing="false" text="Export" />
+                        <MenuItem fx:id="miExport" mnemonicParsing="false" onAction="#onExportButton" text="Export" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="miImport" mnemonicParsing="false" onAction="#onFileClose" text="Import" />
+                        <MenuItem fx:id="miImport" mnemonicParsing="false" onAction="#onImportButton" text="Import" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="miSummarizeReport" mnemonicParsing="false" onAction="#onFileClose" text="Summarize Report" />
+                        <MenuItem fx:id="miSummarizeReport" mnemonicParsing="false" onAction="#onSummarizeButtonButton" text="Summarize Report" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="miQuit" mnemonicParsing="false" onAction="#onFileClose" text="Quit" />
                     </items>

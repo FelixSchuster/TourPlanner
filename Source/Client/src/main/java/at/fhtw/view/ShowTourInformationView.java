@@ -1,20 +1,25 @@
 package at.fhtw.view;
 
+import at.fhtw.exceptions.*;
+import at.fhtw.view.popUps.DialogView;
+import at.fhtw.view.popUps.UpdateTourPopUpView;
+import at.fhtw.viewmodel.ListToursViewModel;
 import at.fhtw.viewmodel.ShowTourInformationViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ShowTourInformationView implements Initializable {
+    private static final Logger logger = LogManager.getLogger(ShowTourInformationView.class);
     private static ShowTourInformationViewModel showTourInformationViewModel;
     @FXML
     private Label tourNameLabel;
@@ -34,23 +39,17 @@ public class ShowTourInformationView implements Initializable {
     private Label childFriendlinessLabel;
     @FXML
     private Label tourDescriptionLabel;
-    @FXML
-    private Boolean showInformation;
-    @FXML
-    private Boolean hideInformation;
 
     @FXML
-    private HBox HBoxTourInformation;
-    @FXML
     private HBox HBoxImage;
-    @FXML
-    private ImageView ImageView;
-    @FXML
-    private Pane ImagePane;
     @FXML
     private VBox informationTypeField;
     @FXML
     private Label informationTextField;
+    @FXML
+    public Button updateButton;
+    @FXML
+    public Button createTourReportButton;
     @FXML
     private static ImageView imageView = new ImageView();
 
@@ -89,5 +88,36 @@ public class ShowTourInformationView implements Initializable {
 
         informationTypeField.visibleProperty().bindBidirectional(showTourInformationViewModel.showInformationProperty());
         informationTextField.visibleProperty().bindBidirectional(showTourInformationViewModel.hideInformationProperty());
+        updateButton.setOnAction(event -> updateTour());
+        createTourReportButton.setOnAction(event -> onActionCreateTourReport());
+    }
+
+    public void updateTour()
+    {
+        try {
+            ListToursViewModel listToursViewModel = ListToursView.getInstance();
+            new UpdateTourPopUpView(listToursViewModel.getTour(showTourInformationViewModel.getTourListEntry().getTourId()), "Update Tour");
+        }catch (NotFoundException e) {
+            logger.info("ShowTourInformationView.getTour() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Update Tour");
+        } catch (BadRequestException e) {
+            logger.warn("UpdateTourPopUp.updateTour() - " + e.getMessage());
+            new DialogView("Bad Request\nTour could not be updated!", "Update Tour");
+        } catch (InternalServerErrorException e) {
+            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Update Tour");
+        } catch (FailedToParseImageFileException e) {
+            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nThe Tour Information could not be shown!", "Update Tour");
+        } catch (FailedToSendRequestException e) {
+            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Update Tour");
+        }
+    }
+
+    public void onActionCreateTourReport()
+    {
+        String filename = Integer.toString(showTourInformationViewModel.getTourListEntry().getTourId()) + "_" + showTourInformationViewModel.getTourListEntry().getName() + "_" + "report";
+        showTourInformationViewModel.createTourReport(showTourInformationViewModel.getTourListEntry().getTourId(), filename);
     }
 }

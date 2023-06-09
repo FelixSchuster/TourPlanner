@@ -4,6 +4,7 @@ import at.fhtw.exceptions.FailedToSendRequestException;
 import at.fhtw.exceptions.InternalServerErrorException;
 import at.fhtw.exceptions.NoContentException;
 import at.fhtw.exceptions.NotFoundException;
+import at.fhtw.view.popUps.DialogView;
 import at.fhtw.viewmodel.ListToursViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

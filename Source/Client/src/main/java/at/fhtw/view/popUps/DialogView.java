@@ -1,4 +1,4 @@
-package at.fhtw.view;
+package at.fhtw.view.popUps;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -31,12 +31,15 @@ public class DialogView extends Dialog<Void> {
         Label label = new Label(message);
         Button okButton= new Button("OK");
         okButton.setPrefWidth(75);
+        label.setAlignment(Pos.CENTER);
 
         okButton.setOnAction(e -> popupWindow.close());
 
         VBox layout = new VBox(20);
         layout.setPadding(new Insets(16, 16, 30, 16));
-        layout.setMaxWidth(300);
+        layout.setMaxWidth(500);
+        layout.setMinWidth(300);
+        layout.setAlignment(Pos.CENTER);
 
         layout.getChildren().addAll(label, okButton);
         layout.setAlignment(Pos.CENTER);
