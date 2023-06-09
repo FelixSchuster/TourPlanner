@@ -4,8 +4,7 @@ import at.fhtw.exceptions.BadRequestException;
 import at.fhtw.exceptions.FailedToParseImageFileException;
 import at.fhtw.exceptions.FailedToSendRequestException;
 import at.fhtw.exceptions.InternalServerErrorException;
-import at.fhtw.models.TourListEntry;
-import at.fhtw.viewmodel.AddTourViewModel;
+import at.fhtw.models.Tour;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,8 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddTourView implements Initializable {
-    private static final Logger logger = LogManager.getLogger(AddTourViewModel.class);
-    private AddTourViewModel addTourViewModel;
+    private static final Logger logger = LogManager.getLogger(AddTourView.class);
     @FXML
     private Text feedbackText;
     @FXML
@@ -33,18 +31,9 @@ public class AddTourView implements Initializable {
     private TextField destinationTextField;
     @FXML
     private ChoiceBox<String> transportTypeChoiceBox;
-    @FXML
-    private Text hiddenText;
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
-
-        addTourViewModel = new AddTourViewModel();
-        tourNameTextField.textProperty().bindBidirectional(addTourViewModel.tourNameProperty());
-        descriptionTextField.textProperty().bindBidirectional(addTourViewModel.descriptionProperty());
-        startTextField.textProperty().bindBidirectional(addTourViewModel.startProperty());
-        destinationTextField.textProperty().bindBidirectional(addTourViewModel.destinationProperty());
-        transportTypeChoiceBox.valueProperty().bindBidirectional(addTourViewModel.selectedTransportTypeOptionProperty());
 
         transportTypeChoiceBox.setValue("car");
         updateChoiceBoxWidth();
@@ -84,9 +73,9 @@ public class AddTourView implements Initializable {
                 return;
             }
 
-            addTourViewModel.addTour();
-            new AboutDialogView("Tour successfully created!", "Create Tour").show();
-            feedbackText.setText("Tour successfully created!");
+            Tour tour = new Tour(tourNameTextField.getText(), descriptionTextField.getText(), startTextField.getText(), destinationTextField.getText(), transportTypeChoiceBox.getSelectionModel().getSelectedItem());
+            ListToursView.getInstance().addTour(tour);
+            new DialogView("Tour successfully created!", "Create Tour");
 
             ListToursView.getInstance().clearItems();
             ListToursView.getInstance().initList();
@@ -94,20 +83,20 @@ public class AddTourView implements Initializable {
             resetTextfields();
         }
         catch (BadRequestException e) {
-            logger.warn("BusinessLogic.createTour() - " + e.getMessage());
-            new AboutDialogView("Bad Request\nTour could not be created!", "Create Tour").show();
+            logger.warn("AddTourViewModel.createTour() - " + e.getMessage());
+            new DialogView("Bad Request\nTour could not be created!", "Create Tour");
             resetTextfields();
         } catch (InternalServerErrorException e) {
-            logger.error("BusinessLogic.createTour() - " + e.getMessage());
-            new AboutDialogView("Internal Server Issues\nTour could not be created!", "Create Tour").show();
+            logger.error("AddTourViewModel.createTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nTour could not be created!", "Create Tour");
             resetTextfields();
         } catch (FailedToSendRequestException e) {
-            logger.error("BusinessLogic.createTour() - " + e.getMessage());
-            new AboutDialogView("Failed to send Request\nTour could not be created!", "Create Tour").show();
+            logger.error("AddTourViewModel.createTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nTour could not be created!", "Create Tour");
             resetTextfields();
         } catch (FailedToParseImageFileException e) {
-            logger.error("BusinessLogic.createTour() - " + e.getMessage());
-            new AboutDialogView("Failed to parse image\nTour could not be created!", "Create Tour").show();
+            logger.error("AddTourViewModel.createTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nTour could not be created!", "Create Tour");
             resetTextfields();
         }
     }

@@ -10,7 +10,7 @@
             fx:controller="at.fhtw.view.SearchView"
             prefHeight="400.0" prefWidth="600.0">
     <children>
-        <HBox fx:id="HBox" alignment="CENTER" spacing="5.0" AnchorPane.leftAnchor="10.0"
+        <HBox fx:id="HBox" alignment="CENTER" spacing="3.0" AnchorPane.leftAnchor="10.0"
               AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <children>
                 <Label/>
@@ -19,13 +19,8 @@
                 <Label />
             </children>
         </HBox>
-
     </children>
     <children>
-
-            <Label fx:id="searchLabel" AnchorPane.leftAnchor="10.0"
-                   AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0"/>
-
-
+            <Label fx:id="searchLabel" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0"/>
     </children>
 </AnchorPane>

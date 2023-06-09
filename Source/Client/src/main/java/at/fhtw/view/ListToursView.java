@@ -1,8 +1,8 @@
 package at.fhtw.view;
 
+import at.fhtw.exceptions.*;
 import at.fhtw.models.TourListEntry;
 import at.fhtw.viewmodel.ListToursViewModel;
-import at.fhtw.viewmodel.TourInformationViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,18 +10,19 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ListToursView implements Initializable {
+    private static final Logger logger = LogManager.getLogger(ListToursView.class);
     private static ListToursViewModel listToursViewModel;
     @FXML
     public TableView tableView = new TableView<>();
     @FXML
     private VBox dataContainer;
-    @FXML
-    private Button reloadButton;
 
     public ListToursView()
     {
@@ -37,71 +38,68 @@ public class ListToursView implements Initializable {
         return listToursViewModel;
     }
 
-    public ListToursViewModel getListToursViewModel() {
-        return listToursViewModel;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle rb){
+        try {
+            tableView.setItems(listToursViewModel.getTourListItems());
+            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        tableView.setItems(listToursViewModel.getTourListItems());
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+            TableColumn id = new TableColumn("ID");
+            id.setCellValueFactory(new PropertyValueFactory("tourId"));
+            TableColumn name = new TableColumn("NAME");
+            name.setCellValueFactory(new PropertyValueFactory("name"));
+            tableView.getColumns().addAll(id, name);
 
-        TableColumn id = new TableColumn("ID");
-        id.setCellValueFactory(new PropertyValueFactory("tourId"));
-        TableColumn name = new TableColumn("NAME");
-        name.setCellValueFactory(new PropertyValueFactory("name"));
-        tableView.getColumns().addAll(id, name);
+            ScrollPane scrollPane = new ScrollPane(tableView);
+            scrollPane.setFitToWidth(true);
+            dataContainer.getChildren().add(scrollPane);
+            listToursViewModel.initList();
 
-        //dataContainer.getChildren().add(tableView);
-        ScrollPane scrollPane = new ScrollPane(tableView);
-        scrollPane.setFitToWidth(true);
-        dataContainer.getChildren().add(scrollPane);
-        listToursViewModel.initList();
-
-
-        //tableView.setOnAction(event -> loadData());
-        //tableView.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
-        tableView.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY)) {
-                if(tableView.getSelectionModel().getSelectedItem() != null) {
-                    //TourInformationViewModel tourInformationViewModel = TourInformationView.getInstance();
-                    //tourInformationViewModel.changeTourImagePath((TourListEntry) tableView.getSelectionModel().getSelectedItem());
-                    TourInformationView.getInstance().changeTourImagePath((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+            tableView.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.PRIMARY)) {
+                    if (tableView.getSelectionModel().getSelectedItem() != null) {
+                        ShowTourInformationView.getInstance().changeTourInformation((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+                    }
                 }
-            }
-        });
-        //searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-          //  searchLabel.setText(newValue);
-        //});
+            });
+        } catch (NoContentException e) {
+            logger.info("ListToursView.getTourList() - " + e.getMessage());
+            new DialogView("No content found!", "Get Tourlist");
+        } catch (InternalServerErrorException e) {
+            logger.error("ListToursView.getTourList() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nTour could not be loaded!", "Get Tourlist");
+        } catch (FailedToSendRequestException e) {
+            logger.error("ListToursView.getTourList() - " + e.getMessage());
+            new DialogView("Failed to send Request", "Get Tourlist");
+        }
     }
 
-    public void reload() {
+    public void reload(ActionEvent actionEvent) {
         listToursViewModel.clearItems();
         listToursViewModel.initList();
+        ShowTourInformationView.getInstance().hideInformation();
     }
-
-    public void showInformation(TourListEntry tourListEntry)
-    {
-
-        System.out.println("item: ");
-        System.out.println(tourListEntry);
-    }
-
 
     public void deleteTour(ActionEvent actionEvent)
     {
         if(tableView.getSelectionModel().getSelectedItem() != null) {
-            TourListEntry tourListEntry = (TourListEntry) tableView.getSelectionModel().getSelectedItem();
-            new DeleteTourMessageView(tourListEntry, "Delete Tour").show();
-            //listToursViewModel.deleteTour(tourListEntry.getTourId());
+            try {
+                TourListEntry tourListEntry = (TourListEntry) tableView.getSelectionModel().getSelectedItem();
+                new DeleteTourMessageView(tourListEntry, "Delete Tour");
+            } catch (NotFoundException e) {
+                logger.info("ListToursView.deleteTour() - " + e.getMessage());
+                new DialogView("Tour Not Found\nTour could not be deleted!", "Delete Tour");
+            } catch (InternalServerErrorException e) {
+                logger.error("ListToursView.deleteTour() - " + e.getMessage());
+                new DialogView("Internal Server Issues\nTour could not be deleted!", "Delete Tour");
+            } catch (FailedToSendRequestException e) {
+                logger.error("ListToursView.deleteTour() - " + e.getMessage());
+                new DialogView("Failed to send Request\nTour could not be deleted!", "Delete Tour");
+            }
         }
         else
         {
-            new DeleteTourMessageView(new TourListEntry(1, "tour1"), "Delete Tour").show();
-            //messageView.initialize();
-
-            System.out.println("please select an item");
+            new DialogView("Please select a tour!", "Delete Tour");
         }
     }
 }

@@ -2,19 +2,17 @@ package at.fhtw.view;
 
 import at.fhtw.models.TourListEntry;
 import at.fhtw.viewmodel.ListToursViewModel;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class DeleteTourMessageView extends Dialog<Void> {
     TourListEntry tourListEntry;
@@ -29,48 +27,44 @@ public class DeleteTourMessageView extends Dialog<Void> {
         initialize();
     }
 
-
     public void initialize() {
-        setTitle(title);
-        final Button btOk = (Button) getDialogPane().lookupButton(ButtonType.OK);
-        btOk.addEventFilter(ActionEvent.ACTION, event -> {
-            System.out.println("yess");
+        Stage popupWindow = new Stage();
+
+        popupWindow.initModality(Modality.APPLICATION_MODAL);
+        popupWindow.setTitle(title);
+
+        Label label = new Label(message);
+
+        Button submitButton= new Button("Submit");
+        Button cancelButton= new Button("Cancel");
+
+        submitButton.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                ListToursViewModel listToursViewModel = ListToursView.getInstance();
+                listToursViewModel.deleteTour(tourListEntry.getTourId());
+                listToursViewModel.clearItems();
+                listToursViewModel.initList();
+                popupWindow.close();
+            }
         });
 
+        cancelButton.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                popupWindow.close();
+            }
+        });
+        HBox buttonBox = new HBox(10, submitButton, cancelButton);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setPadding(new Insets(16, 16, 16, 16));
 
-
-        //Button agreeButton = new Button("Agree");
-        ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-        //getDialogPane().getButtonTypes().add(ok);
-
-        //getDialogPane().getChildren().add(agreeButton);
-        //getDialogPane().getButtonTypes().add(agreeButton);
-
-        VBox layout = new VBox(8);
-        getDialogPane().setContent(layout);
-
+        VBox layout = new VBox();
         layout.setPadding(new Insets(16, 16, 16, 16));
         layout.setMaxWidth(300);
 
-        Text content = new Text(message);
-        content.setWrappingWidth(layout.getMaxWidth());
-        content.maxWidth(layout.getMaxWidth());
-        layout.getChildren().add(content);
-        //layout.getChildren().add(btOk);
+        layout.getChildren().addAll(label, buttonBox);
 
-        //agreeButton.setOnAction(event -> onAgreeButton());
-
-
-        /*agreeButton.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY)) {
-               DialogPane dialogPane = getDialogPane();
-
-            }
-        });*/
-    }
-
-    private void onAgreeButton()
-    {
-        //getDialogPane().getWi
+        Scene scene = new Scene(layout);
+        popupWindow.setScene(scene);
+        popupWindow.showAndWait();
     }
 }

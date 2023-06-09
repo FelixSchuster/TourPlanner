@@ -1,7 +1,6 @@
 package at.fhtw.view;
 
-// import at.fhtw.events.ApplicationShutdownEvent;
-import at.fhtw.viewmodel.MainViewModel;
+import at.fhtw.viewmodel.ApplicationViewModel;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +14,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainView implements Initializable {
+public class ApplicationView implements Initializable {
 
     // ApplicationEventPublisher publisher;
 
@@ -26,12 +25,12 @@ public class MainView implements Initializable {
     Circle monitorStatusIcon = new Circle(8);
 
     // create custom viewmodel
-    private MainViewModel viewModel = new MainViewModel();
+    private ApplicationViewModel viewModel = new ApplicationViewModel();
     SimpleObjectProperty<Stage> stage = new SimpleObjectProperty<>();
 
     // add fx:id and use intelliJ to create field in controller
 
-    public MainView()
+    public ApplicationView()
     {
         System.out.println("Controller created");
         // this.publisher = publisher;

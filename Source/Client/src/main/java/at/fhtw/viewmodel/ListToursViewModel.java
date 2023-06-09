@@ -1,15 +1,16 @@
 package at.fhtw.viewmodel;
 
 import at.fhtw.exceptions.*;
+import at.fhtw.models.Tour;
 import at.fhtw.models.TourListEntry;
 import at.fhtw.services.TourService;
+import at.fhtw.utils.ImageHandler;
+import at.fhtw.view.ShowTourInformationView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -51,60 +52,67 @@ public class ListToursViewModel {
     public void clearItems(){ tourListItems.clear(); }
 
     public void initList(){
-
         try {
             tourService.getTourList().forEach(p -> {
                 addItem(p);
             });
-        } catch (BadRequestException | FailedToSendRequestException | NoContentException | NotFoundException e) {
-            System.out.println("----------------------------------------------------------------------------------");
-            System.out.println(e.getMessage());
-            System.out.println("----------------------------------------------------------------------------------");
-            // TODO: handle exceptions properly
+            logger.info("ListToursViewModel.getTourList() - tourList retrieved successfully: " + tourListItems);
+        } catch (NoContentException e) {
+            throw new NoContentException(e);
+        } catch (InternalServerErrorException e) {
+            throw new InternalServerErrorException(e);
+        } catch (FailedToSendRequestException e) {
+            throw new FailedToSendRequestException(e);
         }
     }
 
     public void filterList(String keyword){
-
         try {
             tourService.searchTour(keyword).forEach(p -> {
                 addItem(p);
             });
-            logger.info("BusinessLogic.searchTour() - tourList retrieved successfully: " + tourListItems);
-            // TODO: show the list in ui
+            ShowTourInformationView.getInstance().hideInformation();
+            logger.info("ListToursViewModel.searchTour() - tourList retrieved successfully: " + tourListItems);
         } catch (NoContentException e) {
-            logger.info("BusinessLogic.searchTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new NoContentException(e);
         } catch (NotFoundException e) {
-            logger.info("BusinessLogic.searchTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new NotFoundException(e);
         } catch (InternalServerErrorException e) {
-            logger.error("BusinessLogic.searchTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new InternalServerErrorException(e);
         } catch (FailedToSendRequestException e) {
-            logger.error("BusinessLogic.searchTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new FailedToSendRequestException(e);
         }
+    }
 
-
-
+    public void addTour(Tour createdTour) {
+        try {
+            Tour tour = new TourService().createTour(createdTour);
+            ShowTourInformationView.getInstance().hideInformation();
+            ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
+            logger.info("ListToursViewModel.createTour() - tour created successfully: " + tour);
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e);
+        } catch (InternalServerErrorException e) {
+            throw new InternalServerErrorException(e);
+        } catch (FailedToSendRequestException e) {
+            throw new FailedToSendRequestException(e);
+        } catch (FailedToParseImageFileException e) {
+            throw new FailedToParseImageFileException(e);
+        }
     }
 
     public void deleteTour(Integer tourId)
     {
         try {
             tourService.deleteTour(tourId);
-            logger.info("BusinessLogic.deleteTour() - tour deleted successfully: " + tourId);
-            // TODO: remove the tour from ui
+            ShowTourInformationView.getInstance().hideInformation();
+            logger.info("ListToursViewModel.deleteTour() - tour deleted successfully: " + tourId);
         } catch (NotFoundException e) {
-            logger.info("BusinessLogic.deleteTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new NotFoundException(e);
         } catch (InternalServerErrorException e) {
-            logger.error("BusinessLogic.deleteTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new InternalServerErrorException(e);
         } catch (FailedToSendRequestException e) {
-            logger.error("BusinessLogic.deleteTour() - " + e.getMessage());
-            // TODO: handle exception properly
+            throw new FailedToSendRequestException(e);
         }
     }
 }

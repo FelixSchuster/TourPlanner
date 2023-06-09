@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class MainViewModel {
+public class ApplicationViewModel {
     // http://openbook.rheinwerk-verlag.de/javainsel/12_004.html
     private final StringProperty input = new SimpleStringProperty("");
     private final StringProperty output = new SimpleStringProperty("Hello VM!");
