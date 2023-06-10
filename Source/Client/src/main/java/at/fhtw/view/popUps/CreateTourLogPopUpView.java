@@ -49,6 +49,8 @@ public class CreateTourLogPopUpView extends Dialog<Void> {
         popupWindow.initModality(Modality.APPLICATION_MODAL);
         popupWindow.setTitle(title);
 
+        feedbackText.setStyle("-fx-text-fill: red;");
+
         VBox root = new VBox();
         root.setPadding(new Insets(8.0));
 

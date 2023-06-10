@@ -88,6 +88,7 @@ public class ShowTourLogsView extends ApplicationView{
         Label informationTextField = new Label();
         informationTextField.setText(text);
         informationTextField.setAlignment(Pos.CENTER);
+        informationTextField.setStyle("-fx-font-size: 14px;");
         paneContainer.getChildren().add(informationTextField);
     }
 
@@ -106,9 +107,11 @@ public class ShowTourLogsView extends ApplicationView{
         Label informationTextField = new Label();
         informationTextField.setText(text);
         informationTextField.setAlignment(Pos.CENTER);
+        informationTextField.setStyle("-fx-font-size: 14px;");
 
         Button createTourLogButton = new Button("Create Tour Log");
         createTourLogButton.setAlignment(Pos.CENTER);
+        createTourLogButton.getStyleClass().add("important-button");
 
         informstionTextBox.getChildren().add(informationTextField);
         informstionTextBox.getChildren().add(createTourLogButton);
@@ -136,14 +139,18 @@ public class ShowTourLogsView extends ApplicationView{
         HBox.setHgrow(createButtonBox, javafx.scene.layout.Priority.ALWAYS);
 
         Label tourName = new Label("Tour Name: ");
+        tourName.getStyleClass().add("bold-headers");
+        tourName.setStyle("-fx-font-size: 15px;");
         tourNameBox.getChildren().add(tourName);
         Label tourLogHeader = new Label(showTourLogsViewModel.getTourListEntry().getName());
+        tourLogHeader.setStyle("-fx-font-size: 15px;");
         headerLabelBox.getChildren().add(tourLogHeader);
 
         Button createTourLogButton = new Button("Create Tour Log");
         createTourLogButton.setMinWidth(80);
         createButtonBox.getChildren().add(createTourLogButton);
         createButtonBox.setAlignment(Pos.CENTER_RIGHT);
+        createTourLogButton.getStyleClass().add("important-button");
 
         hbox.getChildren().addAll(tourNameBox, headerLabelBox, createButtonBox);
         createTourLogButton.setOnAction(e -> createTourlog(showTourLogsViewModel.getTourListEntry().getTourId()));
@@ -199,7 +206,7 @@ public class ShowTourLogsView extends ApplicationView{
         headers.getChildren().addAll(date, totalTime, difficulty, rating, comment);
 
         Label dateTourLog = new Label(tourLog.getDate());
-        Label totalTimeTourLog = new Label(Integer.toString(tourLog.getTotalTime()));
+        Label totalTimeTourLog = new Label(showTourLogsViewModel.calculateTotalTime(tourLog.getTotalTime()));
         Label difficultyTourLog = new Label(Integer.toString(tourLog.getDifficulty()));
         Label ratingTourLog = new Label(Integer.toString(tourLog.getRating()));
         Label commentTourLog = new Label(tourLog.getComment());
@@ -228,7 +235,6 @@ public class ShowTourLogsView extends ApplicationView{
     {
         try {
             new CreateTourLogPopUpView(tourId, "Create Tour");
-            ShowTourLogsView.getInstance().hideTourLogs();
         } catch (NoContentException e) {
             logger.info("ShowTourLogsView.getTourLogs() - " + e.getMessage());
         } catch (NotFoundException e) {

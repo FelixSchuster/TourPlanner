@@ -49,6 +49,8 @@ public class UpdateTourPopUpView extends Dialog<Void> {
         popupWindow.initModality(Modality.APPLICATION_MODAL);
         popupWindow.setTitle(title);
 
+        feedbackText.setStyle("-fx-text-fill: red;");
+
         VBox root = new VBox();
         root.setPadding(new Insets(8.0));
 
@@ -106,9 +108,20 @@ public class UpdateTourPopUpView extends Dialog<Void> {
                 feedbackText
         );
 
-        Scene scene = new Scene(root, 300, 450);
+        updateChoiceBoxWidth();
+        transportTypeChoiceBox.setOnAction(event -> updateChoiceBoxWidth());
+
+        Scene scene = new Scene(root, 300, 440);
         popupWindow.setScene(scene);
         popupWindow.showAndWait();
+    }
+
+    @FXML
+    private void updateChoiceBoxWidth() {
+        String selectedValue = transportTypeChoiceBox.getSelectionModel().getSelectedItem();
+        double newWidth = selectedValue.length() * 10;
+        System.out.println("length: " + selectedValue.length());
+        transportTypeChoiceBox.setPrefWidth(newWidth);
     }
 
     public void onSubmit()

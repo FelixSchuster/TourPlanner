@@ -118,6 +118,23 @@ public class ShowTourLogsViewModel {
         }
     }
 
+    public String calculateTotalTime(Integer totalTime)
+    {
+        String calculatedTime = "";
+        if((totalTime/60) >= 1)
+        {
+            int hours = (totalTime/60);
+            int minutes = ((totalTime) - (60 * hours));
+            calculatedTime = Integer.toString(hours) + "h " + Integer.toString(minutes) + "min";
+        }
+        else
+        {
+            calculatedTime = Integer.toString(totalTime) + "min";
+        }
+
+        return calculatedTime;
+    }
+
     public boolean isHideTourInformation() {
         return hideTourInformation.get();
     }

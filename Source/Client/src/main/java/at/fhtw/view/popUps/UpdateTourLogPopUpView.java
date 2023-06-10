@@ -50,6 +50,8 @@ public class UpdateTourLogPopUpView extends Dialog<Void> {
         popupWindow.initModality(Modality.APPLICATION_MODAL);
         popupWindow.setTitle(title);
 
+        feedbackText.setStyle("-fx-text-fill: red;");
+
         VBox root = new VBox();
         root.setPadding(new Insets(8.0));
 
@@ -101,7 +103,7 @@ public class UpdateTourLogPopUpView extends Dialog<Void> {
                 feedbackText
         );
 
-        Scene scene = new Scene(root, 300, 370);
+        Scene scene = new Scene(root, 300, 400);
         popupWindow.setScene(scene);
         popupWindow.showAndWait();
     }

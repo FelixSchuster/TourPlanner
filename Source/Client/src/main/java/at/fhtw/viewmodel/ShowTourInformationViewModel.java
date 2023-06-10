@@ -90,12 +90,21 @@ public class ShowTourInformationViewModel {
 
     private void setTourInformation(Tour tour)
     {
+        if((tour.getEstimatedTime()/60) >= 1)
+        {
+            int hours = (tour.getEstimatedTime()/60);
+            int minutes = ((tour.getEstimatedTime()) - (60 * hours));
+            estimatedTime.set(Integer.toString(hours) + "h " + Integer.toString(minutes) + "min");
+        }
+        else
+        {
+            estimatedTime.set((Integer.toString(tour.getEstimatedTime()) + "min"));
+        }
         tourName.set(tour.getName());
         start.set(tour.getStart());
         destination.set(tour.getDestination());
         transportType.set(tour.getTransportType());
-        distance.set(Double.toString(tour.getTourDistance()));
-        estimatedTime.set(Integer.toString(tour.getEstimatedTime()));
+        distance.set(Double.toString(tour.getTourDistance()) + "km");
         popularity.set(Integer.toString(tour.getPopularity()));
         childFriendliness.set(Integer.toString(tour.getChildFriendliness()));
         tourDescription.set(tour.getTourDescription());

@@ -42,7 +42,7 @@
             </items>
         </ChoiceBox>
         <HBox alignment="BASELINE_RIGHT">
-            <Button fx:id="submitButton"  onAction="#addTourAction" text="insert"/>
+            <Button fx:id="submitButton"  onAction="#addTourAction" text="Submit"/>
         </HBox>
 
         <Separator prefWidth="200.0" />

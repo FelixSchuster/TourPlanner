@@ -9,6 +9,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.Separator?>
+<?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
             fx:controller="at.fhtw.view.ShowTourInformationView"
@@ -56,7 +58,8 @@
                     <HBox fx:id="HBoxImage" alignment="TOP_RIGHT"></HBox>
                 </children>
             </HBox>
-            <HBox spacing="10">
+            <Separator orientation="HORIZONTAL" />
+            <HBox spacing="10" fx:id="tourDescriptionBox">
                 <HBox>
                     <VBox>
                         <Label text="Tour Description: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
@@ -66,11 +69,14 @@
                     </VBox>
                 </HBox>
                 <Pane HBox.hgrow="ALWAYS"/>
-                <HBox style="-fx-padding: 30 53 0 0;" spacing="8">
-                    <Button minWidth="90" fx:id="updateButton" text="Update Tour"></Button>
-                    <Button minWidth="90" fx:id="createTourReportButton" text="Create Report"></Button>
+                <HBox style="-fx-padding: 30 35 0 0;" spacing="8">
+                    <Button styleClass="important-button" minWidth="90" fx:id="updateButton" text="Update Tour"></Button>
+                    <Button styleClass="important-button" minWidth="90" fx:id="createTourReportButton" text="Create Report"></Button>
                 </HBox>
             </HBox>
         </VBox>
     </children>
+    <stylesheets>
+        <URL value="@css_sheets/showInformation.css" />
+    </stylesheets>
 </AnchorPane>

@@ -71,8 +71,8 @@ public class ShowTourInformationView implements Initializable {
     public void initialize(URL location, ResourceBundle rb){
 
         imageView.imageProperty().bindBidirectional(showTourInformationViewModel.imageProperty());
-        imageView.setFitWidth(300);
-        imageView.setFitHeight(300);
+        imageView.setFitWidth(280);
+        imageView.setFitHeight(280);
         HBoxImage.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
         HBoxImage.getChildren().add(imageView);
 
