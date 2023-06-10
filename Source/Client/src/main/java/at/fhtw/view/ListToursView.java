@@ -1,6 +1,5 @@
 package at.fhtw.view;
 
-import at.fhtw.exceptions.*;
 import at.fhtw.models.TourListEntry;
 import at.fhtw.view.popUps.DeleteTourMessageView;
 import at.fhtw.view.popUps.DialogView;
@@ -42,103 +41,50 @@ public class ListToursView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle rb){
-        try {
-            tableView.setItems(listToursViewModel.getTourListItems());
-            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-            TableColumn id = new TableColumn("ID");
-            id.setCellValueFactory(new PropertyValueFactory("tourId"));
-            TableColumn name = new TableColumn("NAME");
-            name.setCellValueFactory(new PropertyValueFactory("name"));
-            tableView.getColumns().addAll(id, name);
+        tableView.setItems(listToursViewModel.getTourListItems());
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-            ScrollPane scrollPane = new ScrollPane(tableView);
-            scrollPane.setFitToWidth(true);
-            dataContainer.getChildren().add(scrollPane);
-            listToursViewModel.initList();
+        TableColumn id = new TableColumn("ID");
+        id.setCellValueFactory(new PropertyValueFactory("tourId"));
+        TableColumn name = new TableColumn("NAME");
+        name.setCellValueFactory(new PropertyValueFactory("name"));
+        tableView.getColumns().addAll(id, name);
 
-            tableView.setOnMouseClicked(event -> {
-                if (event.getButton().equals(MouseButton.PRIMARY)) {
-                    if (tableView.getSelectionModel().getSelectedItem() != null) {
-                        loadTourInformation();
-                        loadTourLogs();
-                    }
+        ScrollPane scrollPane = new ScrollPane(tableView);
+        scrollPane.setFitToWidth(true);
+        dataContainer.getChildren().add(scrollPane);
+        listToursViewModel.initList();
+
+        tableView.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                if (tableView.getSelectionModel().getSelectedItem() != null) {
+                    ShowTourInformationView.getInstance().changeTourInformation((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+                    loadTourLogs();
                 }
-            });
-        } catch (NoContentException e) {
-            logger.info("ListToursView.getTourList() - " + e.getMessage());
-            new DialogView("No content found!", "Get Tourlist");
-        } catch (InternalServerErrorException e) {
-            logger.error("ListToursView.getTourList() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nTour could not be loaded!", "Get Tourlist");
-        } catch (FailedToSendRequestException e) {
-            logger.error("ListToursView.getTourList() - " + e.getMessage());
-            new DialogView("Failed to send Request", "Get Tourlist");
-        }
+            }
+        });
     }
 
-    public void loadTourInformation()
-    {
-        try
-        {
-            ShowTourInformationView.getInstance().changeTourInformation((TourListEntry) tableView.getSelectionModel().getSelectedItem());
-        } catch (NotFoundException e) {
-            logger.info("ListToursView.getTour() - " + e.getMessage());
-            new DialogView("Tour could not be found", "Tour Information");
-        } catch (InternalServerErrorException e) {
-            logger.error("ListToursView.getTour() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Tour Information");
-        } catch (FailedToParseImageFileException e) {
-            logger.error("ListToursView.getTour() - " + e.getMessage());
-            new DialogView("Failed to parse image\nThe Tour Information could not be shown!", "Tour Information");
-        } catch (FailedToSendRequestException e) {
-            logger.error("ListToursView.getTour() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Tour Information");
-        }
-    }
 
     public void loadTourLogs()
     {
-        try
-        {   ShowTourLogsView.getInstance().setTourListEntry((TourListEntry) tableView.getSelectionModel().getSelectedItem());
-            ShowTourLogsView.getInstance().showTourLogs(((TourListEntry) tableView.getSelectionModel().getSelectedItem()).getTourId());
-        } catch (NoContentException e) {
-            logger.info("ListToursView.getTourLogs() - " + e.getMessage());
-        } catch (NotFoundException e) {
-            logger.info("ListToursView.getTourLogs() - " + e.getMessage());
-            new DialogView("Tour Log could not be found", "Tour Log");
-        } catch (InternalServerErrorException e) {
-            logger.error("ListToursView.getTourLogs() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Log could not be shown!", "Tour Log");
-        } catch (FailedToSendRequestException e) {
-            logger.error("ListToursView.getTourLogs() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Log could not be shown!", "Tour Log");
-        }
+          ShowTourLogsView.getInstance().setTourListEntry((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+          ShowTourLogsView.getInstance().showTourLogs(((TourListEntry) tableView.getSelectionModel().getSelectedItem()).getTourId());
     }
 
-    public void reload(ActionEvent actionEvent) {
+    public void onReload(ActionEvent actionEvent) {
         listToursViewModel.clearItems();
         listToursViewModel.initList();
         ShowTourInformationView.getInstance().hideInformation();
         ShowTourLogsView.getInstance().hideTourLogs();
     }
 
-    public void deleteTour(ActionEvent actionEvent)
+    public void onDeleteTour(ActionEvent actionEvent)
     {
         if(tableView.getSelectionModel().getSelectedItem() != null) {
-            try {
-                TourListEntry tourListEntry = (TourListEntry) tableView.getSelectionModel().getSelectedItem();
-                new DeleteTourMessageView(tourListEntry, "Delete Tour");
-            } catch (NotFoundException e) {
-                logger.info("ListToursView.deleteTour() - " + e.getMessage());
-                new DialogView("Tour Not Found\nTour could not be deleted!", "Delete Tour");
-            } catch (InternalServerErrorException e) {
-                logger.error("ListToursView.deleteTour() - " + e.getMessage());
-                new DialogView("Internal Server Issues\nTour could not be deleted!", "Delete Tour");
-            } catch (FailedToSendRequestException e) {
-                logger.error("ListToursView.deleteTour() - " + e.getMessage());
-                new DialogView("Failed to send Request\nTour could not be deleted!", "Delete Tour");
-            }
+            TourListEntry tourListEntry = (TourListEntry) tableView.getSelectionModel().getSelectedItem();
+            new DeleteTourMessageView(tourListEntry, "Delete Tour");
         }
         else
         {

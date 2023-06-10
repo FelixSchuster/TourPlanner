@@ -19,7 +19,7 @@
 <?import javafx.scene.text.*?>
 
 <?import java.net.URL?>
-<BorderPane fx:id="layout" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.view.ApplicationView">
+<BorderPane fx:id="layout" styleClass="mainPain" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.view.ApplicationView">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -54,7 +54,13 @@
                                         <fx:include source="Search.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     </children>
                                     <children>
-                                        <fx:include source="ListTours.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+                                        <HBox fx:id="HBoxDarkmodeButton" alignment="BASELINE_LEFT" spacing="0" AnchorPane.leftAnchor="10.0"
+                                              AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50"
+                                              AnchorPane.bottomAnchor="10.0">
+                                            <Button fx:id="darkmode" onAction="#onTogglDarkmode" text="Dark" minWidth="43"/>
+                                            <Button fx:id="lightmode" onAction="#onTogglDarkmode" disable="true" text="" minWidth="43"/>
+                                        </HBox>
+                                        <fx:include source="ListTours.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
                                     </children>
                                 </AnchorPane>
                             </content>

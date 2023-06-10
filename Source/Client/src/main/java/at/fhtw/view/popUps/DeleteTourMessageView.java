@@ -74,26 +74,9 @@ public class DeleteTourMessageView extends Dialog<Void> {
 
     public void onDeleteTour()
     {
-        try
-        {
-            ListToursViewModel listToursViewModel = ListToursView.getInstance();
-            listToursViewModel.deleteTour(tourListEntry.getTourId());
-            listToursViewModel.clearItems();
-            listToursViewModel.initList();
-        } catch (NoContentException e) {
-            logger.info("ShowTourLogsView.getTourLogs() - " + e.getMessage());
-        } catch (NotFoundException e) {
-            logger.info("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Tour could not be found", "Delete Tour Log");
-        } catch (InternalServerErrorException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Tour Log could not be deleted!", "Delete Tour Log");
-        } catch (FailedToParseImageFileException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to parse image\nThe Tour Tour Log could be not shown!", "Delete Tour Log");
-        } catch (FailedToSendRequestException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Tour Log could not be deleted!", "Delete Tour Log");
-        }
+        ListToursViewModel listToursViewModel = ListToursView.getInstance();
+        listToursViewModel.deleteTour(tourListEntry.getTourId());
+        listToursViewModel.clearItems();
+        listToursViewModel.initList();
     }
 }

@@ -1,7 +1,6 @@
 package at.fhtw;
 
 import at.fhtw.businessLogic.BusinessLogic;
-import at.fhtw.models.Tour;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +14,7 @@ public class TourPlannerClient extends Application {
     public void start(Stage primaryStage) throws Exception{
         // fxml created with SceneBuilder
         System.out.println("fxml start");
-        Parent root = FXMLLoader.load(TourPlannerClient.class.getResource("/at/fhtw/mainWindow.fxml"));
+        Parent root = FXMLLoader.load(TourPlannerClient.class.getResource("/at/fhtw/MainWindow.fxml"));
         System.out.println("fxml loaded");
 
         // bootstrap "window" named stage

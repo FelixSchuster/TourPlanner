@@ -13,7 +13,7 @@
     -fx-font-weight: bold;
 }
 
-.feedback-text
+.feedbackText
 {
     -fx-text-fill: red;
 }

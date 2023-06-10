@@ -1,10 +1,8 @@
 package at.fhtw.view;
 
-import at.fhtw.exceptions.*;
 import at.fhtw.models.TourLog;
 import at.fhtw.view.popUps.CreateTourLogPopUpView;
 import at.fhtw.view.popUps.DeleteTourLogMessageView;
-import at.fhtw.view.popUps.DialogView;
 import at.fhtw.view.popUps.UpdateTourLogPopUpView;
 import at.fhtw.viewmodel.ShowTourLogsViewModel;
 import javafx.fxml.FXML;
@@ -118,7 +116,7 @@ public class ShowTourLogsView extends ApplicationView{
         hbox.getChildren().addAll(informstionTextBox);
         paneContainer.getChildren().add(hbox);
 
-        createTourLogButton.setOnAction(e -> createTourlog(showTourLogsViewModel.getTourListEntry().getTourId()));
+        createTourLogButton.setOnAction(e -> onCreateTourLog(showTourLogsViewModel.getTourListEntry().getTourId()));
     }
 
     public void showTourLogs()
@@ -153,7 +151,7 @@ public class ShowTourLogsView extends ApplicationView{
         createTourLogButton.getStyleClass().add("important-button");
 
         hbox.getChildren().addAll(tourNameBox, headerLabelBox, createButtonBox);
-        createTourLogButton.setOnAction(e -> createTourlog(showTourLogsViewModel.getTourListEntry().getTourId()));
+        createTourLogButton.setOnAction(e -> onCreateTourLog(showTourLogsViewModel.getTourListEntry().getTourId()));
         dataContainer.getChildren().add(new Separator());
 
         javafx.scene.control.ScrollPane scrollPane = new ScrollPane(dataContainer);
@@ -207,9 +205,10 @@ public class ShowTourLogsView extends ApplicationView{
 
         Label dateTourLog = new Label(tourLog.getDate());
         Label totalTimeTourLog = new Label(showTourLogsViewModel.calculateTotalTime(tourLog.getTotalTime()));
-        Label difficultyTourLog = new Label(Integer.toString(tourLog.getDifficulty()));
-        Label ratingTourLog = new Label(Integer.toString(tourLog.getRating()));
+        Label difficultyTourLog = new Label(showTourLogsViewModel.calculateStarRatings(tourLog.getDifficulty()));
+        Label ratingTourLog = new Label(showTourLogsViewModel.calculateStarRatings(tourLog.getRating()));
         Label commentTourLog = new Label(tourLog.getComment());
+        commentTourLog.setWrapText(true);
 
         dataContainer.getChildren().add(new Separator());
 
@@ -224,73 +223,24 @@ public class ShowTourLogsView extends ApplicationView{
 
         updateButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
-                updateTourLog(tourLog);
+                onUpdateTourLog(tourLog);
             }
         });
 
-        deleteButton.setOnAction(e -> deleteTourLog(tourLog));
+        deleteButton.setOnAction(e -> onDeleteTourLog(tourLog));
     }
 
-    public void createTourlog(Integer tourId)
+    public void onCreateTourLog(Integer tourId)
     {
-        try {
-            new CreateTourLogPopUpView(tourId, "Create Tour");
-        } catch (NoContentException e) {
-            logger.info("ShowTourLogsView.getTourLogs() - " + e.getMessage());
-        } catch (NotFoundException e) {
-            logger.info("ShowTourLogsView.getTour() - " + e.getMessage());
-            new DialogView("Tour could not be found", "Create Tour");
-        } catch (InternalServerErrorException e) {
-            logger.error("ShowTourLogsView.getTour() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Information could not be created!", "Create Tour");
-        } catch (FailedToParseImageFileException e) {
-            logger.error("ShowTourLogsView.getTour() - " + e.getMessage());
-            new DialogView("Failed to parse image\nnThe Tour Tour Log could be not shown!", "Create Tour");
-        }catch (FailedToSendRequestException e) {
-            logger.error("ShowTourLogsView.getTour() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Information could not be created!", "Create Tour");
-        }
-
+        new CreateTourLogPopUpView(tourId, "Create Tour");
     }
 
-    public void deleteTourLog(TourLog tourLog)
+    public void onDeleteTourLog(TourLog tourLog)
     {
-        try {
-            new DeleteTourLogMessageView(tourLog, showTourLogsViewModel.getTourListEntry().getTourId(), "Delete Tour Log");
-        } catch (NoContentException e) {
-            logger.info("ShowTourLogsView.getTourLogs() - " + e.getMessage());
-        } catch (NotFoundException e) {
-            logger.info("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Tour could not be found", "Delete Tour Log");
-        } catch (InternalServerErrorException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Tour Log could not be deleted!", "Delete Tour Log");
-        } catch (FailedToParseImageFileException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to parse image\nThe Tour Tour Log could be not shown!", "Delete Tour Log");
-        } catch (FailedToSendRequestException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Tour Log could not be deleted!", "Delete Tour Log");
-        }
+        new DeleteTourLogMessageView(tourLog, showTourLogsViewModel.getTourListEntry().getTourId(), "Delete Tour Log");
     }
-    public void updateTourLog(TourLog tourLog)
+    public void onUpdateTourLog(TourLog tourLog)
     {
-        try {
-            new UpdateTourLogPopUpView(tourLog, showTourLogsViewModel.getTourListEntry().getTourId(), "Update Tour");
-        } catch (NoContentException e) {
-            logger.info("ShowTourLogsView.getTourLogs() - " + e.getMessage());
-        } catch (NotFoundException e) {
-            logger.info("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Tour could not be found", "Update Tour");
-        } catch (InternalServerErrorException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Update Tour");
-        } catch (FailedToParseImageFileException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to parse image\nThe Tour Tour Log could not be shown!", "Update Tour");
-        } catch (FailedToSendRequestException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Update Tour");
-        }
+        new UpdateTourLogPopUpView(tourLog, showTourLogsViewModel.getTourListEntry().getTourId(), "Update Tour");
     }
 }

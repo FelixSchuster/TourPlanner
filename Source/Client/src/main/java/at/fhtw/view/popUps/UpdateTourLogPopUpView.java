@@ -3,6 +3,7 @@ package at.fhtw.view.popUps;
 import at.fhtw.exceptions.*;
 import at.fhtw.models.TourLog;
 import at.fhtw.view.ListToursView;
+import at.fhtw.view.ShowTourInformationView;
 import at.fhtw.view.ShowTourLogsView;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -27,15 +28,20 @@ public class UpdateTourLogPopUpView extends Dialog<Void> {
     @FXML
     private Stage popupWindow = new Stage();
     @FXML
-    private Text feedbackText = new Text();
+    private Label feedbackText = new Label();
     @FXML
-    public TextField totalTimeTextField = new TextField();
+    private TextField daysTextField = new TextField();
+    @FXML
+    private TextField hoursTextField = new TextField();
+    @FXML
+    private TextField minutesTextField = new TextField();
     @FXML
     private TextField difficultyTextField = new TextField();
     @FXML
     private TextField ratingTextField = new TextField();
     @FXML
     private TextArea commentTextField = new TextArea();
+    private String defaultStylesheet = "file:src/main/resources/at/fhtw/css_sheets/application.css";
     public UpdateTourLogPopUpView(TourLog tourLog, Integer tourId, String title) {
         super();
         this.tourLog = tourLog;
@@ -46,14 +52,13 @@ public class UpdateTourLogPopUpView extends Dialog<Void> {
     }
 
     public void initialize() {
-
         popupWindow.initModality(Modality.APPLICATION_MODAL);
         popupWindow.setTitle(title);
-
-        feedbackText.setStyle("-fx-text-fill: red;");
+        feedbackText.getStyleClass().add("feedbackText");
 
         VBox root = new VBox();
         root.setPadding(new Insets(8.0));
+        root.getStylesheets().add(defaultStylesheet);
 
 
         Label titleLabel = new Label("Update Tour Log");
@@ -62,8 +67,18 @@ public class UpdateTourLogPopUpView extends Dialog<Void> {
         Separator separator1 = new Separator();
         separator1.setPrefWidth(200.0);
 
+        HBox totalTimeContainer = new HBox();
+        totalTimeContainer.setSpacing(5);
+        daysTextField.setMaxWidth(60);
+        hoursTextField.setMaxWidth(60);
+        minutesTextField.setMaxWidth(60);
+        daysTextField.setPromptText("days");
+        hoursTextField.setPromptText("hours");
+        minutesTextField.setPromptText("minutes");
+        ShowTourLogsView.getInstance().calculateTime(tourLog.getTotalTime(), daysTextField, hoursTextField, minutesTextField);
+
         Text totalTimeText = new Text("Total Time");
-        totalTimeTextField.setText(Integer.toString(tourLog.getTotalTime()));
+        totalTimeContainer.getChildren().addAll(daysTextField, hoursTextField, minutesTextField);
 
         Text difficultyText = new Text("Difficulty");
         difficultyTextField.setText(Integer.toString(tourLog.getDifficulty()));
@@ -94,7 +109,7 @@ public class UpdateTourLogPopUpView extends Dialog<Void> {
         root.setSpacing(10.0);
         root.getChildren().addAll(
                 titleLabel, separator1,
-                totalTimeText, totalTimeTextField,
+                totalTimeText, totalTimeContainer,
                 difficultyText, difficultyTextField,
                 ratingText, ratingTextField,
                 commentText, commentTextField,
@@ -111,10 +126,19 @@ public class UpdateTourLogPopUpView extends Dialog<Void> {
     public void onSubmit()
     {
         try {
-
-            if (totalTimeTextField.getText() == null ||
-                    totalTimeTextField.getText().isBlank() ||
-                    totalTimeTextField.getText().isEmpty()) {
+            if (daysTextField.getText() == null ||
+                    daysTextField.getText().isBlank() ||
+                    daysTextField.getText().isEmpty()) {
+                feedbackText.setText("Please enter a Total Time!");
+                return;
+            } else if (hoursTextField.getText() == null ||
+                    hoursTextField.getText().isBlank() ||
+                    hoursTextField.getText().isEmpty()) {
+                feedbackText.setText("Please enter a Total Time!");
+                return;
+            } else if (minutesTextField.getText() == null ||
+                    minutesTextField.getText().isBlank() ||
+                    minutesTextField.getText().isEmpty()) {
                 feedbackText.setText("Please enter a Total Time!");
                 return;
             } else if (difficultyTextField.getText() == null ||
@@ -127,29 +151,27 @@ public class UpdateTourLogPopUpView extends Dialog<Void> {
                     ratingTextField.getText().isEmpty()) {
                 feedbackText.setText("Please enter a rating!");
                 return;
+            } else if(Integer.parseInt(difficultyTextField.getText()) < 0 || Integer.parseInt(difficultyTextField.getText()) > 5)
+            {
+                feedbackText.setText("Please enter a difficulty between 0 and 5");
+                return;
+            } else if(Integer.parseInt(ratingTextField.getText()) < 0 || Integer.parseInt(ratingTextField.getText()) > 5)
+            {
+                feedbackText.setText("Please enter a rating between 0 and 5");
+                return;
             }
 
-            TourLog updatedTourLog = new TourLog(commentTextField.getText(), Integer.parseInt(difficultyTextField.getText()), Integer.parseInt(totalTimeTextField.getText()), Integer.parseInt(ratingTextField.getText()));
+            TourLog updatedTourLog = new TourLog(commentTextField.getText(),
+                    Integer.parseInt(difficultyTextField.getText()),
+                    ShowTourLogsView.getInstance().calculateTotalTimeFromInput(Integer.parseInt(daysTextField.getText()),
+                    Integer.parseInt(hoursTextField.getText()),
+                     Integer.parseInt(minutesTextField.getText())),
+                    Integer.parseInt(ratingTextField.getText()));
             ShowTourLogsView.getInstance().updateTourLogs(updatedTourLog, tourLog.getTourLogId());
-            new DialogView("Tour Log successfully updated!", "Update Tour Log");
 
             ShowTourLogsView.getInstance().showTourLogs(tourId);
 
             popupWindow.close();
-        } catch (NoContentException e) {
-            logger.info("ShowTourLogsView.getTourLogs() - " + e.getMessage());
-        } catch (NotFoundException e) {
-            logger.info("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Tour could not be found", "Update Tour");
-        } catch (InternalServerErrorException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Update Tour");
-        } catch (FailedToParseImageFileException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to parse image\nThe Tour Tour Log could not be shown!", "Update Tour");
-        } catch (FailedToSendRequestException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Update Tour");
         } catch (NumberFormatException e) {
             feedbackText.setText("Please enter a number!");
         }

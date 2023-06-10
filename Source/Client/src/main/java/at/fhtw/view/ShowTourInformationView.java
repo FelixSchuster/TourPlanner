@@ -1,7 +1,5 @@
 package at.fhtw.view;
 
-import at.fhtw.exceptions.*;
-import at.fhtw.view.popUps.DialogView;
 import at.fhtw.view.popUps.UpdateTourPopUpView;
 import at.fhtw.viewmodel.ListToursViewModel;
 import at.fhtw.viewmodel.ShowTourInformationViewModel;
@@ -39,7 +37,6 @@ public class ShowTourInformationView implements Initializable {
     private Label childFriendlinessLabel;
     @FXML
     private Label tourDescriptionLabel;
-
     @FXML
     private HBox HBoxImage;
     @FXML
@@ -85,6 +82,8 @@ public class ShowTourInformationView implements Initializable {
         popularityLabel.textProperty().bindBidirectional(showTourInformationViewModel.popularityProperty());
         childFriendlinessLabel.textProperty().bindBidirectional(showTourInformationViewModel.childFriendlinessProperty());
         tourDescriptionLabel.textProperty().bindBidirectional(showTourInformationViewModel.tourDescriptionProperty());
+        tourDescriptionLabel.setWrapText(true);
+        estimatedTimeLabel.setWrapText(true);
 
         informationTypeField.visibleProperty().bindBidirectional(showTourInformationViewModel.showInformationProperty());
         informationTextField.visibleProperty().bindBidirectional(showTourInformationViewModel.hideInformationProperty());
@@ -94,25 +93,8 @@ public class ShowTourInformationView implements Initializable {
 
     public void updateTour()
     {
-        try {
-            ListToursViewModel listToursViewModel = ListToursView.getInstance();
-            new UpdateTourPopUpView(listToursViewModel.getTour(showTourInformationViewModel.getTourListEntry().getTourId()), "Update Tour");
-        }catch (NotFoundException e) {
-            logger.info("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Tour could not be found", "Update Tour");
-        } catch (BadRequestException e) {
-            logger.warn("UpdateTourPopUp.updateTour() - " + e.getMessage());
-            new DialogView("Bad Request\nTour could not be updated!", "Update Tour");
-        } catch (InternalServerErrorException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Update Tour");
-        } catch (FailedToParseImageFileException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to parse image\nThe Tour Information could not be shown!", "Update Tour");
-        } catch (FailedToSendRequestException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Update Tour");
-        }
+        ListToursViewModel listToursViewModel = ListToursView.getInstance();
+        new UpdateTourPopUpView(listToursViewModel.getTour(showTourInformationViewModel.getTourListEntry().getTourId()), "Update Tour");
     }
 
     public void onActionCreateTourReport()

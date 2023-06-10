@@ -34,14 +34,14 @@
                 <children>
                     <HBox spacing="10">
                         <VBox>
-                            <Label text="Name: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
-                            <Label text="Start: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
-                            <Label text="Destination: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
-                            <Label text="Transport Type: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
-                            <Label text="Tour Distance: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
-                            <Label text="Estimated Time: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
-                            <Label text="Popularity: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
-                            <Label text="Child-Friendliness: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
+                            <Label text="Name: " styleClass="bold-informationTypeFields"/>
+                            <Label text="Start: " styleClass="bold-informationTypeFields"/>
+                            <Label text="Destination: " styleClass="bold-informationTypeFields"/>
+                            <Label text="Transport Type: " styleClass="bold-informationTypeFields"/>
+                            <Label text="Tour Distance: " styleClass="bold-informationTypeFields"/>
+                            <Label text="Estimated Time: " styleClass="bold-informationTypeFields"/>
+                            <Label text="Popularity: " styleClass="bold-informationTypeFields"/>
+                            <Label text="Child-Friendliness: " styleClass="bold-informationTypeFields"/>
                         </VBox>
                         <VBox>
                             <Label fx:id="tourNameLabel" />
@@ -59,15 +59,12 @@
                 </children>
             </HBox>
             <Separator orientation="HORIZONTAL" />
-            <HBox spacing="10" fx:id="tourDescriptionBox">
-                <HBox>
-                    <VBox>
-                        <Label text="Tour Description: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
-                    </VBox>
-                    <VBox>
-                        <Label fx:id="tourDescriptionLabel"/>
-                    </VBox>
-                </HBox>
+            <HBox spacing="10" fx:id="tourDescriptionBox"
+                  AnchorPane.bottomAnchor="0.0">
+                <VBox>
+                    <Label text="Tour Description: " styleClass="bold-informationTypeFields" style="-fx-font-weight: bold"/>
+                    <Label fx:id="tourDescriptionLabel"/>
+                </VBox>
                 <Pane HBox.hgrow="ALWAYS"/>
                 <HBox style="-fx-padding: 30 35 0 0;" spacing="8">
                     <Button styleClass="important-button" minWidth="90" fx:id="updateButton" text="Update Tour"></Button>

@@ -7,13 +7,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.shape.Circle;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 // import org.springframework.context.ApplicationEventPublisher;
 
 import java.io.File;
@@ -26,26 +24,25 @@ public class ApplicationView implements Initializable {
 
     @FXML
     BorderPane layout;
-
     @FXML
-    Label tbMonitorStatus;
-    Circle monitorStatusIcon = new Circle(8);
-
-    // create custom viewmodel
-    private ApplicationViewModel viewModel = new ApplicationViewModel();
+    HBox HBoxDarkmodeButton;
+    @FXML
+    Button darkmode;
+    @FXML
+    Button lightmode;
+    private String defaultStylesheet = "file:src/main/resources/at/fhtw/css_sheets/application.css";
+    private String darkModeStylesheet = "file:src/main/resources/at/fhtw/css_sheets/darkmode.css";
+    private boolean darkModeEnabled;
     SimpleObjectProperty<Stage> stage = new SimpleObjectProperty<>();
-
-    // add fx:id and use intelliJ to create field in controller
 
     public ApplicationView()
     {
         applicationViewModel = new ApplicationViewModel();
+        darkModeEnabled = false;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        stage.addListener((obv, o, n) -> n.setTitle(resourceBundle.getString("app.title")));
-        //tbMonitorStatus.setGraphic(monitorStatusIcon);
     }
 
     @FXML
@@ -91,13 +88,39 @@ public class ApplicationView implements Initializable {
         } else {
             System.out.println("No file selected.");
         }
-
-
     }
 
     public void onSummarizeButtonButton(ActionEvent actionEvent)
     {
         String filename = "summarize_report";
         applicationViewModel.createSummarizeReport(filename);
+    }
+
+    public void onTogglDarkmode(ActionEvent actionEvent) {
+
+        lightmode.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                layout.getStylesheets().clear();
+                layout.getStylesheets().add(defaultStylesheet);
+
+                darkmode.setText("Dark");
+                lightmode.setText("");
+                lightmode.setDisable(true);
+                darkmode.setDisable(false);
+            }
+        });
+
+        darkmode.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                layout.getStylesheets().clear(); // Clear the existing stylesheets
+                layout.getStylesheets().add(darkModeStylesheet); // Apply the dark mode stylesheet
+
+                lightmode.setText("Light");
+                darkmode.setText("");
+
+                darkmode.setDisable(true);
+                lightmode.setDisable(false);
+            }
+        });
     }
 }

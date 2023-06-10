@@ -1,21 +1,17 @@
 package at.fhtw.viewmodel;
 
-import at.fhtw.exceptions.FailedToSendRequestException;
-import at.fhtw.exceptions.InternalServerErrorException;
-import at.fhtw.exceptions.NoContentException;
-import at.fhtw.exceptions.NotFoundException;
-import at.fhtw.models.Tour;
+import at.fhtw.exceptions.*;
 import at.fhtw.models.TourListEntry;
 import at.fhtw.models.TourLog;
 import at.fhtw.services.TourLogService;
+import at.fhtw.view.popUps.DialogView;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class ShowTourLogsViewModel {
@@ -50,14 +46,17 @@ public class ShowTourLogsViewModel {
             showTourInformation.setValue(true);
             logger.info("ShowTourLogsViewModel.getTourLogs() - tourLogs retrieved successfully: " + tourLogs);
         } catch (NoContentException e) {
-            isNoTourLogContent.setValue(true);
-            throw new NoContentException(e);
+            logger.info("ListToursView.getTourLogs() - " + e.getMessage());
+            isNoTourLogContent.set(true);
         } catch (NotFoundException e) {
-            throw new NotFoundException(e);
+            logger.info("ShowTourLogsViewModel.getTourLogs() - " + e.getMessage());
+            new DialogView("Tour Log could not be found", "Tour Log");
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
+            logger.error("ShowTourLogsViewModel.getTourLogs() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Log could not be shown!", "Tour Log");
         } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ShowTourLogsViewModel.getTourLogs() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Log could not be shown!", "Tour Log");
         }
     }
 
@@ -66,27 +65,21 @@ public class ShowTourLogsViewModel {
             TourLog tourLog = tourLogService.createTourLog(tourId, createdTourLog);
             logger.info("ShowTourLogsViewModel.createTourLog() - tourLog created successfully: " + tourLog);
             showTourLogs(tourId);
-
+            new DialogView("Tour Log successfully created", "Create Tour Log");
+        } catch (NoContentException e) {
+            logger.info("ShowTourLogsViewModel.getTourLogs() - " + e.getMessage());
         } catch (NotFoundException e) {
-            throw new NotFoundException(e);
+            logger.info("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Create Tour");
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
-        } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
-        }
-    }
-
-    public void getTourLog(Integer tourLogId)
-    {
-        try {
-            TourLog tourLog= tourLogService.getTourLog(tourLogId);
-            logger.info("ShowTourLogsViewModel.getTourLog() - tourLog retrieved successfully: " + tourLog);
-        } catch (NotFoundException e) {
-            throw new NotFoundException(e);
-        } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
-        } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Information could not be created!", "Create Tour");
+        } catch (FailedToParseImageFileException e) {
+            logger.error("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nnThe Tour Tour Log could be not shown!", "Create Tour");
+        }catch (FailedToSendRequestException e) {
+            logger.error("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Information could not be created!", "Create Tour");
         }
     }
 
@@ -95,12 +88,21 @@ public class ShowTourLogsViewModel {
         try {
             TourLog tourLog = tourLogService.updateTourLog(tourLogId, updatedTourLog);
             logger.info("ShowTourLogsViewModel.updateTourLog() - tourLog updated successfully: " + tourLog);
+            new DialogView("Tour Log successfully updated", "Update Tour Log");
+        } catch (NoContentException e) {
+            logger.info("ShowTourLogsViewModel.getTourLogs() - " + e.getMessage());
         } catch (NotFoundException e) {
-            throw new NotFoundException(e);
+            logger.info("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Update Tour");
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
+            logger.error("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Update Tour");
+        } catch (FailedToParseImageFileException e) {
+            logger.error("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nThe Tour Tour Log could not be shown!", "Update Tour");
         } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Update Tour");
         }
     }
 
@@ -109,30 +111,95 @@ public class ShowTourLogsViewModel {
         try {
             tourLogService.deleteTourLog(tourLogId);
             logger.info("ShowTourLogsViewModel.deleteTourLog() - tourLog deleted successfully: " + tourLogId);
+            new DialogView("Tour Log successfully deleted", "Delete Tour Log");
+        } catch (NoContentException e) {
+            logger.info("ShowTourLogsViewModel.getTourLogs() - " + e.getMessage());
         } catch (NotFoundException e) {
-            throw new NotFoundException(e);
+            logger.info("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Delete Tour Log");
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
+            logger.error("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Tour Log could not be deleted!", "Delete Tour Log");
+        } catch (FailedToParseImageFileException e) {
+            logger.error("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nThe Tour Tour Log could be not shown!", "Delete Tour Log");
         } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ShowTourLogsViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Tour Log could not be deleted!", "Delete Tour Log");
         }
     }
 
-    public String calculateTotalTime(Integer totalTime)
+    public String calculateTotalTime(Integer estimatedTime)
     {
-        String calculatedTime = "";
-        if((totalTime/60) >= 1)
+        int minutes = estimatedTime / 60;
+        int hours = minutes / 60;
+        int days = hours / 24;
+
+        String estimatedTimeString= "";
+
+        if(days >= 1)
         {
-            int hours = (totalTime/60);
-            int minutes = ((totalTime) - (60 * hours));
-            calculatedTime = Integer.toString(hours) + "h " + Integer.toString(minutes) + "min";
+            int remainingHours = hours % 24;
+            int remainingMinutes = minutes % 60;
+            estimatedTimeString = Integer.toString(days) + "d " +Integer.toString(remainingHours) + "h " + Integer.toString(remainingMinutes) + "min";
+        }
+        else if(hours >= 1)
+        {
+            int remainingMinutes = minutes % 60;
+            estimatedTimeString = Integer.toString(hours) + "h " + Integer.toString(remainingMinutes) + "min";
+        }
+        else if(minutes >= 1)
+        {
+            estimatedTimeString = Integer.toString(minutes) + "min";
         }
         else
         {
-            calculatedTime = Integer.toString(totalTime) + "min";
+            estimatedTimeString = "0." + Integer.toString(estimatedTime) + "min";
         }
+        return estimatedTimeString;
+    }
 
-        return calculatedTime;
+    public String calculateStarRatings(Integer rating)
+    {
+        Integer totalAmountOfStars = 5;
+        String starString= "";
+
+        for(int i = 1 ; i <= totalAmountOfStars; i++)
+        {
+            if(i > rating)
+            {
+                starString += "☆";
+            }
+            else
+            {
+                starString += "★";
+            }
+        }
+        return starString;
+    }
+
+    public Integer calculateTotalTimeFromInput(Integer days, Integer hours, Integer minutes)
+    {
+        Integer totalSeconds = 0;
+
+        totalSeconds += days * 24 * 60 * 60;
+        totalSeconds += hours * 60 * 60;
+        totalSeconds += minutes * 60;
+
+        return totalSeconds;
+    }
+
+    public void calculateTime(Integer totalTime, TextField daysTextField, TextField hoursTextField, TextField minutesTextField) {
+        int minutes = totalTime / 60;
+        int hours = minutes / 60;
+        int days = hours / 24;
+
+        int remainingMinutes = minutes % 60;
+        int remainingHours = hours % 24;
+
+        daysTextField.setText(Integer.toString(days));
+        hoursTextField.setText(Integer.toString(remainingHours));
+        minutesTextField.setText(Integer.toString(remainingMinutes));
     }
 
     public boolean isHideTourInformation() {

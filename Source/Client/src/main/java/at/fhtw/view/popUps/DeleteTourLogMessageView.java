@@ -78,20 +78,8 @@ public class DeleteTourLogMessageView extends Dialog<Void> {
 
     public void onDeleteTourLog()
     {
-        try
-        {
-            ShowTourLogsViewModel showTourLogsViewModel = ShowTourLogsView.getInstance();
-            showTourLogsViewModel.deleteTourLogs(tourLog.getTourLogId());
-            showTourLogsViewModel.showTourLogs(tourId);
-        } catch (NotFoundException e) {
-            logger.info("DeleteTourLogMessageView.deleteTour() - " + e.getMessage());
-            new DialogView("Tour Not Found\nTour could not be deleted!", "Delete Tour");
-        } catch (InternalServerErrorException e) {
-            logger.error("DeleteTourLogMessageView.deleteTour() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nTour could not be deleted!", "Delete Tour");
-        } catch (FailedToSendRequestException e) {
-            logger.error("DeleteTourLogMessageView.deleteTour() - " + e.getMessage());
-            new DialogView("Failed to send Request\nTour could not be deleted!", "Delete Tour");
-        }
+        ShowTourLogsViewModel showTourLogsViewModel = ShowTourLogsView.getInstance();
+        showTourLogsViewModel.deleteTourLogs(tourLog.getTourLogId());
+        showTourLogsViewModel.showTourLogs(tourId);
     }
 }

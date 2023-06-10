@@ -6,11 +6,7 @@ import at.fhtw.services.DataTransferService;
 import at.fhtw.utils.ImageHandler;
 import at.fhtw.utils.pdfFileHandler.PdfFileHandler;
 import at.fhtw.view.popUps.DialogView;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,7 +67,6 @@ public class ApplicationViewModel {
             pdfFileHandler.createSummarizeReport(tours, filename);
             logger.info("ApplicationViewModel.createSummarizeReport() - report created successfully: " + filename);
             new DialogView("Summarize Report created successfully!", "Summarize Report");
-            // TODO: show success popup in ui
         } catch (NoContentException e) {
             logger.info("ApplicationViewModel.createSummarizeReport() - " + e.getMessage());
             new DialogView("No content found!", "Create Summarize Report");

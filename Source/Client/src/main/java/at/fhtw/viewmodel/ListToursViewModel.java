@@ -7,6 +7,7 @@ import at.fhtw.services.TourService;
 import at.fhtw.utils.ImageHandler;
 import at.fhtw.view.ShowTourInformationView;
 import at.fhtw.view.ShowTourLogsView;
+import at.fhtw.view.popUps.DialogView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -61,29 +62,36 @@ public class ListToursViewModel {
             tourListItems.sort(Comparator.comparingInt(TourListEntry::getTourId));
             logger.info("ListToursViewModel.getTourList() - tourList retrieved successfully: " + tourListItems);
         } catch (NoContentException e) {
-            throw new NoContentException(e);
+            logger.info("ListToursViewModel.getTourList() - " + e.getMessage());
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
+            logger.error("ListToursViewModel.getTourList() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nTour could not be loaded!", "Get Tourlist");
         } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ListToursViewModel.getTourList() - " + e.getMessage());
+            new DialogView("Failed to send Request", "Get Tourlist");
         }
     }
 
     public Tour getTour(Integer tourId){
-            try {
-                Tour tour = tourService.getTour(tourId);
-                ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
-                logger.info("ListToursViewModel.getTour() - tour retrieved successfully: " + tour);
-                return tour;
-            } catch (NotFoundException e) {
-                throw new NotFoundException(e);
-            } catch (InternalServerErrorException e) {
-                throw new InternalServerErrorException(e);
-            } catch (FailedToParseImageFileException e) {
-                throw new FailedToParseImageFileException(e);
-            } catch (FailedToSendRequestException e) {
-                throw new FailedToSendRequestException(e);
-            }
+        try {
+            Tour tour = tourService.getTour(tourId);
+            ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
+            logger.info("ListToursViewModel.getTour() - tour retrieved successfully: " + tour);
+            return tour;
+        } catch (NotFoundException e) {
+            logger.info("ListToursViewModel.getTour() - " + e.getMessage());
+            new DialogView("Tour not found", "Get Tour");
+        } catch (InternalServerErrorException e) {
+            logger.error("ListToursViewModel.getTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues", "Get Tour");
+        } catch (FailedToParseImageFileException e) {
+            logger.error("ListToursViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to parse imagefile", "Get Tour");
+        } catch (FailedToSendRequestException e) {
+            logger.error("ListToursViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to send Request", "Get Tour");
+        }
+        return null;
     }
 
     public void filterList(String keyword){
@@ -95,13 +103,17 @@ public class ListToursViewModel {
             ShowTourLogsView.getInstance().hideTourLogs();
             logger.info("ListToursViewModel.searchTour() - tourList retrieved successfully: " + tourListItems);
         } catch (NoContentException e) {
-            throw new NoContentException(e);
+            logger.info("ListToursViewModel.searchTour() - " + e.getMessage());
+            new DialogView("No Content Found!", "Search Tour");
         } catch (NotFoundException e) {
-            throw new NotFoundException(e);
+            logger.info("ListToursViewModel.searchTour() - " + e.getMessage());
+            new DialogView("No Tour Found!", "Search Tour");
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
+            logger.error("ListToursViewModel.searchTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nTour could not be searched!", "Search Tour");
         } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ListToursViewModel.searchTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nTour could not be searched!", "Search Tour");
         }
     }
 
@@ -112,14 +124,19 @@ public class ListToursViewModel {
             ShowTourLogsView.getInstance().hideTourLogs();
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
             logger.info("ListToursViewModel.createTour() - tour created successfully: " + tour);
+            new DialogView("Tour added successfully", "Add Tour");
         } catch (BadRequestException e) {
-            throw new BadRequestException(e);
+            logger.warn("ListToursViewModel.createTour() - " + e.getMessage());
+            new DialogView("Bad Request\nTour could not be created!", "Create Tour");
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
+            logger.error("ListToursViewModel.createTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nTour could not be created!", "Create Tour");
         } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ListToursViewModel.createTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nTour could not be created!", "Create Tour");
         } catch (FailedToParseImageFileException e) {
-            throw new FailedToParseImageFileException(e);
+            logger.error("ListToursViewModel.createTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nTour could not be created!", "Create Tour");
         }
     }
     public void updateTour(Tour updatedTour, Integer tourId) {
@@ -129,16 +146,22 @@ public class ListToursViewModel {
             ShowTourLogsView.getInstance().hideTourLogs();
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
             logger.info("ListToursViewModel.updateTour() - tour updated successfully: " + tour);
+            new DialogView("Tour updated successfully", "Update Tour");
         } catch (NotFoundException e) {
-            throw new NotFoundException(e);
+            logger.info("ListToursViewModel.updateTour() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Update Tour");
         } catch (BadRequestException e) {
-            throw new BadRequestException(e);
+            logger.warn("ListToursViewModel.updateTour() - " + e.getMessage());
+            new DialogView("Bad Request\nTour could not be updated!", "Update Tour");
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
-        } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ListToursViewModel.updateTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Update Tour");
         } catch (FailedToParseImageFileException e) {
-            throw new FailedToParseImageFileException(e);
+            logger.error("ListToursViewModel.updateTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nThe Tour Information could not be shown!", "Update Tour");
+        } catch (FailedToSendRequestException e) {
+            logger.error("ListToursViewModel.updateTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Update Tour");
         }
     }
 
@@ -150,12 +173,16 @@ public class ListToursViewModel {
             ShowTourInformationView.getInstance().hideInformation();
             ShowTourLogsView.getInstance().hideTourLogs();
             logger.info("ListToursViewModel.deleteTour() - tour deleted successfully: " + tourId);
+            new DialogView("Tour deleted successfully", "Delete Tour");
         } catch (NotFoundException e) {
-            throw new NotFoundException(e);
+            logger.info("ListToursViewModel.deleteTour() - " + e.getMessage());
+            new DialogView("Tour Not Found\nTour could not be deleted!", "Delete Tour");
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
+            logger.error("ListToursViewModel.deleteTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nTour could not be deleted!", "Delete Tour");
         } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ListToursViewModel.deleteTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nTour could not be deleted!", "Delete Tour");
         }
     }
 }

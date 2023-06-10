@@ -12,9 +12,9 @@
     <children>
         <HBox fx:id="HBoxButton" alignment="BASELINE_RIGHT" spacing="3" AnchorPane.leftAnchor="10.0"
               AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.22"
-                AnchorPane.bottomAnchor="10.0">
-            <Button fx:id="delete" onAction="#deleteTour" text="Delete"/>
-            <Button fx:id="reloadButton" onAction="#reload" text="Reload"/>
+              AnchorPane.bottomAnchor="10.0">
+            <Button fx:id="delete" onAction="#onDeleteTour" text="Delete"/>
+            <Button fx:id="reloadButton" onAction="#onReload" text="Reload"/>
         </HBox>
     </children>
     <children>

@@ -76,38 +76,81 @@ public class ShowTourInformationViewModel {
             logger.info("ShowTourInformationViewModel.getTour() - tour retrieved successfully: " + tour);
             setTourInformation(tour);
             showInformation();
-
         } catch (NotFoundException e) {
-            throw new NotFoundException(e);
+            logger.info("ShowTourInformationViewModel.getTour() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Tour Information");
         } catch (InternalServerErrorException e) {
-            throw new InternalServerErrorException(e);
+            logger.error("ShowTourInformationViewModel.getTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Tour Information");
         } catch (FailedToParseImageFileException e) {
-            throw new FailedToParseImageFileException(e);
+            logger.error("ShowTourInformationViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nThe Tour Information could not be shown!", "Tour Information");
         } catch (FailedToSendRequestException e) {
-            throw new FailedToSendRequestException(e);
+            logger.error("ShowTourInformationViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Tour Information");
         }
     }
 
     private void setTourInformation(Tour tour)
     {
-        if((tour.getEstimatedTime()/60) >= 1)
-        {
-            int hours = (tour.getEstimatedTime()/60);
-            int minutes = ((tour.getEstimatedTime()) - (60 * hours));
-            estimatedTime.set(Integer.toString(hours) + "h " + Integer.toString(minutes) + "min");
-        }
-        else
-        {
-            estimatedTime.set((Integer.toString(tour.getEstimatedTime()) + "min"));
-        }
         tourName.set(tour.getName());
         start.set(tour.getStart());
         destination.set(tour.getDestination());
         transportType.set(tour.getTransportType());
         distance.set(Double.toString(tour.getTourDistance()) + "km");
-        popularity.set(Integer.toString(tour.getPopularity()));
-        childFriendliness.set(Integer.toString(tour.getChildFriendliness()));
+        estimatedTime.set(calculateEstimatedTime(tour.getEstimatedTime()));
+        popularity.set(calculateStarRatings(tour.getPopularity()));
+        childFriendliness.set(calculateStarRatings(tour.getChildFriendliness()));
         tourDescription.set(tour.getTourDescription());
+    }
+
+    public String calculateEstimatedTime(Integer estimatedTime)
+    {
+        int minutes = estimatedTime / 60;
+        int hours = minutes / 60;
+        int days = hours / 24;
+
+        String estimatedTimeString= "";
+
+        if(days >= 1)
+        {
+            int remainingHours = hours % 24;
+            int remainingMinutes = minutes % 60;
+            estimatedTimeString = Integer.toString(days) + "d " +Integer.toString(remainingHours) + "h " + Integer.toString(remainingMinutes) + "min";
+        }
+        else if(hours >= 1)
+        {
+            int remainingMinutes = minutes % 60;
+            estimatedTimeString = Integer.toString(hours) + "h " + Integer.toString(remainingMinutes) + "min";
+        }
+        else if(minutes >= 1)
+        {
+            estimatedTimeString = Integer.toString(minutes) + "min";
+        }
+        else
+        {
+            estimatedTimeString = "0." + Integer.toString(estimatedTime) + "min";
+        }
+        return estimatedTimeString;
+    }
+
+    public String calculateStarRatings(Integer rating)
+    {
+        Integer totalAmountOfStars = 5;
+        String starString= "";
+
+        for(int i = 1 ; i <= totalAmountOfStars; i++)
+        {
+            if(i > rating)
+            {
+                starString += "☆";
+            }
+            else
+            {
+                starString += "★";
+            }
+        }
+        return starString;
     }
 
     public void createTourReport(Integer tourId, String filename) {

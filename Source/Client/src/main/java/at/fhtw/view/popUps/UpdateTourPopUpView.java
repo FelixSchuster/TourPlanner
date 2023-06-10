@@ -1,6 +1,5 @@
 package at.fhtw.view.popUps;
 
-import at.fhtw.exceptions.*;
 import at.fhtw.models.Tour;
 import at.fhtw.view.ListToursView;
 import javafx.fxml.FXML;
@@ -25,7 +24,7 @@ public class UpdateTourPopUpView extends Dialog<Void> {
     @FXML
     private Stage popupWindow = new Stage();
     @FXML
-    private Text feedbackText = new Text();
+    private Label feedbackText = new Label();
     @FXML
     public TextField tourNameTextField = new TextField();
     @FXML
@@ -36,6 +35,7 @@ public class UpdateTourPopUpView extends Dialog<Void> {
     private TextField destinationTextField = new TextField();
     @FXML
     private ChoiceBox<String> transportTypeChoiceBox = new ChoiceBox<>();
+    private String defaultStylesheet = "file:src/main/resources/at/fhtw/css_sheets/application.css";
     public UpdateTourPopUpView(Tour tour, String title) {
         super();
         this.tour = tour;
@@ -48,11 +48,13 @@ public class UpdateTourPopUpView extends Dialog<Void> {
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
         popupWindow.setTitle(title);
+        feedbackText.getStyleClass().add("feedbackText");
 
         feedbackText.setStyle("-fx-text-fill: red;");
 
         VBox root = new VBox();
         root.setPadding(new Insets(8.0));
+        root.getStylesheets().add(defaultStylesheet);
 
 
         Label titleLabel = new Label("Update Tour");
@@ -126,53 +128,34 @@ public class UpdateTourPopUpView extends Dialog<Void> {
 
     public void onSubmit()
     {
-        try {
-            if (tourNameTextField.getText() == null ||
-                    tourNameTextField.getText().isBlank() ||
-                    tourNameTextField.getText().isEmpty()) {
-                feedbackText.setText("Please enter a tourname!");
-                return;
-            } else if (descriptionTextField.getText() == null ||
-                    descriptionTextField.getText().isBlank() ||
-                    descriptionTextField.getText().isEmpty()) {
-                feedbackText.setText("Please enter a description!");
-                return;
-            } else if (startTextField.getText() == null ||
-                    startTextField.getText().isBlank() ||
-                    startTextField.getText().isEmpty()) {
-                feedbackText.setText("Please enter a start!");
-                return;
-            } else if (destinationTextField.getText() == null ||
-                    destinationTextField.getText().isBlank() ||
-                    destinationTextField.getText().isEmpty()) {
-                feedbackText.setText("Please enter a destination!");
-                return;
-            }
-
-            Tour updatedTour = new Tour(tourNameTextField.getText(), descriptionTextField.getText(), startTextField.getText(), destinationTextField.getText(), transportTypeChoiceBox.getSelectionModel().getSelectedItem());
-            System.out.println("tour: " + updatedTour);
-            ListToursView.getInstance().updateTour(updatedTour, tour.getTourId());
-            new DialogView("Tour successfully updated!", "Update Tour");
-
-            ListToursView.getInstance().clearItems();
-            ListToursView.getInstance().initList();
-
-            popupWindow.close();
-        } catch (NotFoundException e) {
-            logger.info("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Tour could not be found", "Update Tour");
-        } catch (BadRequestException e) {
-            logger.warn("UpdateTourPopUp.updateTour() - " + e.getMessage());
-            new DialogView("Bad Request\nTour could not be updated!", "Update Tour");
-        } catch (InternalServerErrorException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Update Tour");
-        } catch (FailedToParseImageFileException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to parse image\nThe Tour Information could not be shown!", "Update Tour");
-        } catch (FailedToSendRequestException e) {
-            logger.error("ShowTourInformationView.getTour() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Update Tour");
+        if (tourNameTextField.getText() == null ||
+                tourNameTextField.getText().isBlank() ||
+                tourNameTextField.getText().isEmpty()) {
+            feedbackText.setText("Please enter a tourname!");
+            return;
+        } else if (descriptionTextField.getText() == null ||
+                descriptionTextField.getText().isBlank() ||
+                descriptionTextField.getText().isEmpty()) {
+            feedbackText.setText("Please enter a description!");
+            return;
+        } else if (startTextField.getText() == null ||
+                startTextField.getText().isBlank() ||
+                startTextField.getText().isEmpty()) {
+            feedbackText.setText("Please enter a start!");
+            return;
+        } else if (destinationTextField.getText() == null ||
+                destinationTextField.getText().isBlank() ||
+                destinationTextField.getText().isEmpty()) {
+            feedbackText.setText("Please enter a destination!");
+            return;
         }
+
+        Tour updatedTour = new Tour(tourNameTextField.getText(), descriptionTextField.getText(), startTextField.getText(), destinationTextField.getText(), transportTypeChoiceBox.getSelectionModel().getSelectedItem());
+        ListToursView.getInstance().updateTour(updatedTour, tour.getTourId());
+
+        ListToursView.getInstance().clearItems();
+        ListToursView.getInstance().initList();
+
+        popupWindow.close();
     }
 }
