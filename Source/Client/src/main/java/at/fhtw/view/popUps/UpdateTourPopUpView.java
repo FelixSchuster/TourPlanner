@@ -76,7 +76,7 @@ public class UpdateTourPopUpView extends Dialog<Void> {
         destinationTextField.setText(tour.getDestination());
 
         Text transportTypeText = new Text("Transport Type");
-        transportTypeChoiceBox.getItems().addAll("car", "Option 2", "Option 3");
+        transportTypeChoiceBox.getItems().addAll("car", "bike", "foot");
         transportTypeChoiceBox.setPrefHeight(30);
         transportTypeChoiceBox.setValue(tour.getTransportType());
 
@@ -121,7 +121,7 @@ public class UpdateTourPopUpView extends Dialog<Void> {
     @FXML
     private void updateChoiceBoxWidth() {
         String selectedValue = transportTypeChoiceBox.getSelectionModel().getSelectedItem();
-        double newWidth = selectedValue.length() * 10;
+        double newWidth = (selectedValue.length() * 10) + 3;
         System.out.println("length: " + selectedValue.length());
         transportTypeChoiceBox.setPrefWidth(newWidth);
     }

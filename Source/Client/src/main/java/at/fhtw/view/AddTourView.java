@@ -39,7 +39,7 @@ public class AddTourView implements Initializable {
     @FXML
     private void updateChoiceBoxWidth() {
         String selectedValue = transportTypeChoiceBox.getSelectionModel().getSelectedItem();
-        double newWidth = selectedValue.length() * 10;
+        double newWidth = (selectedValue.length() * 10) + 3;
         System.out.println("length: " + selectedValue.length());
         transportTypeChoiceBox.setPrefWidth(newWidth);
     }
