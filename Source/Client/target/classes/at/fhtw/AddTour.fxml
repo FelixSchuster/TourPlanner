@@ -36,8 +36,8 @@
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="car" />
-                    <String fx:value="bike" />
-                    <String fx:value="foot" />
+                    <String fx:value="bicycle" />
+                    <String fx:value="pedestrian" />
                 </FXCollections>
             </items>
         </ChoiceBox>

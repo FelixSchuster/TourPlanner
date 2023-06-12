@@ -76,7 +76,7 @@ public class UpdateTourPopUpView extends Dialog<Void> {
         destinationTextField.setText(tour.getDestination());
 
         Text transportTypeText = new Text("Transport Type");
-        transportTypeChoiceBox.getItems().addAll("car", "bike", "foot");
+        transportTypeChoiceBox.getItems().addAll("car", "bicycle", "pedestrian");
         transportTypeChoiceBox.setPrefHeight(30);
         transportTypeChoiceBox.setValue(tour.getTransportType());
 
