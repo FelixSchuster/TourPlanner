@@ -1,27 +1,29 @@
 package at.fhtw.view;
 
 import at.fhtw.models.TourListEntry;
+import at.fhtw.view.popUps.DeleteTourMessageView;
+import at.fhtw.view.popUps.DialogView;
 import at.fhtw.viewmodel.ListToursViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ListToursView implements Initializable {
+    private static final Logger logger = LogManager.getLogger(ListToursView.class);
     private static ListToursViewModel listToursViewModel;
     @FXML
     public TableView tableView = new TableView<>();
     @FXML
     private VBox dataContainer;
-    @FXML
-    private Button reloadButton;
 
     public ListToursView()
     {
@@ -37,10 +39,6 @@ public class ListToursView implements Initializable {
         return listToursViewModel;
     }
 
-    public ListToursViewModel getListToursViewModel() {
-        return listToursViewModel;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle rb){
 
@@ -53,37 +51,44 @@ public class ListToursView implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory("name"));
         tableView.getColumns().addAll(id, name);
 
-        dataContainer.getChildren().add(tableView);
+        ScrollPane scrollPane = new ScrollPane(tableView);
+        scrollPane.setFitToWidth(true);
+        dataContainer.getChildren().add(scrollPane);
         listToursViewModel.initList();
 
-
-        //tableView.setOnAction(event -> loadData());
-        //tableView.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
         tableView.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
-                if(tableView.getSelectionModel().getSelectedItem() != null) {
-                    TourInformationView.getInstance().changeTourImagePath((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+                if (tableView.getSelectionModel().getSelectedItem() != null) {
+                    ShowTourInformationView.getInstance().changeTourInformation((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+                    loadTourLogs();
                 }
             }
         });
-        //searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-          //  searchLabel.setText(newValue);
-        //});
     }
 
-    public void reload() {
-        listToursViewModel.clearItems();
+
+    public void loadTourLogs()
+    {
+          ShowTourLogsView.getInstance().setTourListEntry((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+          ShowTourLogsView.getInstance().showTourLogs(((TourListEntry) tableView.getSelectionModel().getSelectedItem()).getTourId());
+    }
+
+    public void onReload(ActionEvent actionEvent) {
         listToursViewModel.clearItems();
         listToursViewModel.initList();
+        ShowTourInformationView.getInstance().hideInformation();
+        ShowTourLogsView.getInstance().hideTourLogs();
     }
 
-    public void showInformations(TourListEntry tourListEntry)
+    public void onDeleteTour(ActionEvent actionEvent)
     {
-
-        System.out.println("item: ");
-        System.out.println(tourListEntry);
+        if(tableView.getSelectionModel().getSelectedItem() != null) {
+            TourListEntry tourListEntry = (TourListEntry) tableView.getSelectionModel().getSelectedItem();
+            new DeleteTourMessageView(tourListEntry, "Delete Tour");
+        }
+        else
+        {
+            new DialogView("Please select a tour!", "Delete Tour");
+        }
     }
-
-
-
 }

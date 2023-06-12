@@ -1,22 +1,22 @@
 package at.fhtw.view;
 
-import at.fhtw.viewmodel.AddTourViewModel;
+import at.fhtw.models.Tour;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddTourView implements Initializable {
-
-
-
-    private AddTourViewModel addTourViewModel;
+    private static final Logger logger = LogManager.getLogger(AddTourView.class);
     @FXML
-    private Text feedbackText;
+    private Label feedback;
     @FXML
     public TextField tourNameTextField;
     @FXML
@@ -26,58 +26,67 @@ public class AddTourView implements Initializable {
     @FXML
     private TextField destinationTextField;
     @FXML
-    private TextField transportTypeTextField;
+    private ChoiceBox<String> transportTypeChoiceBox;
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
-        //Tour tour = new Tour();
-        tourNameTextField.setText("");
-        descriptionTextField.setText("");
-        startTextField.setText("");
-        destinationTextField.setText("");
-        transportTypeTextField.setText("");
+        feedback.getStyleClass().add("feedbackText");
+        transportTypeChoiceBox.setValue("car");
+        updateChoiceBoxWidth();
+        transportTypeChoiceBox.setOnAction(event -> updateChoiceBoxWidth());
+    }
 
-
-        addTourViewModel = new AddTourViewModel();
-        tourNameTextField.textProperty().bindBidirectional(addTourViewModel.tourNameProperty());
-        descriptionTextField.textProperty().bindBidirectional(addTourViewModel.descriptionProperty());
-        startTextField.textProperty().bindBidirectional(addTourViewModel.startProperty());
-        destinationTextField.textProperty().bindBidirectional(addTourViewModel.destinationProperty());
-        transportTypeTextField.textProperty().bindBidirectional(addTourViewModel.transportTypeProperty());
+    @FXML
+    private void updateChoiceBoxWidth() {
+        String selectedValue = transportTypeChoiceBox.getSelectionModel().getSelectedItem();
+        double newWidth = (selectedValue.length() * 10) + 3;
+        System.out.println("length: " + selectedValue.length());
+        transportTypeChoiceBox.setPrefWidth(newWidth);
     }
 
     public void addTourAction(ActionEvent event) {
 
-        try {
-            System.out.println("iam here 5");
-            if (tourNameTextField.getText().trim().equals("")) {
-                feedbackText.setText("nothing entered!");
-                System.out.println("yeahh");
-                return;
-            } else if (descriptionTextField.getText().isEmpty()) {
-                feedbackText.setText("nothing entered!");
-                return;
-            } else if (startTextField.getText().isEmpty()) {
-                feedbackText.setText("nothing entered!");
-                return;
-            } else if (destinationTextField.getText().isEmpty()) {
-                feedbackText.setText("nothing entered!");
-                return;
-            } else if (transportTypeTextField.getText().isEmpty()) {
-                feedbackText.setText("nothing entered!");
-                return;
-            }
-
-            addTourViewModel.addTour();
-            System.out.println("iam here 6");
-            feedbackText.setText("Tour successfully created!");
-        }
-        catch(NullPointerException e)
-        {
-            feedbackText.setText("nothing entered! exc");
+        if (tourNameTextField.getText() == null ||
+                tourNameTextField.getText().isBlank() ||
+                tourNameTextField.getText().isEmpty()) {
+            feedback.setText("Please enter a tourname!");
+            return;
+        } else if (tourNameTextField.getText().length() > 20) {
+            feedback.setText("Tourname is too long!");
+            return;
+        } else if (descriptionTextField.getText() == null ||
+                descriptionTextField.getText().isBlank() ||
+                descriptionTextField.getText().isEmpty()) {
+            feedback.setText("Please enter a description!");
+            return;
+        } else if (startTextField.getText() == null ||
+                startTextField.getText().isBlank() ||
+                startTextField.getText().isEmpty()) {
+            feedback.setText("Please enter a start!");
+            return;
+        } else if (destinationTextField.getText() == null ||
+                destinationTextField.getText().isBlank() ||
+                destinationTextField.getText().isEmpty()) {
+            feedback.setText("Please enter a destination!");
             return;
         }
 
-        //ListToursView.getInstance().addItem(new TourListEntry());
+        Tour tour = new Tour(tourNameTextField.getText(), descriptionTextField.getText(), startTextField.getText(), destinationTextField.getText(), transportTypeChoiceBox.getSelectionModel().getSelectedItem());
+        ListToursView.getInstance().addTour(tour);
+
+        ListToursView.getInstance().clearItems();
+        ListToursView.getInstance().initList();
+
+        resetTextfields();
+    }
+
+    private void resetTextfields()
+    {
+        tourNameTextField.setText("");
+        descriptionTextField.setText("");
+        startTextField.setText("");
+        destinationTextField.setText("");
+        transportTypeChoiceBox.setValue("car");
+        feedback.setText("");
     }
 }

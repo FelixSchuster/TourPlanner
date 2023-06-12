@@ -1,8 +1,6 @@
 package at.fhtw;
 
 import at.fhtw.businessLogic.BusinessLogic;
-import at.fhtw.models.Tour;
-import at.fhtw.models.TourLog;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +14,7 @@ public class TourPlannerClient extends Application {
     public void start(Stage primaryStage) throws Exception{
         // fxml created with SceneBuilder
         System.out.println("fxml start");
-        Parent root = FXMLLoader.load(TourPlannerClient.class.getResource("/mainWindow.fxml"));
+        Parent root = FXMLLoader.load(TourPlannerClient.class.getResource("/at/fhtw/MainWindow.fxml"));
         System.out.println("fxml loaded");
 
         // bootstrap "window" named stage
@@ -48,7 +46,8 @@ public class TourPlannerClient extends Application {
         Tour createTour = new Tour("Vienna-Bratislava tour", "Vienna-Bratislava (car)", "Vienna", "Bratislava", "car");
         businessLogic.createTour(createTour);
 
-        businessLogic.getTour(2);
+        businessLogic.getTour(1);
+
 
         businessLogic.searchTour("aaaaaaaaaa");
 

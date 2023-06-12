@@ -61,7 +61,7 @@ public class BusinessLogic {
             logger.info("BusinessLogic.searchTour() - tourList retrieved successfully: " + tourList);
             // TODO: show the list in ui
         } catch (NoContentException e) {
-            logger.info("BusinessLogic.searchTour() - " + e.getMessage());
+                logger.info("BusinessLogic.searchTour() - " + e.getMessage());
             // TODO: handle exception properly
         } catch (NotFoundException e) {
             logger.info("BusinessLogic.searchTour() - " + e.getMessage());

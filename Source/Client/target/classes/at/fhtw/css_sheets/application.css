@@ -1,0 +1,19 @@
+.important-button {
+    -fx-font-size: 14px;
+    -fx-background-color: slateblue; -fx-text-fill: white;
+}
+
+.bold-informationTypeFields
+{
+    -fx-font-weight: bold;
+}
+
+.bold-headers
+{
+    -fx-font-weight: bold;
+}
+
+.feedbackText
+{
+    -fx-text-fill: red;
+}
