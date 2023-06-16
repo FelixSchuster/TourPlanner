@@ -82,6 +82,7 @@
 .bold-headers
 {
     -fx-font-weight: bold;
+    -fx-font-size: 15px;
 }
 
 .feedbackText

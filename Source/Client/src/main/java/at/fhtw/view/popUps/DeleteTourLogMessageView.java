@@ -1,12 +1,7 @@
 package at.fhtw.view.popUps;
 
-import at.fhtw.exceptions.*;
-import at.fhtw.models.TourListEntry;
 import at.fhtw.models.TourLog;
-import at.fhtw.view.ListToursView;
-import at.fhtw.view.SearchView;
 import at.fhtw.view.ShowTourLogsView;
-import at.fhtw.viewmodel.ListToursViewModel;
 import at.fhtw.viewmodel.ShowTourLogsViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

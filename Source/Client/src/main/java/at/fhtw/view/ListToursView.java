@@ -11,14 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ListToursView implements Initializable {
-    private static final Logger logger = LogManager.getLogger(ListToursView.class);
     private static ListToursViewModel listToursViewModel;
     @FXML
     public TableView tableView = new TableView<>();
@@ -57,13 +54,12 @@ public class ListToursView implements Initializable {
         tableView.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
                 if (tableView.getSelectionModel().getSelectedItem() != null) {
-                    ShowTourInformationView.getInstance().changeTourInformation((TourListEntry) tableView.getSelectionModel().getSelectedItem());
+                    ShowTourInformationView.getInstance().changeTourInformation(((TourListEntry) tableView.getSelectionModel().getSelectedItem()).getTourId());
                     loadTourLogs();
                 }
             }
         });
     }
-
 
     public void loadTourLogs()
     {

@@ -165,7 +165,6 @@ public class ListToursViewModel {
         }
     }
 
-
     public void deleteTour(Integer tourId)
     {
         try {

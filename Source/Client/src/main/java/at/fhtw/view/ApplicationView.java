@@ -2,7 +2,6 @@ package at.fhtw.view;
 
 import at.fhtw.view.popUps.DialogView;
 import at.fhtw.viewmodel.ApplicationViewModel;
-import at.fhtw.viewmodel.ListToursViewModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -14,7 +13,6 @@ import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-// import org.springframework.context.ApplicationEventPublisher;
 
 import java.io.File;
 import java.net.URL;
@@ -88,7 +86,6 @@ public class ApplicationView implements Initializable {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
         //FileChooser.ExtensionFilter textFilter = new FileChooser.ExtensionFilter("Text Files", "*.txt", "*.csv");
-
         File selectedFile = fileChooser.showOpenDialog(popupWindow);
         //fileChooser.getExtensionFilters().addAll(textFilter);
 

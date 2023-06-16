@@ -18,11 +18,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class DeleteTourMessageView extends Dialog<Void> {
-    private static final Logger logger = LogManager.getLogger(DeleteTourMessageView.class);
     TourListEntry tourListEntry;
     String message;
     String title;

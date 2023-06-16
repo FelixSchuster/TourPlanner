@@ -7,14 +7,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddTourView implements Initializable {
-    private static final Logger logger = LogManager.getLogger(AddTourView.class);
     @FXML
     private Label feedback;
     @FXML

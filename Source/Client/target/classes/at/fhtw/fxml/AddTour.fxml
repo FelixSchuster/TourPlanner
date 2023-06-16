@@ -15,7 +15,6 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200.0" prefWidth="200.0"
       spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="at.fhtw.view.AddTourView">
-
     <children>
         <Label text="Add Tour">
             <font>
@@ -44,7 +43,6 @@
         <HBox alignment="BASELINE_RIGHT">
             <Button fx:id="submitButton"  onAction="#addTourAction" text="Submit"/>
         </HBox>
-
         <Separator prefWidth="200.0" />
         <Label fx:id="feedback" />
     </children>

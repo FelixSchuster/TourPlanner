@@ -141,20 +141,20 @@ public class ShowTourLogsViewModel {
         {
             int remainingHours = hours % 24;
             int remainingMinutes = minutes % 60;
-            estimatedTimeString = Integer.toString(days) + "d " +Integer.toString(remainingHours) + "h " + Integer.toString(remainingMinutes) + "min";
+            estimatedTimeString = days + "d " + remainingHours + "h " + remainingMinutes + "min";
         }
         else if(hours >= 1)
         {
             int remainingMinutes = minutes % 60;
-            estimatedTimeString = Integer.toString(hours) + "h " + Integer.toString(remainingMinutes) + "min";
+            estimatedTimeString = hours + "h " + remainingMinutes + "min";
         }
         else if(minutes >= 1)
         {
-            estimatedTimeString = Integer.toString(minutes) + "min";
+            estimatedTimeString = minutes + "min";
         }
         else
         {
-            estimatedTimeString = "0." + Integer.toString(estimatedTime) + "min";
+            estimatedTimeString = "0." + estimatedTime + "min";
         }
         return estimatedTimeString;
     }

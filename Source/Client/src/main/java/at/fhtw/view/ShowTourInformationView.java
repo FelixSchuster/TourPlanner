@@ -13,15 +13,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ShowTourInformationView implements Initializable {
-    private static final Logger logger = LogManager.getLogger(ShowTourInformationView.class);
     private static ShowTourInformationViewModel showTourInformationViewModel;
     @FXML
     private Label tourNameLabel;
@@ -98,14 +95,14 @@ public class ShowTourInformationView implements Initializable {
     public void onActionUpdateTour()
     {
         ListToursViewModel listToursViewModel = ListToursView.getInstance();
-        new UpdateTourPopUpView(listToursViewModel.getTour(showTourInformationViewModel.getTourListEntry().getTourId()), "Update Tour");
+        new UpdateTourPopUpView(listToursViewModel.getTour(showTourInformationViewModel.getTourId()), "Update Tour");
     }
 
     public void onActionCreateTourReport()
     {
         Stage popupWindow = new Stage();
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        String filename = "/" + Integer.toString(showTourInformationViewModel.getTourListEntry().getTourId()) + "_" + showTourInformationViewModel.getTourListEntry().getName() + "_" + "report.pdf";
+        String filename = "/" + Integer.toString(showTourInformationViewModel.getTourId()) + "_" + ListToursView.getInstance().getTour(showTourInformationViewModel.getTourId()).getName() + "_" + "report.pdf";
 
         directoryChooser.setTitle("Select a Directory");
         directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -113,7 +110,7 @@ public class ShowTourInformationView implements Initializable {
         File selectedDirectory = directoryChooser.showDialog(popupWindow);
 
         if (selectedDirectory != null) {
-            showTourInformationViewModel.createTourReport(showTourInformationViewModel.getTourListEntry().getTourId(), selectedDirectory.getPath() + filename);
+            showTourInformationViewModel.createTourReport(showTourInformationViewModel.getTourId(), selectedDirectory.getPath() + filename);
         } else {
             new DialogView("No directory selected!", "Create Tour Report");
         }

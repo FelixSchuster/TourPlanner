@@ -17,7 +17,6 @@ public class ShowTourInformationViewModel {
     private static final Logger logger = LogManager.getLogger(ShowTourInformationViewModel.class);
     private TourService tourService;
     private String imagePath;
-    //private ObjectProperty<String> selectedTransportTypeOption = new SimpleObjectProperty<>();
     private ObjectProperty<Image> image = new SimpleObjectProperty<>();
     private String imageFolderPath = "file:data/images/";
     private SimpleStringProperty tourName = new SimpleStringProperty();
@@ -39,7 +38,7 @@ public class ShowTourInformationViewModel {
 
     private SimpleBooleanProperty showInformation = new SimpleBooleanProperty();
     private SimpleBooleanProperty hideInformation = new SimpleBooleanProperty();
-    private TourListEntry tourListEntry;
+    private Integer tourId;
 
     public ShowTourInformationViewModel()
     {
@@ -63,15 +62,42 @@ public class ShowTourInformationViewModel {
         hideInformation.set(false);
     }
 
-    public void changeTourInformation(TourListEntry tourListEntry)
+    public void changeTourInformation(Integer tourId)
     {
         try{
-            this.tourListEntry = tourListEntry;
-            String imageName = (tourListEntry.getTourId()) + ".jpg";
+            this.tourId = tourId;
+            String imageName = (tourId) + ".jpg";
             imagePath = imageFolderPath + imageName;
             image.set(new Image(imagePath));
 
-            Tour tour = ListToursView.getInstance().getTour(tourListEntry.getTourId());
+            Tour tour = ListToursView.getInstance().getTour(tourId);
+            ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
+            logger.info("ShowTourInformationViewModel.getTour() - tour retrieved successfully: " + tour);
+            setTourInformation(tour);
+            showInformation();
+        } catch (NotFoundException e) {
+            logger.info("ShowTourInformationViewModel.getTour() - " + e.getMessage());
+            new DialogView("Tour could not be found", "Tour Information");
+        } catch (InternalServerErrorException e) {
+            logger.error("ShowTourInformationViewModel.getTour() - " + e.getMessage());
+            new DialogView("Internal Server Issues\nThe Tour Information could not be shown!", "Tour Information");
+        } catch (FailedToParseImageFileException e) {
+            logger.error("ShowTourInformationViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to parse image\nThe Tour Information could not be shown!", "Tour Information");
+        } catch (FailedToSendRequestException e) {
+            logger.error("ShowTourInformationViewModel.getTour() - " + e.getMessage());
+            new DialogView("Failed to send Request\nThe Tour Information could not be shown!", "Tour Information");
+        }
+    }
+
+    public void updateTourInformation(Integer tourId)
+    {
+        try{
+            String imageName = (tourId) + ".jpg";
+            imagePath = imageFolderPath + imageName;
+            image.set(new Image(imagePath));
+
+            Tour tour = ListToursView.getInstance().getTour(tourId);
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tour.getTourId().toString());
             logger.info("ShowTourInformationViewModel.getTour() - tour retrieved successfully: " + tour);
             setTourInformation(tour);
@@ -97,7 +123,7 @@ public class ShowTourInformationViewModel {
         start.set(tour.getStart());
         destination.set(tour.getDestination());
         transportType.set(tour.getTransportType());
-        distance.set(Double.toString(tour.getTourDistance()) + "km");
+        distance.set(tour.getTourDistance() + "km");
         estimatedTime.set(calculateEstimatedTime(tour.getEstimatedTime()));
         popularity.set(calculateStarRatings(tour.getPopularity()));
         childFriendliness.set(calculateStarRatings(tour.getChildFriendliness()));
@@ -116,20 +142,20 @@ public class ShowTourInformationViewModel {
         {
             int remainingHours = hours % 24;
             int remainingMinutes = minutes % 60;
-            estimatedTimeString = Integer.toString(days) + "d " +Integer.toString(remainingHours) + "h " + Integer.toString(remainingMinutes) + "min";
+            estimatedTimeString = days + "d " + remainingHours + "h " + remainingMinutes + "min";
         }
         else if(hours >= 1)
         {
             int remainingMinutes = minutes % 60;
-            estimatedTimeString = Integer.toString(hours) + "h " + Integer.toString(remainingMinutes) + "min";
+            estimatedTimeString = hours + "h " + remainingMinutes + "min";
         }
         else if(minutes >= 1)
         {
-            estimatedTimeString = Integer.toString(minutes) + "min";
+            estimatedTimeString = minutes + "min";
         }
         else
         {
-            estimatedTimeString = "0." + Integer.toString(estimatedTime) + "min";
+            estimatedTimeString = "0." + estimatedTime + "min";
         }
         return estimatedTimeString;
     }
@@ -269,7 +295,5 @@ public class ShowTourInformationViewModel {
         return hideInformation;
     }
 
-    public TourListEntry getTourListEntry() {
-        return tourListEntry;
-    }
+    public Integer getTourId() { return tourId; }
 }
