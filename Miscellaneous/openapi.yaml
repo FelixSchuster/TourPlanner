@@ -189,7 +189,7 @@ paths:
     get:
       tags:
         - Tour Logs
-      summary: Get all tourlogs for a tour (DEBUG?)
+      summary: Get all tourlogs for a tour
       description: Get all tourlogs for a tour
       parameters:
         - in: path
@@ -216,8 +216,8 @@ paths:
   /tourlogs/{tourlogId}:
     get:
       tags:
-        - Tour Logs
-      summary: Get a single tourlog (DEBUG?)
+        - Debug
+      summary: Get a single tourlog
       description: Get a single tourlog for a tour
       parameters:
         - in: path
