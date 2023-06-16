@@ -51,9 +51,7 @@ public class ListToursView implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory("name"));
         tableView.getColumns().addAll(id, name);
 
-        ScrollPane scrollPane = new ScrollPane(tableView);
-        scrollPane.setFitToWidth(true);
-        dataContainer.getChildren().add(scrollPane);
+        dataContainer.getChildren().add(tableView);
         listToursViewModel.initList();
 
         tableView.setOnMouseClicked(event -> {

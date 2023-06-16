@@ -160,25 +160,25 @@ public class ShowTourInformationViewModel {
             ImageHandler.saveBase64EncodedImageToFile(tour.getTourInformation(), tourId.toString());
             pdfFileHandler.createTourReport(tour, filename);
             logger.info("ShowTourInformationViewModel.createTourReport() - report created successfully: " + filename);
-            new DialogView("Tour Report successfully created", "Create Report Tour");
+            new DialogView("Tour Report successfully created", "Create Tour Report");
         } catch (NoContentException e) {
             logger.info("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
-            new DialogView("Tour has no content", "Create Report Tour");
+            new DialogView("Tour has no content", "Create Tour Report");
         } catch (NotFoundException e) {
             logger.info("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
-            new DialogView("Tour could not be found", "Create Report Tour");
+            new DialogView("Tour could not be found", "Create Tour Report");
         } catch (InternalServerErrorException e) {
             logger.error("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
-            new DialogView("Internal Server Issues\nThe Tour Tour Report could not be created!", "Create Report Tour");
+            new DialogView("Internal Server Issues\nThe Tour Tour Report could not be created!", "Create Tour Report");
         } catch (FailedToParseJsonFileException e) {
             logger.error("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
-            new DialogView("Failed to parse jsonfile\nThe Tour Report could not be created!", "Create Report Tour");
+            new DialogView("Failed to parse jsonfile\nThe Tour Report could not be created!", "Create Tour Report");
         } catch (FailedToCreatePdfFileException e) {
             logger.error("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
-            new DialogView("Failed to parse image\nThe Tour Report could not be created!", "Create Report Tour");
+            new DialogView("Failed to create pdf file\nThe Tour Report could not be created!", "Create Tour Report");
         } catch (FailedToSendRequestException e) {
             logger.error("ShowTourInformationViewModel.createTourReport() - " + e.getMessage());
-            new DialogView("Failed to send Request\nThe Tour Report could not be created!", "Create Report Tour");
+            new DialogView("Failed to send Request\nThe Tour Report could not be created!", "Create Tour Report");
         }
     }
     public String getTourName() {

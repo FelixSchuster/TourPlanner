@@ -50,8 +50,6 @@ public class UpdateTourPopUpView extends Dialog<Void> {
         popupWindow.setTitle(title);
         feedbackText.getStyleClass().add("feedbackText");
 
-        feedbackText.setStyle("-fx-text-fill: red;");
-
         VBox root = new VBox();
         root.setPadding(new Insets(8.0));
         root.getStylesheets().add(defaultStylesheet);

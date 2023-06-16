@@ -35,12 +35,18 @@ public class SearchView {
         ListToursViewModel toursViewModel = ListToursView.getInstance();
 
         if (searchField.getText() == null || searchField.getText().isBlank() || searchField.getText().isEmpty()) {
-            toursViewModel.clearItems();
-            toursViewModel.initList();
+            reload();
             return;
         }
 
-        toursViewModel.clearItems();
+        reload();
         toursViewModel.filterList(searchField.getText());
+    }
+
+    public void reload() {
+        ListToursView.getInstance().clearItems();
+        ListToursView.getInstance().initList();
+        ShowTourInformationView.getInstance().hideInformation();
+        ShowTourLogsView.getInstance().hideTourLogs();
     }
 }

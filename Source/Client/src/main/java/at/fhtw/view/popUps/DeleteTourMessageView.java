@@ -3,6 +3,7 @@ package at.fhtw.view.popUps;
 import at.fhtw.exceptions.*;
 import at.fhtw.models.TourListEntry;
 import at.fhtw.view.ListToursView;
+import at.fhtw.view.ShowTourInformationView;
 import at.fhtw.view.ShowTourLogsView;
 import at.fhtw.viewmodel.ListToursViewModel;
 import at.fhtw.viewmodel.ShowTourLogsViewModel;
@@ -76,7 +77,13 @@ public class DeleteTourMessageView extends Dialog<Void> {
     {
         ListToursViewModel listToursViewModel = ListToursView.getInstance();
         listToursViewModel.deleteTour(tourListEntry.getTourId());
-        listToursViewModel.clearItems();
-        listToursViewModel.initList();
+        reload();
+    }
+
+    public void reload() {
+        ListToursView.getInstance().clearItems();
+        ListToursView.getInstance().initList();
+        ShowTourInformationView.getInstance().hideInformation();
+        ShowTourLogsView.getInstance().hideTourLogs();
     }
 }

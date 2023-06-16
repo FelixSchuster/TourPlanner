@@ -74,8 +74,7 @@ public class AddTourView implements Initializable {
         Tour tour = new Tour(tourNameTextField.getText(), descriptionTextField.getText(), startTextField.getText(), destinationTextField.getText(), transportTypeChoiceBox.getSelectionModel().getSelectedItem());
         ListToursView.getInstance().addTour(tour);
 
-        ListToursView.getInstance().clearItems();
-        ListToursView.getInstance().initList();
+        reload();
 
         resetTextfields();
     }
@@ -88,5 +87,12 @@ public class AddTourView implements Initializable {
         destinationTextField.setText("");
         transportTypeChoiceBox.setValue("car");
         feedback.setText("");
+    }
+
+    public void reload() {
+        ListToursView.getInstance().clearItems();
+        ListToursView.getInstance().initList();
+        ShowTourInformationView.getInstance().hideInformation();
+        ShowTourLogsView.getInstance().hideTourLogs();
     }
 }

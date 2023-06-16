@@ -2,6 +2,7 @@ package at.fhtw.view;
 
 import at.fhtw.view.popUps.DialogView;
 import at.fhtw.viewmodel.ApplicationViewModel;
+import at.fhtw.viewmodel.ListToursViewModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 // import org.springframework.context.ApplicationEventPublisher;
@@ -27,9 +29,9 @@ public class ApplicationView implements Initializable {
     @FXML
     HBox HBoxDarkmodeButton;
     @FXML
-    Button darkmode;
+    Button darkmodeButton;
     @FXML
-    Button lightmode;
+    Button lightmodeButton;
     private String defaultStylesheet = "file:src/main/resources/at/fhtw/css_sheets/application.css";
     private String darkModeStylesheet = "file:src/main/resources/at/fhtw/css_sheets/darkmode.css";
     private boolean darkModeEnabled;
@@ -58,69 +60,98 @@ public class ApplicationView implements Initializable {
 
     public void onExportButton(ActionEvent actionEvent)
     {
-        String filename = "tours_export";
-        applicationViewModel.exportTours(filename);
+        Stage popupWindow = new Stage();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        String filename = "/tours_export";
+
+        directoryChooser.setTitle("Select a Directory");
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+        File selectedDirectory = directoryChooser.showDialog(popupWindow);
+
+
+        if (selectedDirectory != null) {
+            applicationViewModel.exportTours(selectedDirectory.getPath() + filename);
+
+        } else {
+            new DialogView("No directory selected!", "Export Tours");
+        }
     }
 
     public void onImportButton(ActionEvent actionEvent)
     {
-
         Stage popupWindow = new Stage();
 
-        String filename = "";
         FileChooser fileChooser = new FileChooser();
 
-        // Set the title and initial directory (optional)
         fileChooser.setTitle("Select a File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
-        FileChooser.ExtensionFilter textFilter = new FileChooser.ExtensionFilter("Text Files", "*.txt", "*.csv");
+        //FileChooser.ExtensionFilter textFilter = new FileChooser.ExtensionFilter("Text Files", "*.txt", "*.csv");
 
-        // Show the file dialog and wait for user selection
         File selectedFile = fileChooser.showOpenDialog(popupWindow);
-        fileChooser.getExtensionFilters().addAll(textFilter);
+        //fileChooser.getExtensionFilters().addAll(textFilter);
 
-        // Process the selected file
         if (selectedFile != null) {
-            System.out.println("Selected file: " + selectedFile);
-            System.out.println("Selected file name: " + selectedFile.getName());
-            applicationViewModel.importTours(selectedFile.getName());
+            applicationViewModel.importTours(selectedFile.getPath());
+            reload();
         } else {
-            System.out.println("No file selected.");
+            new DialogView("No file selected!", "Import Tours");
         }
     }
 
     public void onSummarizeButtonButton(ActionEvent actionEvent)
     {
-        String filename = "summarize_report";
-        applicationViewModel.createSummarizeReport(filename);
+        Stage popupWindow = new Stage();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        String filename = "/summarize_report";
+
+        directoryChooser.setTitle("Select a Directory");
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+        File selectedDirectory = directoryChooser.showDialog(popupWindow);
+
+
+        if (selectedDirectory != null) {
+            applicationViewModel.createSummarizeReport(selectedDirectory.getPath() + filename);
+
+        } else {
+            new DialogView("No directory selected!", "Summarize Report");
+        }
     }
 
     public void onTogglDarkmode(ActionEvent actionEvent) {
 
-        lightmode.setOnMouseClicked(event -> {
+        lightmodeButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
-                layout.getStylesheets().clear();
-                layout.getStylesheets().add(defaultStylesheet);
+                layout.getStylesheets().clear(); // Clear the existing stylesheets
+                layout.getStylesheets().add(defaultStylesheet); // Apply the dark mode stylesheet
 
-                darkmode.setText("Dark");
-                lightmode.setText("");
-                lightmode.setDisable(true);
-                darkmode.setDisable(false);
+                darkmodeButton.setText("Dark");
+                lightmodeButton.setText("");
+                lightmodeButton.setDisable(true);
+                darkmodeButton.setDisable(false);
             }
         });
 
-        darkmode.setOnMouseClicked(event -> {
+        darkmodeButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
                 layout.getStylesheets().clear(); // Clear the existing stylesheets
                 layout.getStylesheets().add(darkModeStylesheet); // Apply the dark mode stylesheet
 
-                lightmode.setText("Light");
-                darkmode.setText("");
+                lightmodeButton.setText("Light");
+                darkmodeButton.setText("");
 
-                darkmode.setDisable(true);
-                lightmode.setDisable(false);
+                darkmodeButton.setDisable(true);
+                lightmodeButton.setDisable(false);
             }
         });
+    }
+
+    public void reload() {
+        ListToursView.getInstance().clearItems();
+        ListToursView.getInstance().initList();
+        ShowTourInformationView.getInstance().hideInformation();
+        ShowTourLogsView.getInstance().hideTourLogs();
     }
 }
