@@ -14,11 +14,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class UpdateTourPopUpView extends Dialog<Void> {
-    private static final Logger logger = LogManager.getLogger(UpdateTourPopUpView.class);
     Tour tour;
     String title;
     @FXML
@@ -49,8 +46,6 @@ public class UpdateTourPopUpView extends Dialog<Void> {
         popupWindow.initModality(Modality.APPLICATION_MODAL);
         popupWindow.setTitle(title);
         feedbackText.getStyleClass().add("feedbackText");
-
-        feedbackText.setStyle("-fx-text-fill: red;");
 
         VBox root = new VBox();
         root.setPadding(new Insets(8.0));
@@ -153,9 +148,15 @@ public class UpdateTourPopUpView extends Dialog<Void> {
         Tour updatedTour = new Tour(tourNameTextField.getText(), descriptionTextField.getText(), startTextField.getText(), destinationTextField.getText(), transportTypeChoiceBox.getSelectionModel().getSelectedItem());
         ListToursView.getInstance().updateTour(updatedTour, tour.getTourId());
 
-        ListToursView.getInstance().clearItems();
-        ListToursView.getInstance().initList();
+        updateTourView();
 
         popupWindow.close();
+    }
+
+    private void updateTourView()
+    {
+        ListToursView.getInstance().clearItems();
+        ListToursView.getInstance().initList();
+        //ShowTourInformationView.getInstance().changeTourInformation(tour.getTourId());
     }
 }

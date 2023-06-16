@@ -14,22 +14,14 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ShowTourLogsView extends ApplicationView{
-    private static final Logger logger = LogManager.getLogger(ShowTourLogsView.class);
     private static ShowTourLogsViewModel showTourLogsViewModel;
-    public VBox headers;
-    @FXML
-    public VBox tourLogs;
     @FXML
     public AnchorPane tourLogPane;
-    @FXML
-    public ScrollPane scrollPane;
     public VBox paneContainer;
     @FXML
     private VBox dataContainer;
@@ -134,39 +126,43 @@ public class ShowTourLogsView extends ApplicationView{
         VBox headerLabelBox = new VBox();
         VBox createButtonBox = new VBox();
 
+        hbox.getChildren().addAll(tourNameBox, headerLabelBox, createButtonBox);
+        dataContainer.getChildren().add(new Separator());
+
         HBox.setHgrow(createButtonBox, javafx.scene.layout.Priority.ALWAYS);
 
         Label tourName = new Label("Tour Name: ");
-        tourName.getStyleClass().add("bold-headers");
-        tourName.setStyle("-fx-font-size: 15px;");
-        tourNameBox.getChildren().add(tourName);
         Label tourLogHeader = new Label(showTourLogsViewModel.getTourListEntry().getName());
-        tourLogHeader.setStyle("-fx-font-size: 15px;");
+
+        tourName.getStyleClass().add("bold-headers");
+        tourLogHeader.getStyleClass().add("bold-headers");
+
+        tourNameBox.getChildren().add(tourName);
         headerLabelBox.getChildren().add(tourLogHeader);
 
         Button createTourLogButton = new Button("Create Tour Log");
         createTourLogButton.setMinWidth(80);
-        createButtonBox.getChildren().add(createTourLogButton);
         createButtonBox.setAlignment(Pos.CENTER_RIGHT);
         createTourLogButton.getStyleClass().add("important-button");
 
-        hbox.getChildren().addAll(tourNameBox, headerLabelBox, createButtonBox);
-        createTourLogButton.setOnAction(e -> onCreateTourLog(showTourLogsViewModel.getTourListEntry().getTourId()));
-        dataContainer.getChildren().add(new Separator());
+        createButtonBox.getChildren().add(createTourLogButton);
 
         javafx.scene.control.ScrollPane scrollPane = new ScrollPane(dataContainer);
         scrollPane.setFitToWidth(true);
+
         AnchorPane.setRightAnchor(scrollPane, 0.0);
         AnchorPane.setLeftAnchor(scrollPane, 0.0);
         AnchorPane.setTopAnchor(scrollPane, 0.0);
         AnchorPane.setBottomAnchor(scrollPane, 0.0);
-        paneContainer.getChildren().add(scrollPane);
         AnchorPane.setRightAnchor(dataContainer, 0.0);
         AnchorPane.setLeftAnchor(dataContainer, 0.0);
         AnchorPane.setTopAnchor(dataContainer, 0.0);
         AnchorPane.setBottomAnchor(dataContainer, 0.0);
 
+        paneContainer.getChildren().add(scrollPane);
         scrollPane.setPrefSize(400, 600);
+
+        createTourLogButton.setOnAction(e -> onCreateTourLog(showTourLogsViewModel.getTourListEntry().getTourId()));
 
         showTourLogsViewModel.getTourLogs().forEach(p -> {
             createTourLogsView(p);
@@ -212,7 +208,9 @@ public class ShowTourLogsView extends ApplicationView{
 
         dataContainer.getChildren().add(new Separator());
 
-        content.getChildren().addAll(dateTourLog, totalTimeTourLog, difficultyTourLog, ratingTourLog, commentTourLog);
+        content.getChildren().addAll(dateTourLog, totalTimeTourLog,
+                                    difficultyTourLog, ratingTourLog,
+                                    commentTourLog);
 
         Button updateButton = new Button("Update");
         updateButton.setMinWidth(80);

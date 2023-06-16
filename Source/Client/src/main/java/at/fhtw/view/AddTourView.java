@@ -7,14 +7,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddTourView implements Initializable {
-    private static final Logger logger = LogManager.getLogger(AddTourView.class);
     @FXML
     private Label feedback;
     @FXML
@@ -74,8 +71,7 @@ public class AddTourView implements Initializable {
         Tour tour = new Tour(tourNameTextField.getText(), descriptionTextField.getText(), startTextField.getText(), destinationTextField.getText(), transportTypeChoiceBox.getSelectionModel().getSelectedItem());
         ListToursView.getInstance().addTour(tour);
 
-        ListToursView.getInstance().clearItems();
-        ListToursView.getInstance().initList();
+        reload();
 
         resetTextfields();
     }
@@ -88,5 +84,12 @@ public class AddTourView implements Initializable {
         destinationTextField.setText("");
         transportTypeChoiceBox.setValue("car");
         feedback.setText("");
+    }
+
+    public void reload() {
+        ListToursView.getInstance().clearItems();
+        ListToursView.getInstance().initList();
+        ShowTourInformationView.getInstance().hideInformation();
+        ShowTourLogsView.getInstance().hideTourLogs();
     }
 }

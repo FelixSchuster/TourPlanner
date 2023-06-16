@@ -1,5 +1,6 @@
 package at.fhtw.view;
 
+import at.fhtw.view.popUps.DialogView;
 import at.fhtw.view.popUps.UpdateTourPopUpView;
 import at.fhtw.viewmodel.ListToursViewModel;
 import at.fhtw.viewmodel.ShowTourInformationViewModel;
@@ -10,14 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ShowTourInformationView implements Initializable {
-    private static final Logger logger = LogManager.getLogger(ShowTourInformationView.class);
     private static ShowTourInformationViewModel showTourInformationViewModel;
     @FXML
     private Label tourNameLabel;
@@ -87,19 +88,31 @@ public class ShowTourInformationView implements Initializable {
 
         informationTypeField.visibleProperty().bindBidirectional(showTourInformationViewModel.showInformationProperty());
         informationTextField.visibleProperty().bindBidirectional(showTourInformationViewModel.hideInformationProperty());
-        updateButton.setOnAction(event -> updateTour());
+        updateButton.setOnAction(event -> onActionUpdateTour());
         createTourReportButton.setOnAction(event -> onActionCreateTourReport());
     }
 
-    public void updateTour()
+    public void onActionUpdateTour()
     {
         ListToursViewModel listToursViewModel = ListToursView.getInstance();
-        new UpdateTourPopUpView(listToursViewModel.getTour(showTourInformationViewModel.getTourListEntry().getTourId()), "Update Tour");
+        new UpdateTourPopUpView(listToursViewModel.getTour(showTourInformationViewModel.getTourId()), "Update Tour");
     }
 
     public void onActionCreateTourReport()
     {
-        String filename = Integer.toString(showTourInformationViewModel.getTourListEntry().getTourId()) + "_" + showTourInformationViewModel.getTourListEntry().getName() + "_" + "report";
-        showTourInformationViewModel.createTourReport(showTourInformationViewModel.getTourListEntry().getTourId(), filename);
+        Stage popupWindow = new Stage();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        String filename = "/" + Integer.toString(showTourInformationViewModel.getTourId()) + "_" + ListToursView.getInstance().getTour(showTourInformationViewModel.getTourId()).getName() + "_" + "report.pdf";
+
+        directoryChooser.setTitle("Select a Directory");
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+        File selectedDirectory = directoryChooser.showDialog(popupWindow);
+
+        if (selectedDirectory != null) {
+            showTourInformationViewModel.createTourReport(showTourInformationViewModel.getTourId(), selectedDirectory.getPath() + filename);
+        } else {
+            new DialogView("No directory selected!", "Create Tour Report");
+        }
     }
 }
