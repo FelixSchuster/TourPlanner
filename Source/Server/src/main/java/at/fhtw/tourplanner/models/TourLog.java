@@ -88,7 +88,6 @@ public class TourLog {
     public void setTour(Tour tour) {
         this.tour = tour;
     }
-
     @Override
     public String toString() {
         return "TourLog{" +
@@ -100,7 +99,6 @@ public class TourLog {
                 ", rating=" + rating +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,7 +106,6 @@ public class TourLog {
         TourLog tourLog = (TourLog) o;
         return Objects.equals(tourLogId, tourLog.tourLogId) && Objects.equals(date, tourLog.date) && Objects.equals(comment, tourLog.comment) && Objects.equals(difficulty, tourLog.difficulty) && Objects.equals(totalTime, tourLog.totalTime) && Objects.equals(rating, tourLog.rating);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(tourLogId, date, comment, difficulty, totalTime, rating);

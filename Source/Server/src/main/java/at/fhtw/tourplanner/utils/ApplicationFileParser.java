@@ -1,6 +1,5 @@
 package at.fhtw.tourplanner.utils;
 
-import at.fhtw.tourplanner.services.tourLog.TourLogService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;

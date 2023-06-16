@@ -5,12 +5,8 @@ import at.fhtw.tourplanner.exceptions.NotFoundException;
 import at.fhtw.tourplanner.models.MapQuestData;
 import at.fhtw.tourplanner.models.Tour;
 import at.fhtw.tourplanner.models.TourListEntry;
-import at.fhtw.tourplanner.models.TourLog;
 import at.fhtw.tourplanner.repositories.MapQuestRepository;
 import at.fhtw.tourplanner.repositories.TourRepository;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.persistence.Lob;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

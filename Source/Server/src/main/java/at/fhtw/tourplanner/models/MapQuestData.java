@@ -26,7 +26,6 @@ public class MapQuestData {
     public void setEstimatedTime(Integer estimatedTime) {
         this.estimatedTime = estimatedTime;
     }
-
     @Override
     public String toString() {
         return "MapQuestResponseData{" +
@@ -34,7 +33,6 @@ public class MapQuestData {
                 ", estimatedTime=" + estimatedTime +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,7 +40,6 @@ public class MapQuestData {
         MapQuestData that = (MapQuestData) o;
         return Objects.equals(tourDistance, that.tourDistance) && Objects.equals(estimatedTime, that.estimatedTime);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(tourDistance, estimatedTime);

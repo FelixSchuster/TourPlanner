@@ -22,7 +22,6 @@ public class TourListEntry {
     public void setName(String name) {
         this.name = name;
     }
-
     @Override
     public String toString() {
         return "TourListEntry{" +
@@ -30,7 +29,6 @@ public class TourListEntry {
                 ", name='" + name + '\'' +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,7 +36,6 @@ public class TourListEntry {
         TourListEntry that = (TourListEntry) o;
         return Objects.equals(tourId, that.tourId) && Objects.equals(name, that.name);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(tourId, name);
