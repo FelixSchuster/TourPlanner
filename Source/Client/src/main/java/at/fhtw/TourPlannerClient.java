@@ -31,7 +31,6 @@ public class TourPlannerClient extends Application {
         System.out.println("show stage");
     }
     public static void main(String[] args) {
-
         launch(args);
 
         // some proof of concept

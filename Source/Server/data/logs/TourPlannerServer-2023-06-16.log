@@ -1,0 +1,472 @@
+2023-06-16 19:57:16.945 [main] ERROR at.fhtw.tourplanner.utils.ApplicationFileParser - ApplicationFileParser.parseApiKey() - src\main\resources\application.yml (Das System kann die angegebene Datei nicht finden)
+2023-06-16 19:57:17.725 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 3420 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 19:57:17.729 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 19:57:18.476 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 19:57:18.545 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 61 ms. Found 2 JPA repository interfaces.
+2023-06-16 19:57:19.124 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-06-16 19:57:19.134 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-06-16 19:57:19.135 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-06-16 19:57:19.136 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-06-16 19:57:19.224 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-06-16 19:57:19.224 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1452 ms
+2023-06-16 19:57:19.308 [main] WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to determine a suitable driver class
+2023-06-16 19:57:19.311 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2023-06-16 19:57:19.333 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-06-16 19:57:19.359 [main] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).
+
+2023-06-16 19:57:55.236 [main] ERROR at.fhtw.tourplanner.utils.ApplicationFileParser - ApplicationFileParser.parseApiKey() - src\main\resources\application.yml (Das System kann die angegebene Datei nicht finden)
+2023-06-16 19:57:55.600 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 18296 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 19:57:55.602 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 19:57:56.138 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 19:57:56.188 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 2 JPA repository interfaces.
+2023-06-16 19:57:56.607 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-06-16 19:57:56.615 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-06-16 19:57:56.615 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-06-16 19:57:56.616 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-06-16 19:57:56.690 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-06-16 19:57:56.690 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1054 ms
+2023-06-16 19:57:56.758 [main] WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to determine a suitable driver class
+2023-06-16 19:57:56.760 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2023-06-16 19:57:56.773 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-06-16 19:57:56.788 [main] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).
+
+2023-06-16 19:58:30.049 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 16424 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 19:58:30.056 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 19:58:30.643 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 19:58:30.695 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 2 JPA repository interfaces.
+2023-06-16 19:58:31.119 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+2023-06-16 19:58:31.127 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10001"]
+2023-06-16 19:58:31.128 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-06-16 19:58:31.129 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-06-16 19:58:31.213 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-06-16 19:58:31.213 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1122 ms
+2023-06-16 19:58:31.364 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-16 19:58:31.407 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-06-16 19:58:31.657 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-06-16 19:58:31.872 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@71fb8301
+2023-06-16 19:58:31.873 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-06-16 19:58:31.974 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-16 19:58:32.859 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 19:58:32.859 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Relation »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 19:58:32.861 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 19:58:32.861 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 19:58:32.861 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 19:58:32.861 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tours« existiert nicht, wird übersprungen
+2023-06-16 19:58:32.862 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 19:58:32.862 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tour_logs_seq« existiert nicht, wird übersprungen
+2023-06-16 19:58:32.863 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 19:58:32.863 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tours_seq« existiert nicht, wird übersprungen
+2023-06-16 19:58:32.965 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-16 19:58:32.973 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 19:58:33.458 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-16 19:58:33.734 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10001"]
+2023-06-16 19:58:33.745 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+2023-06-16 19:58:33.751 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Started TourPlannerApplication in 4.108 seconds (process running for 5.621)
+2023-06-16 19:58:43.576 [http-nio-10001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-16 19:58:43.576 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-06-16 19:58:43.577 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-06-16 19:58:43.705 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 19:59:10.931 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - tour created successfully: Tour{tourId=1, name='test', tourDescription='test', start='vienna', destination='bratislava', transportType='pedestrian', tourDistance=63.1, estimatedTime=63339, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=null}
+2023-06-16 19:59:12.057 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}]
+2023-06-16 19:59:13.666 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='vienna', destination='bratislava', transportType='pedestrian', tourDistance=63.1, estimatedTime=63339, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:13.880 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 19:59:14.032 [http-nio-10001-exec-6] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='vienna', destination='bratislava', transportType='pedestrian', tourDistance=63.1, estimatedTime=63339, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:14.053 [http-nio-10001-exec-7] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 19:59:34.075 [http-nio-10001-exec-4] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - tour created successfully: Tour{tourId=2, name='test2', tourDescription='test', start='vienna', destination='bratislava', transportType='car', tourDistance=80.3, estimatedTime=3302, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=null}
+2023-06-16 19:59:34.978 [http-nio-10001-exec-9] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}, TourListEntry{tourId=2, name='test2'}]
+2023-06-16 19:59:36.655 [http-nio-10001-exec-10] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test2', tourDescription='test', start='vienna', destination='bratislava', transportType='car', tourDistance=80.3, estimatedTime=3302, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:36.674 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 19:59:36.797 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test2', tourDescription='test', start='vienna', destination='bratislava', transportType='car', tourDistance=80.3, estimatedTime=3302, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:36.815 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 19:59:37.599 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='vienna', destination='bratislava', transportType='pedestrian', tourDistance=63.1, estimatedTime=63339, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:37.617 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 19:59:37.756 [http-nio-10001-exec-6] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='vienna', destination='bratislava', transportType='pedestrian', tourDistance=63.1, estimatedTime=63339, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:37.773 [http-nio-10001-exec-7] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 19:59:39.742 [http-nio-10001-exec-4] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test2', tourDescription='test', start='vienna', destination='bratislava', transportType='car', tourDistance=80.3, estimatedTime=3302, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:39.758 [http-nio-10001-exec-9] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 19:59:39.892 [http-nio-10001-exec-10] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test2', tourDescription='test', start='vienna', destination='bratislava', transportType='car', tourDistance=80.3, estimatedTime=3302, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:39.909 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 19:59:42.064 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='vienna', destination='bratislava', transportType='pedestrian', tourDistance=63.1, estimatedTime=63339, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:42.081 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 19:59:42.221 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='vienna', destination='bratislava', transportType='pedestrian', tourDistance=63.1, estimatedTime=63339, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 19:59:42.237 [http-nio-10001-exec-6] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:00:02.234 [http-nio-10001-exec-7] WARN  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - MapQuestRepository.findMapQuestData() - bad request
+2023-06-16 20:00:04.774 [http-nio-10001-exec-9] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}, TourListEntry{tourId=2, name='test2'}]
+2023-06-16 20:00:44.676 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - tour created successfully: Tour{tourId=3, name='test4', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=null}
+2023-06-16 20:00:45.689 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}, TourListEntry{tourId=2, name='test2'}, TourListEntry{tourId=3, name='test4'}]
+2023-06-16 20:00:47.291 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=3, name='test4', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:00:47.314 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:00:47.450 [http-nio-10001-exec-6] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=3, name='test4', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:00:47.468 [http-nio-10001-exec-7] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:04:03.954 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - tour created successfully: Tour{tourId=4, name='test5', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=null}
+2023-06-16 20:04:05.061 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}, TourListEntry{tourId=2, name='test2'}, TourListEntry{tourId=3, name='test4'}, TourListEntry{tourId=4, name='test5'}]
+2023-06-16 20:04:06.354 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=4, name='test5', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:04:06.375 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:04:06.488 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=4, name='test5', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:04:06.504 [http-nio-10001-exec-6] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:04:11.800 [http-nio-10001-exec-7] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=3, name='test4', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:04:11.819 [http-nio-10001-exec-4] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:04:11.937 [http-nio-10001-exec-9] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=3, name='test4', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:04:11.954 [http-nio-10001-exec-10] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:04:12.681 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=4, name='test5', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:04:12.698 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:04:12.824 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=4, name='test5', tourDescription='test', start='palermo', destination='hamburg', transportType='pedestrian', tourDistance=5492.300000000001, estimatedTime=689495, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:04:12.842 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:08:20.716 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:08:20.716 [SpringApplicationShutdownHook] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-06-16 20:08:20.780 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-06-16 20:08:20.783 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-06-16 20:08:25.942 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 14548 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 20:08:25.950 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 20:08:26.575 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 20:08:26.629 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 2 JPA repository interfaces.
+2023-06-16 20:08:27.127 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+2023-06-16 20:08:27.144 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:08:27.145 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-06-16 20:08:27.146 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-06-16 20:08:27.225 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-06-16 20:08:27.226 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1239 ms
+2023-06-16 20:08:27.404 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-16 20:08:27.451 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-06-16 20:08:27.740 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-06-16 20:08:27.913 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6076c66
+2023-06-16 20:08:27.915 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-06-16 20:08:27.947 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-16 20:08:28.787 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:08:28.788 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Relation »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:08:28.788 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:08:28.788 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:08:28.789 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:08:28.789 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tours« existiert nicht, wird übersprungen
+2023-06-16 20:08:28.790 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:08:28.790 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tour_logs_seq« existiert nicht, wird übersprungen
+2023-06-16 20:08:28.791 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:08:28.791 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tours_seq« existiert nicht, wird übersprungen
+2023-06-16 20:08:28.833 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-16 20:08:28.844 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:08:29.343 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-16 20:08:29.665 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:08:29.679 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+2023-06-16 20:08:29.686 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Started TourPlannerApplication in 4.145 seconds (process running for 5.386)
+2023-06-16 20:08:31.827 [http-nio-10001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-16 20:08:31.827 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-06-16 20:08:31.829 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-06-16 20:08:31.947 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:08:46.444 [http-nio-10001-exec-2] WARN  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - MapQuestRepository.findMapQuestData() - bad request
+2023-06-16 20:08:47.801 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:09:08.299 [http-nio-10001-exec-7] WARN  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - MapQuestRepository.findMapQuestData() - bad request
+2023-06-16 20:09:11.811 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:10:01.047 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:10:01.047 [SpringApplicationShutdownHook] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-06-16 20:10:01.060 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-06-16 20:10:01.065 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-06-16 20:10:05.424 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 18720 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 20:10:05.432 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 20:10:05.962 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 20:10:06.011 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 2 JPA repository interfaces.
+2023-06-16 20:10:06.427 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+2023-06-16 20:10:06.435 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:10:06.436 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-06-16 20:10:06.436 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-06-16 20:10:06.517 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-06-16 20:10:06.517 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1050 ms
+2023-06-16 20:10:06.658 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-16 20:10:06.707 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-06-16 20:10:06.953 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-06-16 20:10:07.095 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2f99d8c
+2023-06-16 20:10:07.097 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-06-16 20:10:07.121 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-16 20:10:07.961 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:10:07.961 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Relation »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:10:07.962 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:10:07.962 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:10:07.962 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:10:07.962 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tours« existiert nicht, wird übersprungen
+2023-06-16 20:10:07.963 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:10:07.963 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tour_logs_seq« existiert nicht, wird übersprungen
+2023-06-16 20:10:07.964 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:10:07.964 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tours_seq« existiert nicht, wird übersprungen
+2023-06-16 20:10:07.997 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-16 20:10:08.007 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:10:08.586 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-16 20:10:08.905 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:10:08.916 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+2023-06-16 20:10:08.923 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Started TourPlannerApplication in 3.841 seconds (process running for 5.024)
+2023-06-16 20:10:10.977 [http-nio-10001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-16 20:10:10.977 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-06-16 20:10:10.978 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-06-16 20:10:11.085 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:10:39.714 [http-nio-10001-exec-4] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - tour created successfully: Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.299999999999, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=null}
+2023-06-16 20:10:42.451 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}]
+2023-06-16 20:10:43.781 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.299999999999, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:10:43.807 [http-nio-10001-exec-6] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:10:43.929 [http-nio-10001-exec-7] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.299999999999, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:10:43.946 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:11:25.302 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:11:25.302 [SpringApplicationShutdownHook] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-06-16 20:11:25.315 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-06-16 20:11:25.320 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-06-16 20:11:29.646 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 18296 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 20:11:29.653 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 20:11:30.190 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 20:11:30.243 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 46 ms. Found 2 JPA repository interfaces.
+2023-06-16 20:11:30.658 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+2023-06-16 20:11:30.667 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:11:30.668 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-06-16 20:11:30.668 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-06-16 20:11:30.751 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-06-16 20:11:30.751 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1065 ms
+2023-06-16 20:11:30.899 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-16 20:11:30.948 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-06-16 20:11:31.186 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-06-16 20:11:31.329 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2f99d8c
+2023-06-16 20:11:31.331 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-06-16 20:11:31.360 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-16 20:11:32.150 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:11:32.151 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Relation »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:11:32.151 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:11:32.152 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:11:32.153 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:11:32.153 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tours« existiert nicht, wird übersprungen
+2023-06-16 20:11:32.154 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:11:32.154 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tour_logs_seq« existiert nicht, wird übersprungen
+2023-06-16 20:11:32.155 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:11:32.155 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tours_seq« existiert nicht, wird übersprungen
+2023-06-16 20:11:32.191 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-16 20:11:32.201 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:11:32.674 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-16 20:11:32.957 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:11:32.969 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+2023-06-16 20:11:32.977 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Started TourPlannerApplication in 3.678 seconds (process running for 4.836)
+2023-06-16 20:11:44.241 [http-nio-10001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-16 20:11:44.241 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-06-16 20:11:44.242 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-06-16 20:11:44.353 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:11:47.479 [http-nio-10001-exec-4] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:11:58.995 [http-nio-10001-exec-6] WARN  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - MapQuestRepository.findMapQuestData() - bad request
+2023-06-16 20:12:01.585 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:12:34.438 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:12:34.439 [SpringApplicationShutdownHook] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-06-16 20:12:34.452 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-06-16 20:12:34.457 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-06-16 20:12:38.704 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 6908 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 20:12:38.712 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 20:12:39.242 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 20:12:39.300 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 52 ms. Found 2 JPA repository interfaces.
+2023-06-16 20:12:39.708 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+2023-06-16 20:12:39.716 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:12:39.717 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-06-16 20:12:39.718 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-06-16 20:12:39.786 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-06-16 20:12:39.787 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1039 ms
+2023-06-16 20:12:39.915 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-16 20:12:39.974 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-06-16 20:12:40.207 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-06-16 20:12:40.336 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5c1c9881
+2023-06-16 20:12:40.337 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-06-16 20:12:40.362 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-16 20:12:41.108 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:12:41.108 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Relation »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:12:41.108 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:12:41.108 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:12:41.109 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:12:41.109 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tours« existiert nicht, wird übersprungen
+2023-06-16 20:12:41.110 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:12:41.110 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tour_logs_seq« existiert nicht, wird übersprungen
+2023-06-16 20:12:41.110 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:12:41.110 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tours_seq« existiert nicht, wird übersprungen
+2023-06-16 20:12:41.142 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-16 20:12:41.150 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:12:41.581 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-16 20:12:41.857 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:12:41.868 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+2023-06-16 20:12:41.874 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Started TourPlannerApplication in 3.52 seconds (process running for 4.639)
+2023-06-16 20:12:53.852 [http-nio-10001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-16 20:12:53.853 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-06-16 20:12:53.854 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-06-16 20:12:56.722 [http-nio-10001-exec-1] WARN  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - MapQuestRepository.findMapQuestData() - bad request
+2023-06-16 20:13:01.705 [http-nio-10001-exec-4] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:13:16.415 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:13:16.415 [SpringApplicationShutdownHook] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-06-16 20:13:16.429 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-06-16 20:13:16.432 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-06-16 20:13:20.669 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 19384 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 20:13:20.676 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 20:13:21.210 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 20:13:21.266 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 49 ms. Found 2 JPA repository interfaces.
+2023-06-16 20:13:21.719 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+2023-06-16 20:13:21.728 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:13:21.729 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-06-16 20:13:21.730 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-06-16 20:13:21.819 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-06-16 20:13:21.820 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1108 ms
+2023-06-16 20:13:21.990 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-16 20:13:22.035 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-06-16 20:13:22.304 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-06-16 20:13:22.469 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6076c66
+2023-06-16 20:13:22.470 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-06-16 20:13:22.499 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-16 20:13:23.296 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:13:23.296 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Relation »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:13:23.297 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:13:23.297 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:13:23.297 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:13:23.298 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tours« existiert nicht, wird übersprungen
+2023-06-16 20:13:23.298 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:13:23.298 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tour_logs_seq« existiert nicht, wird übersprungen
+2023-06-16 20:13:23.299 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:13:23.299 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tours_seq« existiert nicht, wird übersprungen
+2023-06-16 20:13:23.337 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-16 20:13:23.346 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:13:23.823 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-16 20:13:24.120 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:13:24.131 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+2023-06-16 20:13:24.138 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Started TourPlannerApplication in 3.836 seconds (process running for 4.954)
+2023-06-16 20:13:31.203 [http-nio-10001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-16 20:13:31.203 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-06-16 20:13:31.204 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-06-16 20:13:31.326 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:13:46.341 [http-nio-10001-exec-2] WARN  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - MapQuestRepository.findMapQuestData() - bad request
+2023-06-16 20:13:48.512 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:15:33.314 [http-nio-10001-exec-10] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:16:13.948 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:16:13.949 [SpringApplicationShutdownHook] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-06-16 20:16:13.963 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-06-16 20:16:13.966 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-06-16 20:16:18.624 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 12480 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 20:16:18.632 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 20:16:19.224 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 20:16:19.303 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71 ms. Found 2 JPA repository interfaces.
+2023-06-16 20:16:19.796 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+2023-06-16 20:16:19.887 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1217 ms
+2023-06-16 20:16:20.048 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-16 20:16:20.104 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-06-16 20:16:20.390 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-06-16 20:16:20.554 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2f99d8c
+2023-06-16 20:16:20.556 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-06-16 20:16:20.585 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-16 20:16:21.616 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:21.616 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Relation »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:16:21.617 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:21.617 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:16:21.618 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:21.618 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tours« existiert nicht, wird übersprungen
+2023-06-16 20:16:21.618 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:21.618 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tour_logs_seq« existiert nicht, wird übersprungen
+2023-06-16 20:16:21.619 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:21.619 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tours_seq« existiert nicht, wird übersprungen
+2023-06-16 20:16:21.652 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-16 20:16:21.661 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:16:22.122 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-16 20:16:22.429 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+2023-06-16 20:16:22.437 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Started TourPlannerApplication in 4.209 seconds (process running for 5.527)
+2023-06-16 20:16:22.456 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:16:22.457 [SpringApplicationShutdownHook] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-06-16 20:16:22.468 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-06-16 20:16:22.472 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-06-16 20:16:27.045 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Starting TourPlannerApplication using Java 20.0.1 with PID 5376 (C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server\target\classes started by Felix in C:\Users\Felix\OneDrive - FH Technikum Wien\BIF\4_Semester\SWEN2\Projekte\TourPlanner\Source\Server)
+2023-06-16 20:16:27.053 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-06-16 20:16:27.619 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-16 20:16:27.674 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 2 JPA repository interfaces.
+2023-06-16 20:16:28.128 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+2023-06-16 20:16:28.139 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:16:28.141 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-06-16 20:16:28.141 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-06-16 20:16:28.221 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-06-16 20:16:28.221 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1128 ms
+2023-06-16 20:16:28.399 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-16 20:16:28.446 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-06-16 20:16:28.684 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-06-16 20:16:28.931 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5d37aa0f
+2023-06-16 20:16:28.932 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-06-16 20:16:28.960 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-16 20:16:29.702 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:29.702 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Relation »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:16:29.703 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:29.703 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tour_logs« existiert nicht, wird übersprungen
+2023-06-16 20:16:29.704 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:29.704 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle »tours« existiert nicht, wird übersprungen
+2023-06-16 20:16:29.704 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:29.704 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tour_logs_seq« existiert nicht, wird übersprungen
+2023-06-16 20:16:29.705 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2023-06-16 20:16:29.705 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Sequenz »tours_seq« existiert nicht, wird übersprungen
+2023-06-16 20:16:29.739 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-16 20:16:29.746 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-16 20:16:30.176 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-16 20:16:30.462 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10001"]
+2023-06-16 20:16:30.475 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+2023-06-16 20:16:30.481 [main] INFO  at.fhtw.tourplanner.TourPlannerApplication - Started TourPlannerApplication in 3.848 seconds (process running for 4.891)
+2023-06-16 20:16:37.402 [http-nio-10001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-16 20:16:37.402 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-06-16 20:16:37.403 [http-nio-10001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-06-16 20:16:37.506 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - TourController.getTourList() - no content
+2023-06-16 20:16:56.412 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - tour created successfully: Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.3, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=null}
+2023-06-16 20:16:57.525 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}]
+2023-06-16 20:16:59.224 [http-nio-10001-exec-4] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.3, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:16:59.257 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:16:59.349 [http-nio-10001-exec-9] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.3, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:16:59.370 [http-nio-10001-exec-7] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:17:37.989 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}]
+2023-06-16 20:17:52.083 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.createTour() - tour created successfully: Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=null}
+2023-06-16 20:17:53.041 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}, TourListEntry{tourId=2, name='test'}]
+2023-06-16 20:17:54.451 [http-nio-10001-exec-4] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:17:54.479 [http-nio-10001-exec-3] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:17:54.583 [http-nio-10001-exec-9] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:17:54.605 [http-nio-10001-exec-7] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:17:56.319 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.3, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:17:56.340 [http-nio-10001-exec-6] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:17:56.478 [http-nio-10001-exec-10] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.3, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:17:56.496 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:17:59.147 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.dataTransfer.DataTransferService - DataTransferService.exportTours() - tours exported successfully: [Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.3, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}, Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}]
+2023-06-16 20:20:29.121 [http-nio-10001-exec-7] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}, TourListEntry{tourId=2, name='test'}]
+2023-06-16 20:20:31.516 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:20:31.582 [http-nio-10001-exec-6] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:20:31.646 [http-nio-10001-exec-10] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:20:31.670 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:20:33.949 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.dataTransfer.DataTransferService - DataTransferService.exportTours() - tours exported successfully: [Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.3, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}, Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}]
+2023-06-16 20:21:04.810 [http-nio-10001-exec-9] INFO  at.fhtw.tourplanner.services.dataTransfer.DataTransferService - DataTransferService.exportTours() - tours exported successfully: [Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.3, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}, Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}]
+2023-06-16 20:23:33.029 [http-nio-10001-exec-8] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retrieved successfully: [TourListEntry{tourId=1, name='test'}, TourListEntry{tourId=2, name='test'}]
+2023-06-16 20:23:35.376 [http-nio-10001-exec-6] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:23:35.436 [http-nio-10001-exec-10] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:23:35.521 [http-nio-10001-exec-1] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTour() - tour retrieved successfully: Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}
+2023-06-16 20:23:35.546 [http-nio-10001-exec-2] INFO  at.fhtw.tourplanner.services.tourLog.TourLogService - TourLogService.getTourLogs() - TourLogController.getTourLogs() - no content
+2023-06-16 20:23:37.588 [http-nio-10001-exec-5] INFO  at.fhtw.tourplanner.services.dataTransfer.DataTransferService - DataTransferService.exportTours() - tours exported successfully: [Tour{tourId=1, name='test', tourDescription='test', start='hamburg', destination='palermo', transportType='pedestrian', tourDistance=5492.3, estimatedTime=689519, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}, Tour{tourId=2, name='test', tourDescription='test', start='berlin', destination='vienna', transportType='pedestrian', tourDistance=591.6, estimatedTime=593613, popularity=1, childFriendliness=3, tourInformation='<tourInformation>', tourLogs=[]}]
+2023-06-16 20:24:19.174 [http-nio-10001-exec-7] INFO  at.fhtw.tourplanner.services.tour.TourService - TourService.getTourList() - tourListEntries retri

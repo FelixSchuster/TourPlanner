@@ -1,12 +1,16 @@
 package at.fhtw.tourplanner.models;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Objects;
 
 public class MapQuestData {
     private Double tourDistance;
     private Integer estimatedTime;
     public MapQuestData(Double tourDistance, Integer estimatedTime) {
-        this.tourDistance = tourDistance;
+        DecimalFormat df = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
+        this.tourDistance = Double.valueOf(df.format(tourDistance));
         this.estimatedTime = estimatedTime;
     }
     public MapQuestData() { }

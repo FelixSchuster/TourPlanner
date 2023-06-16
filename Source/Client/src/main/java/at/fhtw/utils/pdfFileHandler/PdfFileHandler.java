@@ -171,7 +171,7 @@ public class PdfFileHandler {
             list.add("Destination: " + tour.getDestination());
             list.add("Transport Type: " + tour.getTransportType());
             list.add("Tour Distance: " + tour.getTourDistance() + "km");
-            list.add("Estimated Time: " + LocalTime.ofSecondOfDay(tour.getEstimatedTime()).toString());
+            list.add("Estimated Time: " + DateHandler.formatSecondsToDDHHMM(tour.getEstimatedTime()));
             list.add(popularityString);
             list.add(childfriendlinessString);
             list.add("Tour Description: " + tour.getTourDescription());
