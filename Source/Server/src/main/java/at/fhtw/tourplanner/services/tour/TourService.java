@@ -5,7 +5,6 @@ import at.fhtw.tourplanner.exceptions.NoContentException;
 import at.fhtw.tourplanner.exceptions.NotFoundException;
 import at.fhtw.tourplanner.models.Tour;
 import at.fhtw.tourplanner.models.TourListEntry;
-import at.fhtw.tourplanner.services.dataTransfer.DataTransferService;
 import at.fhtw.tourplanner.services.tourLog.TourLogController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

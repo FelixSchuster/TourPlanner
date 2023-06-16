@@ -6,7 +6,6 @@ import at.fhtw.tourplanner.models.Tour;
 import at.fhtw.tourplanner.models.TourLog;
 import at.fhtw.tourplanner.repositories.TourLogRepository;
 import at.fhtw.tourplanner.repositories.TourRepository;
-import at.fhtw.tourplanner.services.tour.TourController;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
