@@ -29,7 +29,7 @@ public class SearchView {
         ListToursViewModel toursViewModel = ListToursView.getInstance();
 
         if (searchField.getText() == null || searchField.getText().isBlank() || searchField.getText().isEmpty()) {
-            reload();
+            showAll();
             return;
         }
 
@@ -38,6 +38,12 @@ public class SearchView {
     }
 
     public void reload() {
+        ListToursView.getInstance().clearItems();
+        ShowTourInformationView.getInstance().hideInformation();
+        ShowTourLogsView.getInstance().hideTourLogs();
+    }
+
+    public void showAll() {
         ListToursView.getInstance().clearItems();
         ListToursView.getInstance().initList();
         ShowTourInformationView.getInstance().hideInformation();

@@ -41,7 +41,7 @@ public class AddTourView implements Initializable {
         transportTypeChoiceBox.setPrefWidth(newWidth);
     }
 
-    public void addTourAction(ActionEvent event) {
+    public void onAddTourAction(ActionEvent event) {
 
         if (tourNameTextField.getText() == null ||
                 tourNameTextField.getText().isBlank() ||

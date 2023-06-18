@@ -99,8 +99,6 @@ public class ListToursViewModel {
             tourService.searchTour(keyword).forEach(p -> {
                 addItem(p);
             });
-            ShowTourInformationView.getInstance().hideInformation();
-            ShowTourLogsView.getInstance().hideTourLogs();
             logger.info("ListToursViewModel.searchTour() - tourList retrieved successfully: " + tourListItems);
         } catch (NoContentException e) {
             logger.info("ListToursViewModel.searchTour() - " + e.getMessage());
