@@ -41,7 +41,7 @@
             </items>
         </ChoiceBox>
         <HBox alignment="BASELINE_RIGHT">
-            <Button fx:id="submitButton"  onAction="#addTourAction" text="Submit"/>
+            <Button fx:id="submitButton" onAction="#onAddTourAction" text="Submit"/>
         </HBox>
         <Separator prefWidth="200.0" />
         <Label fx:id="feedback" />
