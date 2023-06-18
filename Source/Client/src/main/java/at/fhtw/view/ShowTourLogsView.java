@@ -134,8 +134,8 @@ public class ShowTourLogsView extends ApplicationView{
         Label tourName = new Label("Tour Name: ");
         Label tourLogHeader = new Label(showTourLogsViewModel.getTourListEntry().getName());
 
-        tourName.getStyleClass().add("bold-headers");
-        tourLogHeader.getStyleClass().add("bold-headers");
+        tourName.getStyleClass().add("headers");
+        tourLogHeader.getStyleClass().add("headers");
 
         tourNameBox.getChildren().add(tourName);
         headerLabelBox.getChildren().add(tourLogHeader);
