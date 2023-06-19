@@ -12,15 +12,17 @@ The file can be viewed using https://editor.swagger.io/.
 
 ## App Design
 
-![<AppDesignOverview>](./Miscellaneous/AppArchitecture.drawio.png)
+### Client
+
+![<ClientArchitecture>](./Miscellaneous/ClientArchitecture.drawio.png)
+
+### Server
+
+![<ServerArchitecture>](./Miscellaneous/ServerArchitecture.drawio.png)
 
 ## Use Cases
 
 ![<UseCaseDiagram>](./Miscellaneous/UseCaseDiagram.drawio.png)
-
-## UX
-
-![<UseCaseDiagram>](./Miscellaneous/MVVM.drawio.png)
 
 ## Library Decisions
 - Server: Spring Boot
@@ -47,7 +49,7 @@ A configuration file for postman can be found in ``./Miscellaneous/SWEN2.postman
 For more time efficient testing during refactoring a total number of 24 unit tests was added to the server using the JUnit 5 API.\
 The unit tests were designed to cover every edge case possible considering the implemented routes.
 
-## Unique Feature
+## UX / Unique Feature
 For improved user experience a darkmode was added.
 
 ![<Darkmode>](./Miscellaneous/Darkmode.png)
